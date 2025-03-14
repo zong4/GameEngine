@@ -1,3 +1,23 @@
+# CMake cache
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Testing/
+*.xcodeproj/
+*.xcworkspace/
+cmake_install.cmake
+CMakeLists.txt
+
+# VSCode cache
+.vscode/
+
+# Xmake cache
+.xmake/
+build/
+
+# MacOS Cache
+.DS_Store
+
 # Prerequisites
 *.d
 
