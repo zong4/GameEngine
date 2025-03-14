@@ -1,5 +1,5 @@
-target("editor")
+target("Editor")
     set_kind("binary")
     add_files("src/**.cpp")
 
-    add_deps("engine")
+    add_deps("Engine")

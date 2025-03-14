@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Logger.hpp"
+#include "Logger/Logger.hpp"
 
 namespace Engine
 {

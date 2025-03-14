@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Logger.hpp"
+#include "Logger/Logger.hpp"
 #include "Application.hpp"
 
 int main(int argc, char **argv)

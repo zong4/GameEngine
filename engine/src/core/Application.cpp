@@ -1,7 +1,5 @@
 #include "Application.hpp"
 
-#include "Logger.hpp"
-
 void Engine::Application::Run()
 {
     ENGINE_INFO("Application running");

@@ -15,5 +15,5 @@ elseif is_mode("release") then
 end
 
 -- includes sub-projects
-includes("engine")
-includes("editor")
+includes("Engine")
+includes("Editor")
