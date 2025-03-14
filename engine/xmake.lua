@@ -1,4 +1,5 @@
 add_requires("spdlog")
+add_requires("glfw")
 
 target("Engine")
     set_kind("shared")
@@ -8,3 +9,4 @@ target("Engine")
     add_includedirs("include", {public=true})
 
     add_packages("spdlog", {public=true})
+    add_packages("glfw", {public=true})

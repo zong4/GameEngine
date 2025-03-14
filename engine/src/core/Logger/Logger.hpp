@@ -9,12 +9,12 @@ namespace Engine
     public:
         static void Init();
 
-        inline static std::shared_ptr<spdlog::logger> &GetEngineLogger() { return logger_engine; }
-        inline static std::shared_ptr<spdlog::logger> &GetEditorLogger() { return logger_editor; }
+        inline static std::shared_ptr<spdlog::logger> &GetEngineLogger() { return m_EngineLogger; }
+        inline static std::shared_ptr<spdlog::logger> &GetEditorLogger() { return m_EditorLogger; }
 
     private:
-        static std::shared_ptr<spdlog::logger> logger_engine;
-        static std::shared_ptr<spdlog::logger> logger_editor;
+        static std::shared_ptr<spdlog::logger> m_EngineLogger;
+        static std::shared_ptr<spdlog::logger> m_EditorLogger;
     };
 } // namespace Engine
 

@@ -14,6 +14,14 @@ elseif is_mode("release") then
     add_defines("RELEASE")
 end
 
+if is_plat("windows") then
+    add_defines("PLATFORM_WINDOWS")
+elseif is_plat("linux") then
+    add_defines("PLATFORM_LINUX")
+elseif is_plat("macosx") then
+    add_defines("PLATFORM_MACOS")
+end
+
 -- includes sub-projects
 includes("Engine")
 includes("Editor")

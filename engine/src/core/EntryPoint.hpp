@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Logger/Logger.hpp"
-#include "Application.hpp"
+#include "Application/Application.hpp"
 
 int main(int argc, char **argv)
 {
