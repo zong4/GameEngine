@@ -4,6 +4,9 @@
 
 #include "../Core.hpp"
 #include "../Window/Window.hpp"
+#include "../Events/ApplicationEvent.hpp"
+#include "../Events/KeyEvent.hpp"
+#include "../Events/MouseEvent.hpp"
 
 namespace Engine
 {
@@ -14,6 +17,10 @@ namespace Engine
         virtual ~Application() = default;
 
         void Run();
+        void OnEvent(Event &e);
+
+    private:
+        bool OnWindowClose(WindowCloseEvent &e);
 
     private:
         std::unique_ptr<Window> m_Window;

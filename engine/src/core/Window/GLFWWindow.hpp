@@ -3,9 +3,6 @@
 #include <GLFW/glfw3.h>
 
 #include "Window.hpp"
-#include "../Events/ApplicationEvent.hpp"
-#include "../Events/KeyEvent.hpp"
-#include "../Events/MouseEvent.hpp"
 
 namespace Engine
 {
