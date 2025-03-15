@@ -2,6 +2,8 @@
 
 #include "../Core.hpp"
 
+#define BIT(x) (1 << x)
+
 namespace Engine
 {
     /// @brief Event types
@@ -36,10 +38,10 @@ namespace Engine
     };
 
 /// @brief Macros for event classes
-#define EVENT_CLASS_TYPE(type)                                                  \
-    static EventType GetStaticType() { return EventType::type; }                \
-    virtual EventType GetEventType() const override { return GetStaticType(); } \
-    virtual const char *GetName() const override { return #type; }
+#define EVENT_CLASS_TYPE(type)                                                         \
+    inline static EventType GetStaticType() { return EventType::type; }                \
+    inline virtual EventType GetEventType() const override { return GetStaticType(); } \
+    inline virtual const char *GetName() const override { return #type; }
 
 /// @brief Macros for event categories
 #define EVENT_CLASS_CATEGORY(category) \
@@ -54,12 +56,14 @@ namespace Engine
         virtual EventType GetEventType() const = 0;
         virtual const char *GetName() const = 0;
         virtual int GetCategoryFlags() const = 0;
-        virtual std::string ToString() const { return GetName(); }
+        virtual inline std::string ToString() const { return GetName(); }
 
         inline bool IsInCategory(EventCategory category)
         {
             return GetCategoryFlags() & category;
         }
+
+        inline bool IsHandled() const { return m_Handled; }
 
     protected:
         bool m_Handled = false;

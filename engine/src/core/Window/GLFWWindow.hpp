@@ -9,18 +9,18 @@ namespace Engine
     class GLFWWindow : public Window
     {
     public:
-        GLFWWindow(const WindowProps &props);
-        virtual ~GLFWWindow();
+        GLFWWindow(const WindowProps &props) { Init(props); }
+        virtual ~GLFWWindow() override { Shutdown(); }
 
         void OnUpdate() override;
 
-        unsigned int GetWidth() const override { return m_Data.Width; }
-        unsigned int GetHeight() const override { return m_Data.Height; }
+        inline unsigned int GetWidth() const override { return m_Data.Width; }
+        inline unsigned int GetHeight() const override { return m_Data.Height; }
 
         // Window attributes
-        void SetEventCallback(const std::function<void(Event &)> &callback) override { m_Data.EventCallback = callback; }
+        inline void SetEventCallback(const std::function<void(Event &)> &callback) override { m_Data.EventCallback = callback; }
         void SetVSync(bool enabled) override;
-        bool IsVSync() const override;
+        inline bool IsVSync() const override { return m_Data.VSync; }
 
     private:
         virtual void Init(const WindowProps &props);
@@ -40,4 +40,6 @@ namespace Engine
 
         WindowData m_Data;
     };
+
+    static void GLFWErrorCallback(int error, const char *description);
 } // namespace Engine

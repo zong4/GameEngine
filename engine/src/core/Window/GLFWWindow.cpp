@@ -4,19 +4,9 @@
 #include "../Events/KeyEvent.hpp"
 #include "../Events/MouseEvent.hpp"
 
-static void GLFWErrorCallback(int error, const char *description)
+static void Engine::GLFWErrorCallback(int error, const char *description)
 {
     ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
-}
-
-Engine::GLFWWindow::GLFWWindow(const WindowProps &props)
-{
-    Init(props);
-}
-
-Engine::GLFWWindow::~GLFWWindow()
-{
-    Shutdown();
 }
 
 void Engine::GLFWWindow::OnUpdate()
@@ -37,11 +27,6 @@ void Engine::GLFWWindow::SetVSync(bool enabled)
     }
 
     m_Data.VSync = enabled;
-}
-
-bool Engine::GLFWWindow::IsVSync() const
-{
-    return m_Data.VSync;
 }
 
 void Engine::GLFWWindow::Init(const WindowProps &props)
