@@ -1,9 +1,11 @@
+#include <memory>
+
 #include <engine.hpp>
 
 class ExampleLayer : public Engine::Layer
 {
 public:
-    ExampleLayer() : Layer("Example") {}
+    ExampleLayer() : Layer("ExampleLayer") {}
 
     void OnAttach() override
     {

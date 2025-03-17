@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../../EnginePCH.hpp"
+
+// Core
 #include "../../Core/Events/Event.hpp"
 
 namespace Engine
@@ -28,6 +30,7 @@ namespace Engine
 
         virtual unsigned int GetWidth() const = 0;
         virtual unsigned int GetHeight() const = 0;
+        virtual void *GetNativeWindow() const = 0;
 
         virtual void SetEventCallback(const std::function<void(Event &)> &callback) = 0;
         virtual void SetVSync(bool enabled) = 0;

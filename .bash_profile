@@ -1,2 +1,2 @@
 xmake f -m debug
-source setup_vulkan.sh
+source scripts/setup_vulkan.sh

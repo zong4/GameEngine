@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../../../EnginePCH.hpp"
 #include <GLFW/glfw3.h>
+
+// Platform
 #include "../Window.hpp"
 
 namespace Engine
@@ -16,6 +17,7 @@ namespace Engine
 
         inline unsigned int GetWidth() const override { return m_Data.Width; }
         inline unsigned int GetHeight() const override { return m_Data.Height; }
+        inline void *GetNativeWindow() const override { return m_Window; }
 
         // Window attributes
         inline void SetEventCallback(const std::function<void(Event &)> &callback) override { m_Data.EventCallback = callback; }

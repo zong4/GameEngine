@@ -20,6 +20,7 @@ namespace Engine
         AppRender,
         KeyPressed,
         KeyReleased,
+        KeyTyped,
         MouseButtonPressed,
         MouseButtonReleased,
         MouseMoved,

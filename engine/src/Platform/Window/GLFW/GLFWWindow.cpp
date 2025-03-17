@@ -1,9 +1,14 @@
 #include "GLFWWindow.hpp"
 
-#include <glad/glad.h>
+#include "GLFW/glfw3.h"
+
+// Core
 #include "../../../Core/Events/ApplicationEvent.hpp"
 #include "../../../Core/Events/KeyEvent.hpp"
 #include "../../../Core/Events/MouseEvent.hpp"
+
+// Platform
+#include <glad/glad.h> // todo: unbind with opengl
 
 static void GLFWErrorCallback(int error, const char *description)
 {
@@ -100,6 +105,13 @@ void Engine::GLFWWindow::Init(const WindowProps &props)
         default:
             break;
         } });
+
+    glfwSetCharCallback(m_Window, [](GLFWwindow *window, unsigned int keycode)
+                        {
+        WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
+
+        KeyTypedEvent event(keycode);
+        data.EventCallback(event); });
 
     glfwSetMouseButtonCallback(m_Window, [](GLFWwindow *window, int button, int action, int mods)
                                {
