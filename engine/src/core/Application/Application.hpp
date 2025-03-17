@@ -2,7 +2,6 @@
 
 #include "../../EnginePCH.hpp"
 #include <GLFW/glfw3.h>
-
 #include "../../Platform/Window/Window.hpp"
 #include "../Events/ApplicationEvent.hpp"
 #include "../Layer/LayerStack.hpp"
@@ -15,6 +14,9 @@ namespace Engine
         Application();
         virtual ~Application() = default;
 
+        inline static Application &Get() { return *s_Instance; }
+        inline Window &GetWindow() { return *m_Window; }
+
         void Run();
         void OnEvent(Event &e);
 
@@ -25,6 +27,8 @@ namespace Engine
         bool OnWindowClose(WindowCloseEvent &e);
 
     private:
+        static Application *s_Instance;
+
         bool m_Running = true;
         std::unique_ptr<Window> m_Window;
 

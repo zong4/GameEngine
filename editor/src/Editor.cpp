@@ -3,9 +3,16 @@
 class ExampleLayer : public Engine::Layer
 {
 public:
-    ExampleLayer()
-        : Layer("Example")
+    ExampleLayer() : Layer("Example") {}
+
+    void OnAttach() override
     {
+        EDITOR_INFO("ExampleLayer::Attach");
+    }
+
+    void OnDetach() override
+    {
+        EDITOR_INFO("ExampleLayer::Detach");
     }
 
     void OnUpdate() override
@@ -15,7 +22,7 @@ public:
 
     void OnEvent(Engine::Event &event) override
     {
-        EDITOR_TRACE("{0}", event.ToString());
+        EDITOR_INFO("{0}", event.ToString());
     }
 };
 
@@ -26,6 +33,7 @@ public:
     {
         EDITOR_INFO("Editor constructor");
         PushLayer(new ExampleLayer());
+        PushLayer(new Engine::ImGuiLayer());
     }
 
     ~Editor()

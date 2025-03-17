@@ -14,8 +14,11 @@ elseif is_plat("linux") then
     add_requires("vulkansdk")
 elseif is_plat("macosx") then
     add_requires("glfw")
-    add_requires("vulkansdk")
+    add_requires("glad")
 end
+
+-- Function
+add_requires("imgui")
 
 target("Engine")
     set_kind("static")
@@ -37,5 +40,8 @@ target("Engine")
         add_packages("vulkansdk", {public=true})
     elseif is_plat("macosx") then
         add_packages("glfw", {public=true})
-        add_packages("vulkansdk", {public=true})
+        add_packages("glad", {public=true})
     end
+
+    -- Function
+    add_packages("imgui", {public=true})

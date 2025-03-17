@@ -1,9 +1,16 @@
 #include "Application.hpp"
 
+#include <glad/glad.h>
+
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+
+Engine::Application *Engine::Application::s_Instance = nullptr;
 
 Engine::Application::Application()
 {
+    ENGINE_ASSERT(!s_Instance, "Application already exists");
+    s_Instance = this;
+
     m_Window = std::unique_ptr<Window>(Window::Create());
     m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 }
@@ -14,6 +21,9 @@ void Engine::Application::Run()
 
     while (m_Running)
     {
+        glClearColor(255, 0, 255, 1);
+        glClear(GL_COLOR_BUFFER_BIT);
+
         for (Layer *layer : m_LayerStack)
         {
             layer->OnUpdate();

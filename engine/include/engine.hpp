@@ -4,4 +4,5 @@
 #include "../src/Core/Application/Application.hpp"
 #include "../src/Core/Logger/Logger.hpp"
 
-// Renderer
+// Platform
+#include "../src/Platform/ImGui/ImGuiLayer.hpp"

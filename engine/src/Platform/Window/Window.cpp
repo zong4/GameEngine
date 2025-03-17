@@ -1,6 +1,6 @@
 #include "Window.hpp"
 
-#include "GLFWWindow.hpp"
+#include "GLFW/GLFWWindow.hpp"
 
 Engine::Window *Engine::Window::Create(const WindowProps &props)
 {

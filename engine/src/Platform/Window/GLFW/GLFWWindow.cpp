@@ -1,8 +1,9 @@
 #include "GLFWWindow.hpp"
 
-#include "../../Core/Events/ApplicationEvent.hpp"
-#include "../../Core/Events/KeyEvent.hpp"
-#include "../../Core/Events/MouseEvent.hpp"
+#include <glad/glad.h>
+#include "../../../Core/Events/ApplicationEvent.hpp"
+#include "../../../Core/Events/KeyEvent.hpp"
+#include "../../../Core/Events/MouseEvent.hpp"
 
 static void GLFWErrorCallback(int error, const char *description)
 {
@@ -25,7 +26,6 @@ void Engine::GLFWWindow::SetVSync(bool enabled)
     {
         glfwSwapInterval(0);
     }
-
     m_Data.VSync = enabled;
 }
 
@@ -34,7 +34,6 @@ void Engine::GLFWWindow::Init(const WindowProps &props)
     m_Data.Title = props.Title;
     m_Data.Width = props.Width;
     m_Data.Height = props.Height;
-
     ENGINE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
     if (!glfwInit())
@@ -42,7 +41,6 @@ void Engine::GLFWWindow::Init(const WindowProps &props)
         ENGINE_ERROR("Could not initialize GLFW");
         return;
     }
-
     glfwSetErrorCallback(GLFWErrorCallback);
 
     m_Window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
@@ -51,8 +49,10 @@ void Engine::GLFWWindow::Init(const WindowProps &props)
         ENGINE_ERROR("Could not create window");
         return;
     }
-
     glfwMakeContextCurrent(m_Window);
+    int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+    ENGINE_ASSERT(status, "Failed to initialize Glad");
+
     glfwSetWindowUserPointer(m_Window, &m_Data);
     SetVSync(true);
 

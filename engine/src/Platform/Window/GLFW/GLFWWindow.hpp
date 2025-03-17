@@ -1,9 +1,8 @@
 #pragma once
 
-#include "../../EnginePCH.hpp"
+#include "../../../EnginePCH.hpp"
 #include <GLFW/glfw3.h>
-
-#include "Window.hpp"
+#include "../Window.hpp"
 
 namespace Engine
 {
@@ -11,7 +10,7 @@ namespace Engine
     {
     public:
         GLFWWindow(const WindowProps &props) { Init(props); }
-        virtual ~GLFWWindow() override { Shutdown(); }
+        ~GLFWWindow() override { Shutdown(); }
 
         void OnUpdate() override;
 
@@ -24,8 +23,8 @@ namespace Engine
         inline bool IsVSync() const override { return m_Data.VSync; }
 
     private:
-        virtual void Init(const WindowProps &props);
-        virtual void Shutdown();
+        void Init(const WindowProps &props);
+        void Shutdown();
 
     private:
         GLFWwindow *m_Window;
