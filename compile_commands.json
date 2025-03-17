@@ -1,0 +1,36 @@
+[
+{
+  "directory": "/Users/zong/Documents/GameEngine",
+  "arguments": ["/usr/bin/clang", "-c", "-Qunused-arguments", "-g", "-O0", "-std=c++20", "-IEngine/include", "-DPLATFORM_MACOSX", "-DDEBUG", "-DGLFW_INCLUDE_NONE", "-DGL_SILENCE_DEPRECATION", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "OpenGL", "-isystem", "/Users/zong/.xmake/packages/s/spdlog/v1.15.1/4c8aaf371cb94bfabfc8fbf1114bf6e3/include", "-isystem", "/Users/zong/.xmake/packages/g/glm/1.0.1/994459c3fcd145d19b531bc78964d954/include", "-isystem", "/Users/zong/.xmake/packages/g/glfw/3.4/3e5d6eac298a4f39acfa24782c01348c/include", "-isystem", "/Users/zong/VulkanSDK/1.4.309.0/macOS/include", "-o", "build/.objs/Editor/macosx/arm64/debug/Editor/src/Editor.cpp.o", "Editor/src/Editor.cpp"],
+  "file": "Editor/src/Editor.cpp"
+},
+{
+  "directory": "/Users/zong/Documents/GameEngine",
+  "arguments": ["/usr/bin/clang", "-c", "-Qunused-arguments", "-g", "-O0", "-std=c++20", "-include", "Engine/src/EnginePCH.hpp", "-include-pch", "build/.objs/Engine/macosx/arm64/debug/Engine/src/cxx/EnginePCH.hpp.pch", "-IEngine/include", "-DPLATFORM_MACOSX", "-DDEBUG", "-DGLFW_INCLUDE_NONE", "-DGL_SILENCE_DEPRECATION", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "OpenGL", "-isystem", "/Users/zong/.xmake/packages/s/spdlog/v1.15.1/4c8aaf371cb94bfabfc8fbf1114bf6e3/include", "-isystem", "/Users/zong/.xmake/packages/g/glm/1.0.1/994459c3fcd145d19b531bc78964d954/include", "-isystem", "/Users/zong/.xmake/packages/g/glfw/3.4/3e5d6eac298a4f39acfa24782c01348c/include", "-isystem", "/Users/zong/VulkanSDK/1.4.309.0/macOS/include", "-o", "build/.objs/Engine/macosx/arm64/debug/Engine/src/Core/Logger/Logger.cpp.o", "Engine/src/Core/Logger/Logger.cpp"],
+  "file": "Engine/src/Core/Logger/Logger.cpp"
+},
+{
+  "directory": "/Users/zong/Documents/GameEngine",
+  "arguments": ["/usr/bin/clang", "-c", "-Qunused-arguments", "-g", "-O0", "-std=c++20", "-include", "Engine/src/EnginePCH.hpp", "-include-pch", "build/.objs/Engine/macosx/arm64/debug/Engine/src/cxx/EnginePCH.hpp.pch", "-IEngine/include", "-DPLATFORM_MACOSX", "-DDEBUG", "-DGLFW_INCLUDE_NONE", "-DGL_SILENCE_DEPRECATION", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "OpenGL", "-isystem", "/Users/zong/.xmake/packages/s/spdlog/v1.15.1/4c8aaf371cb94bfabfc8fbf1114bf6e3/include", "-isystem", "/Users/zong/.xmake/packages/g/glm/1.0.1/994459c3fcd145d19b531bc78964d954/include", "-isystem", "/Users/zong/.xmake/packages/g/glfw/3.4/3e5d6eac298a4f39acfa24782c01348c/include", "-isystem", "/Users/zong/VulkanSDK/1.4.309.0/macOS/include", "-o", "build/.objs/Engine/macosx/arm64/debug/Engine/src/Core/EntryPoint.cpp.o", "Engine/src/Core/EntryPoint.cpp"],
+  "file": "Engine/src/Core/EntryPoint.cpp"
+},
+{
+  "directory": "/Users/zong/Documents/GameEngine",
+  "arguments": ["/usr/bin/clang", "-c", "-Qunused-arguments", "-g", "-O0", "-std=c++20", "-include", "Engine/src/EnginePCH.hpp", "-include-pch", "build/.objs/Engine/macosx/arm64/debug/Engine/src/cxx/EnginePCH.hpp.pch", "-IEngine/include", "-DPLATFORM_MACOSX", "-DDEBUG", "-DGLFW_INCLUDE_NONE", "-DGL_SILENCE_DEPRECATION", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "OpenGL", "-isystem", "/Users/zong/.xmake/packages/s/spdlog/v1.15.1/4c8aaf371cb94bfabfc8fbf1114bf6e3/include", "-isystem", "/Users/zong/.xmake/packages/g/glm/1.0.1/994459c3fcd145d19b531bc78964d954/include", "-isystem", "/Users/zong/.xmake/packages/g/glfw/3.4/3e5d6eac298a4f39acfa24782c01348c/include", "-isystem", "/Users/zong/VulkanSDK/1.4.309.0/macOS/include", "-o", "build/.objs/Engine/macosx/arm64/debug/Engine/src/Core/Layer/LayerStack.cpp.o", "Engine/src/Core/Layer/LayerStack.cpp"],
+  "file": "Engine/src/Core/Layer/LayerStack.cpp"
+},
+{
+  "directory": "/Users/zong/Documents/GameEngine",
+  "arguments": ["/usr/bin/clang", "-c", "-Qunused-arguments", "-g", "-O0", "-std=c++20", "-include", "Engine/src/EnginePCH.hpp", "-include-pch", "build/.objs/Engine/macosx/arm64/debug/Engine/src/cxx/EnginePCH.hpp.pch", "-IEngine/include", "-DPLATFORM_MACOSX", "-DDEBUG", "-DGLFW_INCLUDE_NONE", "-DGL_SILENCE_DEPRECATION", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "OpenGL", "-isystem", "/Users/zong/.xmake/packages/s/spdlog/v1.15.1/4c8aaf371cb94bfabfc8fbf1114bf6e3/include", "-isystem", "/Users/zong/.xmake/packages/g/glm/1.0.1/994459c3fcd145d19b531bc78964d954/include", "-isystem", "/Users/zong/.xmake/packages/g/glfw/3.4/3e5d6eac298a4f39acfa24782c01348c/include", "-isystem", "/Users/zong/VulkanSDK/1.4.309.0/macOS/include", "-o", "build/.objs/Engine/macosx/arm64/debug/Engine/src/Core/Application/Application.cpp.o", "Engine/src/Core/Application/Application.cpp"],
+  "file": "Engine/src/Core/Application/Application.cpp"
+},
+{
+  "directory": "/Users/zong/Documents/GameEngine",
+  "arguments": ["/usr/bin/clang", "-c", "-Qunused-arguments", "-g", "-O0", "-std=c++20", "-include", "Engine/src/EnginePCH.hpp", "-include-pch", "build/.objs/Engine/macosx/arm64/debug/Engine/src/cxx/EnginePCH.hpp.pch", "-IEngine/include", "-DPLATFORM_MACOSX", "-DDEBUG", "-DGLFW_INCLUDE_NONE", "-DGL_SILENCE_DEPRECATION", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "OpenGL", "-isystem", "/Users/zong/.xmake/packages/s/spdlog/v1.15.1/4c8aaf371cb94bfabfc8fbf1114bf6e3/include", "-isystem", "/Users/zong/.xmake/packages/g/glm/1.0.1/994459c3fcd145d19b531bc78964d954/include", "-isystem", "/Users/zong/.xmake/packages/g/glfw/3.4/3e5d6eac298a4f39acfa24782c01348c/include", "-isystem", "/Users/zong/VulkanSDK/1.4.309.0/macOS/include", "-o", "build/.objs/Engine/macosx/arm64/debug/Engine/src/Platform/Window/Window.cpp.o", "Engine/src/Platform/Window/Window.cpp"],
+  "file": "Engine/src/Platform/Window/Window.cpp"
+},
+{
+  "directory": "/Users/zong/Documents/GameEngine",
+  "arguments": ["/usr/bin/clang", "-c", "-Qunused-arguments", "-g", "-O0", "-std=c++20", "-include", "Engine/src/EnginePCH.hpp", "-include-pch", "build/.objs/Engine/macosx/arm64/debug/Engine/src/cxx/EnginePCH.hpp.pch", "-IEngine/include", "-DPLATFORM_MACOSX", "-DDEBUG", "-DGLFW_INCLUDE_NONE", "-DGL_SILENCE_DEPRECATION", "-framework", "Cocoa", "-framework", "IOKit", "-framework", "OpenGL", "-isystem", "/Users/zong/.xmake/packages/s/spdlog/v1.15.1/4c8aaf371cb94bfabfc8fbf1114bf6e3/include", "-isystem", "/Users/zong/.xmake/packages/g/glm/1.0.1/994459c3fcd145d19b531bc78964d954/include", "-isystem", "/Users/zong/.xmake/packages/g/glfw/3.4/3e5d6eac298a4f39acfa24782c01348c/include", "-isystem", "/Users/zong/VulkanSDK/1.4.309.0/macOS/include", "-o", "build/.objs/Engine/macosx/arm64/debug/Engine/src/Platform/Window/GLFWWindow.cpp.o", "Engine/src/Platform/Window/GLFWWindow.cpp"],
+  "file": "Engine/src/Platform/Window/GLFWWindow.cpp"
+}]

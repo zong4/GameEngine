@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Core.hpp"
-#include "../Events/Event.hpp"
+#include "../../EnginePCH.hpp"
+#include "../../Core/Events/Event.hpp"
 
 namespace Engine
 {

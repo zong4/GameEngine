@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <engine.hpp>
 
 class ExampleLayer : public Engine::Layer

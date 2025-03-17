@@ -5,6 +5,18 @@ set_version("1.0.0", {build = "%Y%m%d%H%M"})
 
 -- set common flags
 set_languages("cxx20")
+set_toolchains("clang")
+
+if is_plat("windows") then
+    set_arch("x64") 
+    add_defines("PLATFORM_WINDOWS")
+elseif is_plat("linux") then
+    set_arch("arm64")
+    add_defines("PLATFORM_LINUX")
+elseif is_plat("macosx") then
+    set_arch("arm64")
+    add_defines("PLATFORM_MACOSX")
+end
 
 -- add rules
 add_rules("plugin.compile_commands.autoupdate", {outputdir = ".vscode"})

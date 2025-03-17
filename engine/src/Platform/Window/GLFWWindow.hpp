@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../EnginePCH.hpp"
 #include <GLFW/glfw3.h>
 
 #include "Window.hpp"
@@ -40,6 +41,4 @@ namespace Engine
 
         WindowData m_Data;
     };
-
-    static void GLFWErrorCallback(int error, const char *description);
 } // namespace Engine

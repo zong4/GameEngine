@@ -1,12 +1,10 @@
 #pragma once
 
+#include "../../EnginePCH.hpp"
 #include <GLFW/glfw3.h>
 
-#include "../Core.hpp"
-#include "../Window/Window.hpp"
+#include "../../Platform/Window/Window.hpp"
 #include "../Events/ApplicationEvent.hpp"
-#include "../Events/KeyEvent.hpp"
-#include "../Events/MouseEvent.hpp"
 #include "../Layer/LayerStack.hpp"
 
 namespace Engine

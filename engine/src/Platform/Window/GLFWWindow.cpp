@@ -1,8 +1,13 @@
 #include "GLFWWindow.hpp"
 
-#include "../Events/ApplicationEvent.hpp"
-#include "../Events/KeyEvent.hpp"
-#include "../Events/MouseEvent.hpp"
+#include "../../Core/Events/ApplicationEvent.hpp"
+#include "../../Core/Events/KeyEvent.hpp"
+#include "../../Core/Events/MouseEvent.hpp"
+
+static void GLFWErrorCallback(int error, const char *description)
+{
+    ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
+}
 
 void Engine::GLFWWindow::OnUpdate()
 {
@@ -161,9 +166,4 @@ void Engine::GLFWWindow::Shutdown()
 {
     glfwDestroyWindow(m_Window);
     glfwTerminate();
-}
-
-static void Engine::GLFWErrorCallback(int error, const char *description)
-{
-    ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
 }

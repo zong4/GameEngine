@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core.hpp"
+#include "../../EnginePCH.hpp"
 
 #define BIT(x) (1 << x)
 

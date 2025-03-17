@@ -5,5 +5,6 @@
 #include <functional>
 #include <algorithm>
 #include <vector>
+#include <sstream>
 
-#include "Logger/Logger.hpp"
+#include "Core/Logger/Logger.hpp"
