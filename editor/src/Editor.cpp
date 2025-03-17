@@ -19,7 +19,6 @@ public:
 
     void OnUpdate() override
     {
-        EDITOR_INFO("ExampleLayer::Update");
     }
 
     void OnEvent(Engine::Event &event) override
@@ -44,7 +43,7 @@ public:
     }
 };
 
-Engine::Application *Engine::CreateApplication()
+std::unique_ptr<Engine::Application> Engine::CreateApplication()
 {
-    return new Editor();
+    return std::make_unique<Editor>();
 }

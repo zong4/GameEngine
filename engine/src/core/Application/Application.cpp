@@ -1,6 +1,7 @@
 #include "Application.hpp"
 
-#include <glad/glad.h>
+// Platform
+#include <glad/glad.h> // todo: unbind with opengl
 
 Engine::Application *Engine::Application::s_Instance = nullptr;
 
@@ -32,15 +33,15 @@ void Engine::Application::Run()
     ENGINE_INFO("Application shutdown");
 }
 
-void Engine::Application::OnEvent(Event &e)
+void Engine::Application::OnEvent(Event &event)
 {
-    EventDispatcher dispatcher(e);
+    EventDispatcher dispatcher(event);
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 
     for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
     {
-        (*--it)->OnEvent(e);
-        if (e.IsHandled())
+        (*--it)->OnEvent(event);
+        if (event.IsHandled())
         {
             break;
         }

@@ -8,7 +8,6 @@ int main(int argc, char **argv)
 
     auto app = Engine::CreateApplication();
     app->Run();
-    delete app;
 
     ENGINE_INFO("Engine shutdown");
 }

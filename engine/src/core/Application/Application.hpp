@@ -1,10 +1,13 @@
 #pragma once
 
 #include "../../EnginePCH.hpp"
-#include <GLFW/glfw3.h>
-#include "../../Platform/Window/Window.hpp"
+
+// Core
 #include "../Events/ApplicationEvent.hpp"
 #include "../Layer/LayerStack.hpp"
+
+// Platform
+#include "../../Platform/Window/Window.hpp"
 
 namespace Engine
 {
@@ -30,10 +33,10 @@ namespace Engine
         static Application *s_Instance;
 
         bool m_Running = true;
-        std::unique_ptr<Window> m_Window;
+        std::unique_ptr<Window> m_Window; // todo: more windows
 
         LayerStack m_LayerStack;
     };
 
-    extern Application *CreateApplication();
+    extern std::unique_ptr<Application> CreateApplication();
 } // namespace Engine
