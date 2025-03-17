@@ -4,11 +4,6 @@
 #include "../Events/KeyEvent.hpp"
 #include "../Events/MouseEvent.hpp"
 
-static void Engine::GLFWErrorCallback(int error, const char *description)
-{
-    ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
-}
-
 void Engine::GLFWWindow::OnUpdate()
 {
     glfwPollEvents();
@@ -152,6 +147,13 @@ void Engine::GLFWWindow::Init(const WindowProps &props)
             data.EventCallback(event);
         } });
 
+    glfwSetWindowPosCallback(m_Window, [](GLFWwindow *window, int xPos, int yPos)
+                             {
+        WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
+
+        WindowMovedEvent event(xPos, yPos);
+        data.EventCallback(event); });
+
     ENGINE_INFO("Window created");
 }
 
@@ -159,4 +161,9 @@ void Engine::GLFWWindow::Shutdown()
 {
     glfwDestroyWindow(m_Window);
     glfwTerminate();
+}
+
+static void Engine::GLFWErrorCallback(int error, const char *description)
+{
+    ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
 }

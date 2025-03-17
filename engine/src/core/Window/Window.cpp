@@ -8,7 +8,7 @@ Engine::Window *Engine::Window::Create(const WindowProps &props)
     return new GLFWWindow(props);
 #elif PLATFORM_LINUX
     return new GLFWWindow(props);
-#elif PLATFORM_MACOS
+#elif PLATFORM_MACOSX
     return new GLFWWindow(props);
 #endif
 }
