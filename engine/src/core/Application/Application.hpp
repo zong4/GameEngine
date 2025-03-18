@@ -34,12 +34,15 @@ class Application
     bool OnWindowClose(WindowCloseEvent& e);
 
   private:
+    static Application* s_Instance;
+
     bool                    m_Running = true;
     std::unique_ptr<Window> m_Window; // todo: more windows
-    ImGuiLayer*             m_ImGuiLayer;
-    static Application*     s_Instance;
 
-    LayerStack m_LayerStack;
+    ImGuiLayer* m_ImGuiLayer;
+    LayerStack  m_LayerStack;
+
+    unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
 };
 
 extern std::unique_ptr<Application> CreateApplication();
