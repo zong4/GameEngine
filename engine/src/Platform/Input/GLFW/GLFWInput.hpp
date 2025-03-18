@@ -7,6 +7,10 @@ namespace Engine
 {
 class GLFWInput : public Input
 {
+  public:
+    GLFWInput()          = default;
+    virtual ~GLFWInput() = default;
+
   protected:
     virtual bool                    IsKeyPressedImpl(int keycode) override;
     virtual bool                    IsMouseButtonPressedImpl(int button) override;

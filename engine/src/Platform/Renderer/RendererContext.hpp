@@ -7,6 +7,7 @@ namespace Engine
 class RendererContext
 {
   public:
+    RendererContext()          = default;
     virtual ~RendererContext() = default;
 
     virtual void Init()        = 0;
