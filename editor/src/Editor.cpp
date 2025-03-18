@@ -1,8 +1,5 @@
 #include <engine.hpp>
 
-// todo: test
-#include <imgui.h>
-
 class ExampleLayer : public Engine::Layer
 {
   public:
@@ -15,12 +12,7 @@ class ExampleLayer : public Engine::Layer
             EDITOR_INFO("Tab key is pressed");
     }
     void BeginRender() override {}
-    void OnImGuiRender() override
-    {
-        ImGui::Begin("Test");
-        ImGui::Text("Hello, world!");
-        ImGui::End();
-    }
+    void OnImGuiRender() override {}
     void EndRender() override {}
     void OnEvent(Engine::Event& event) override
     {

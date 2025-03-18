@@ -21,8 +21,5 @@ class ImGuiLayer : public Layer
     virtual void EndRender() override;
     virtual void OnEvent(Event& event) override {}
     virtual void OnDetach() override;
-
-  private:
-    float m_Time = 0.0f;
 };
 }; // namespace Engine
