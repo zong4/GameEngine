@@ -1,6 +1,6 @@
-source scripts/setup_vulkan.sh
+# source scripts/setup_vulkan.sh
 
-xmake f -m debug
 xmake clean --all
+xmake f -m debug
 xmake build
 xmake run
