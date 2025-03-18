@@ -8,10 +8,10 @@ add_requires("glm")
 -- Platform
 if is_plat("windows") then
     add_requires("glfw")
-    add_requires("vulkansdk")
+    add_requires("glad")
 elseif is_plat("linux") then
     add_requires("glfw")
-    add_requires("vulkansdk")
+    add_requires("glad")
 elseif is_plat("macosx") then
     add_requires("glfw")
     add_requires("glad")
@@ -37,10 +37,10 @@ target("Engine")
     -- Platform
     if is_plat("windows") then
         add_packages("glfw", {public=true})
-        add_packages("vulkansdk", {public=true})
+        add_packages("glad", {public=true})
     elseif is_plat("linux") then
         add_packages("glfw", {public=true})
-        add_packages("vulkansdk", {public=true})
+        add_packages("glad", {public=true})
     elseif is_plat("macosx") then
         add_packages("glfw", {public=true})
         add_packages("glad", {public=true})
