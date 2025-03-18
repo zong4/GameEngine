@@ -12,7 +12,7 @@ class ImGuiLayer : public Layer
 {
   public:
     ImGuiLayer() : Layer("ImGuiLayer") {}
-    ~ImGuiLayer() = default;
+    virtual ~ImGuiLayer() = default;
 
     virtual void OnAttach() override;
     virtual void OnUpdate() override {}

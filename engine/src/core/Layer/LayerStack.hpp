@@ -10,7 +10,6 @@ namespace Engine
 class LayerStack
 {
   public:
-    LayerStack() = default;
     ~LayerStack();
 
     inline std::vector<Layer*>::iterator begin() { return m_Layers.begin(); }

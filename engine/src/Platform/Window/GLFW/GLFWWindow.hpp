@@ -1,6 +1,7 @@
 #pragma once
 
 // Platform
+#include "Platform/Renderer/RendererContext.hpp"
 #include "Platform/Window/Window.hpp"
 #include <GLFW/glfw3.h>
 
@@ -29,7 +30,8 @@ class GLFWWindow : public Window
     void Shutdown();
 
   private:
-    GLFWwindow* m_Window;
+    GLFWwindow*                      m_Window;
+    std::unique_ptr<RendererContext> m_Context;
 
     struct WindowData {
         std::string  Title;

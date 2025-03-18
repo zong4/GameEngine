@@ -6,8 +6,7 @@
 #include "Core/Events/MouseEvent.hpp"
 
 // Platform
-#include "GLFW/glfw3.h"
-#include <glad/glad.h> // todo: unbind with opengl
+#include "Platform/Renderer/OpenGL/OpenGLRendererContext.hpp"
 
 void Engine::GLFWWindow::Shutdown()
 {
@@ -29,6 +28,7 @@ void Engine::GLFWWindow::SetVSync(bool enabled)
 void Engine::GLFWWindow::OnUpdate()
 {
     glfwPollEvents();
+    m_Context->SwapBuffers();
     glfwSwapBuffers(m_Window);
 }
 
@@ -55,9 +55,9 @@ void Engine::GLFWWindow::Init(const WindowProps& props)
         ENGINE_ERROR("Could not create window");
         return;
     }
-    glfwMakeContextCurrent(m_Window);
-    int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-    ENGINE_ASSERT(status, "Failed to initialize Glad");
+
+    m_Context = std::make_unique<OpenGLRendererContext>(m_Window);
+    m_Context->Init();
 
     glfwSetWindowUserPointer(m_Window, &m_Data);
     SetVSync(true);
