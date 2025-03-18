@@ -1,7 +1,8 @@
-#include "Logger/Logger.hpp"
-#include "Application/Application.hpp"
+// Core
+#include "Core/Application/Application.hpp"
+#include "Core/Logger/Logger.hpp"
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     Engine::Logger::Init();
     ENGINE_INFO("Engine startup");

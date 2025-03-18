@@ -22,9 +22,12 @@ add_requires("imgui")
 
 target("Engine")
     set_kind("static")
+
     set_pcxxheader("src/EnginePCH.hpp")
     add_headerfiles("src/**.hpp")
     add_files("src/**.cpp")
+
+    add_includedirs("src", {public=true})
     add_includedirs("include", {public=true})
 
     -- Core

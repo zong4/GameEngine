@@ -1,8 +1,8 @@
 #pragma once
 
 // Core
-#include "../src/Core/Logger/Logger.hpp"
-#include "../src/Core/Application/Application.hpp"
+#include "Core/Application/Application.hpp"
+#include "Core/Logger/Logger.hpp"
 
 // Platform
-#include "../src/Platform/ImGui/ImGuiLayer.hpp"
+#include "Platform/ImGui/ImGuiLayer.hpp"

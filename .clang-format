@@ -1,0 +1,31 @@
+BasedOnStyle: LLVM  # 基于 LLVM 风格，简洁高效:cite[1]:cite[8]
+Language: Cpp
+
+# 基础格式
+ColumnLimit: 120    # 放宽行宽限制，适应现代宽屏显示器:cite[8]
+IndentWidth: 4      # 4 空格缩进，提升可读性:cite[2]:cite[5]
+TabWidth: 4
+UseTab: Never       # 强制使用空格而非 Tab:cite[8]
+
+# 对齐与空格
+AlignConsecutiveAssignments: true   # 对齐连续赋值语句的等号:cite[2]:cite[4]
+AlignConsecutiveDeclarations: true  # 对齐连续变量声明:cite[2]
+AlignTrailingComments: true         # 对齐行尾注释:cite[2]:cite[5]
+PointerAlignment: Left              # 指针符号左对齐（`int* ptr`）:cite[3]:cite[5]
+SpaceBeforeParens: ControlStatements # 控制语句括号前加空格（如 `if (cond)`）:cite[8]
+SpaceAfterTemplateKeyword: true     # `template<typename T>` 后加空格:cite[5]
+
+# 函数与代码块
+AllowShortFunctionsOnASingleLine: InlineOnly  # 类内短函数保持单行:cite[5]
+AllowShortIfStatementsOnASingleLine: Never    # 禁止短 if 压缩到单行:cite[2]
+BreakBeforeBraces: Custom          # 自定义大括号换行规则:cite[2]
+BraceWrapping:
+  AfterClass: true                 # 类定义后换行
+  AfterFunction: true              # 函数定义后换行
+  AfterNamespace: true             # 命名空间后换行
+  BeforeElse: true                 # else 前换行:cite[8]
+
+# 其他优化
+SortIncludes: true                 # 自动排序头文件:cite[5]
+ReflowComments: true               # 重新排版注释:cite[5]
+Cpp11BracedListStyle: true         # 使用 C++11 风格的初始化列表（`{1, 2}`）:cite[2]

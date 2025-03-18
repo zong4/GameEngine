@@ -3,7 +3,7 @@
 // Platform
 #include "GLFW/GLFWWindow.hpp"
 
-Engine::Window *Engine::Window::Create(const WindowProps &props)
+Engine::Window* Engine::Window::Create(const WindowProps& props)
 {
 #ifdef PLATFORM_WINDOWS
     return std::make_unique<GLFWWindow>(props);
