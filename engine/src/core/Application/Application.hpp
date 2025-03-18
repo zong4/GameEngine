@@ -7,6 +7,7 @@
 #include "Core/Layer/LayerStack.hpp"
 
 // Platform
+#include "Platform/ImGui/ImGuiLayer.hpp"
 #include "Platform/Window/Window.hpp"
 
 namespace Engine
@@ -35,6 +36,7 @@ class Application
   private:
     bool                    m_Running = true;
     std::unique_ptr<Window> m_Window; // todo: more windows
+    ImGuiLayer*             m_ImGuiLayer;
     static Application*     s_Instance;
 
     LayerStack m_LayerStack;

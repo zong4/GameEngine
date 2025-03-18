@@ -18,6 +18,9 @@ class Layer
     virtual void OnAttach()            = 0;
     virtual void OnDetach()            = 0;
     virtual void OnUpdate()            = 0;
+    virtual void BeginRender()         = 0;
+    virtual void OnImGuiRender()       = 0;
+    virtual void EndRender()           = 0;
     virtual void OnEvent(Event& event) = 0;
 
   protected:

@@ -1,17 +1,27 @@
 #include <engine.hpp>
 
+// todo: test
+#include <imgui.h>
+
 class ExampleLayer : public Engine::Layer
 {
   public:
     ExampleLayer() : Layer("ExampleLayer") {}
 
     void OnAttach() override { EDITOR_INFO("ExampleLayer::Attach"); }
-    void OnDetach() override { EDITOR_INFO("ExampleLayer::Detach"); }
     void OnUpdate() override
     {
         if (Engine::Input::IsKeyPressed(ENGINE_KEY_TAB))
             EDITOR_INFO("Tab key is pressed");
     }
+    void BeginRender() override {}
+    void OnImGuiRender() override
+    {
+        ImGui::Begin("Test");
+        ImGui::Text("Hello, world!");
+        ImGui::End();
+    }
+    void EndRender() override {}
     void OnEvent(Engine::Event& event) override
     {
         if (event.GetEventType() == Engine::EventType::KeyPressed) {
@@ -19,6 +29,7 @@ class ExampleLayer : public Engine::Layer
             EDITOR_INFO("Key pressed: {0} ({1})", e.GetKeyCode(), (char)e.GetKeyCode());
         }
     }
+    void OnDetach() override { EDITOR_INFO("ExampleLayer::Detach"); }
 };
 
 class Editor : public Engine::Application
@@ -28,7 +39,6 @@ class Editor : public Engine::Application
     {
         EDITOR_INFO("Editor constructor");
         PushLayer(new ExampleLayer());
-        PushLayer(new Engine::ImGuiLayer());
     }
     ~Editor() { EDITOR_INFO("Editor destructor"); }
 };

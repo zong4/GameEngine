@@ -14,20 +14,13 @@ class ImGuiLayer : public Layer
     ImGuiLayer() : Layer("ImGuiLayer") {}
     ~ImGuiLayer() = default;
 
-    void OnAttach() override;
-    void OnDetach() override;
-    void OnUpdate() override;
-    void OnEvent(Event& event) override;
-
-  private:
-    bool OnMouseButtonPressedEvent(MouseButtonPressedEvent& event);
-    bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& event);
-    bool OnMouseMovedEvent(MouseMovedEvent& event);
-    bool OnMouseScrolledEvent(MouseScrolledEvent& event);
-    bool OnKeyPressedEvent(KeyPressedEvent& event);
-    bool OnKeyReleasedEvent(KeyReleasedEvent& event);
-    bool OnKeyTypedEvent(KeyTypedEvent& event);
-    bool OnWindowResizeEvent(WindowResizeEvent& event);
+    virtual void OnAttach() override;
+    virtual void OnUpdate() override {}
+    virtual void BeginRender() override;
+    virtual void OnImGuiRender() override;
+    virtual void EndRender() override;
+    virtual void OnEvent(Event& event) override {}
+    virtual void OnDetach() override;
 
   private:
     float m_Time = 0.0f;

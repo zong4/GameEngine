@@ -18,7 +18,7 @@ elseif is_plat("macosx") then
 end
 
 -- Functions
-add_requires("imgui")
+add_requires("imgui docking", {configs = {glfw_opengl3 = true}})
 
 target("Engine")
     set_kind("static")
