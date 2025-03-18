@@ -29,7 +29,6 @@ void Engine::GLFWWindow::OnUpdate()
 {
     glfwPollEvents();
     m_Context->SwapBuffers();
-    glfwSwapBuffers(m_Window);
 }
 
 static void GLFWErrorCallback(int error, const char* description)

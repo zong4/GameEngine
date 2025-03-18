@@ -9,9 +9,9 @@ void Engine::OpenGLRendererContext::Init()
     ENGINE_ASSERT(status, "Failed to initialize Glad!");
 
     ENGINE_INFO("OpenGL Info:");
-    ENGINE_INFO("  Vendor: {0}", glGetString(GL_VENDOR));
-    ENGINE_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
-    ENGINE_INFO("  Version: {0}", glGetString(GL_VERSION));
+    ENGINE_INFO("  Vendor: {0}", reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+    ENGINE_INFO("  Renderer: {0}", reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+    ENGINE_INFO("  Version: {0}", reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 }
 
 void Engine::OpenGLRendererContext::SwapBuffers()
