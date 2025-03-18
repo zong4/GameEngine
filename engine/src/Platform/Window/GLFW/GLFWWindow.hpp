@@ -1,9 +1,8 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
-
 // Platform
 #include "Platform/Window/Window.hpp"
+#include <GLFW/glfw3.h>
 
 namespace Engine
 {
@@ -13,19 +12,17 @@ class GLFWWindow : public Window
     GLFWWindow(const WindowProps& props) { Init(props); }
     ~GLFWWindow() override { Shutdown(); }
 
-    void OnUpdate() override;
-
     inline unsigned int GetWidth() const override { return m_Data.Width; }
     inline unsigned int GetHeight() const override { return m_Data.Height; }
     inline void*        GetNativeWindow() const override { return m_Window; }
-
-    // Window attributes
-    inline void SetEventCallback(const std::function<void(Event&)>& callback) override
+    inline bool         IsVSync() const override { return m_Data.VSync; }
+    void                SetVSync(bool enabled) override;
+    inline void         SetEventCallback(const std::function<void(Event&)>& callback) override
     {
         m_Data.EventCallback = callback;
     }
-    void        SetVSync(bool enabled) override;
-    inline bool IsVSync() const override { return m_Data.VSync; }
+
+    void OnUpdate() override;
 
   private:
     void Init(const WindowProps& props);
@@ -41,7 +38,6 @@ class GLFWWindow : public Window
 
         std::function<void(Event&)> EventCallback;
     };
-
     WindowData m_Data;
 };
 } // namespace Engine

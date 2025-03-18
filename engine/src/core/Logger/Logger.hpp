@@ -7,10 +7,10 @@ namespace Engine
 class Logger
 {
   public:
-    static void Init();
-
     inline static std::shared_ptr<spdlog::logger>& GetEngineLogger() { return s_EngineLogger; }
     inline static std::shared_ptr<spdlog::logger>& GetEditorLogger() { return s_EditorLogger; }
+
+    static void Init();
 
   private:
     static std::shared_ptr<spdlog::logger> s_EngineLogger;

@@ -1,24 +1,18 @@
 #include "GLFWWindow.hpp"
 
-#include "GLFW/glfw3.h"
-
 // Core
-#include "../../../Core/Events/ApplicationEvent.hpp"
-#include "../../../Core/Events/KeyEvent.hpp"
-#include "../../../Core/Events/MouseEvent.hpp"
+#include "Core/Events/ApplicationEvent.hpp"
+#include "Core/Events/KeyEvent.hpp"
+#include "Core/Events/MouseEvent.hpp"
 
 // Platform
+#include "GLFW/glfw3.h"
 #include <glad/glad.h> // todo: unbind with opengl
 
-static void GLFWErrorCallback(int error, const char* description)
+void Engine::GLFWWindow::Shutdown()
 {
-    ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
-}
-
-void Engine::GLFWWindow::OnUpdate()
-{
-    glfwPollEvents();
-    glfwSwapBuffers(m_Window);
+    glfwDestroyWindow(m_Window);
+    glfwTerminate();
 }
 
 void Engine::GLFWWindow::SetVSync(bool enabled)
@@ -30,6 +24,17 @@ void Engine::GLFWWindow::SetVSync(bool enabled)
         glfwSwapInterval(0);
     }
     m_Data.VSync = enabled;
+}
+
+void Engine::GLFWWindow::OnUpdate()
+{
+    glfwPollEvents();
+    glfwSwapBuffers(m_Window);
+}
+
+static void GLFWErrorCallback(int error, const char* description)
+{
+    ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
 }
 
 void Engine::GLFWWindow::Init(const WindowProps& props)
@@ -159,10 +164,4 @@ void Engine::GLFWWindow::Init(const WindowProps& props)
     });
 
     ENGINE_INFO("Window created");
-}
-
-void Engine::GLFWWindow::Shutdown()
-{
-    glfwDestroyWindow(m_Window);
-    glfwTerminate();
 }

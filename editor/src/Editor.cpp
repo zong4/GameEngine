@@ -7,8 +7,18 @@ class ExampleLayer : public Engine::Layer
 
     void OnAttach() override { EDITOR_INFO("ExampleLayer::Attach"); }
     void OnDetach() override { EDITOR_INFO("ExampleLayer::Detach"); }
-    void OnUpdate() override {}
-    void OnEvent(Engine::Event& event) override { EDITOR_INFO("{0}", event.ToString()); }
+    void OnUpdate() override
+    {
+        if (Engine::Input::IsKeyPressed(ENGINE_KEY_TAB))
+            EDITOR_INFO("Tab key is pressed");
+    }
+    void OnEvent(Engine::Event& event) override
+    {
+        if (event.GetEventType() == Engine::EventType::KeyPressed) {
+            Engine::KeyPressedEvent& e = (Engine::KeyPressedEvent&)event;
+            EDITOR_INFO("Key pressed: {0} ({1})", e.GetKeyCode(), (char)e.GetKeyCode());
+        }
+    }
 };
 
 class Editor : public Engine::Application

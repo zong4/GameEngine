@@ -14,8 +14,10 @@ namespace Engine
 class Application
 {
   public:
-    Application();
-    virtual ~Application() = default;
+    Application() { Init(); }
+    virtual ~Application()                     = default;
+    Application(const Application&)            = delete;
+    Application& operator=(const Application&) = delete;
 
     inline static Application& Get() { return *s_Instance; }
     inline Window&             GetWindow() { return *m_Window; }
@@ -27,13 +29,13 @@ class Application
     inline void PushOverlay(Layer* overlay) { m_LayerStack.PushOverlay(overlay); }
 
   private:
+    void Init();
     bool OnWindowClose(WindowCloseEvent& e);
 
   private:
-    static Application* s_Instance;
-
     bool                    m_Running = true;
     std::unique_ptr<Window> m_Window; // todo: more windows
+    static Application*     s_Instance;
 
     LayerStack m_LayerStack;
 };

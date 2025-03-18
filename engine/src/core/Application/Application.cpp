@@ -1,14 +1,17 @@
 #include "Application.hpp"
+#include "Platform/Input/Input.hpp"
 
 // Platform
 #include <glad/glad.h> // todo: unbind with opengl
 
 Engine::Application* Engine::Application::s_Instance = nullptr;
 
-Engine::Application::Application()
+void Engine::Application::Init()
 {
     ENGINE_ASSERT(!s_Instance, "Application already exists");
     s_Instance = this;
+
+    Input::Init();
 
     m_Window = std::unique_ptr<Window>(Window::Create());
     m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));

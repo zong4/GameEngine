@@ -1,6 +1,7 @@
 // Core
 #include "Core/Application/Application.hpp"
 #include "Core/Logger/Logger.hpp"
+#include <iostream>
 
 int main(int argc, char** argv)
 {

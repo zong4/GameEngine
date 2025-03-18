@@ -4,10 +4,10 @@
 
 // Core
 #include "Core/Events/Event.hpp"
+#include <memory>
 
 namespace Engine
 {
-/// @brief Properties for a window
 struct WindowProps {
     std::string  Title;
     unsigned int Width;
@@ -19,25 +19,23 @@ struct WindowProps {
     }
 };
 
-/// @brief Interface representing a desktop system based Window
 class Window
 {
   public:
-    virtual ~Window() = default;
+    Window()                         = default;
+    virtual ~Window()                = default;
+    Window(const Window&)            = delete;
+    Window& operator=(const Window&) = delete;
+
+    virtual unsigned int GetWidth() const                                              = 0;
+    virtual unsigned int GetHeight() const                                             = 0;
+    virtual void*        GetNativeWindow() const                                       = 0;
+    virtual bool         IsVSync() const                                               = 0;
+    virtual void         SetVSync(bool enabled)                                        = 0;
+    virtual void         SetEventCallback(const std::function<void(Event&)>& callback) = 0;
 
     virtual void OnUpdate() = 0;
 
-    virtual unsigned int GetWidth() const        = 0;
-    virtual unsigned int GetHeight() const       = 0;
-    virtual void*        GetNativeWindow() const = 0;
-
-    virtual void SetEventCallback(const std::function<void(Event&)>& callback) = 0;
-    virtual void SetVSync(bool enabled)                                        = 0;
-    virtual bool IsVSync() const                                               = 0;
-
-    /// @brief Creates a window
-    /// @param props The properties of the window
-    /// @return A pointer to the window
-    static Window* Create(const WindowProps& props = WindowProps());
+    static std::unique_ptr<Window> Create(const WindowProps& props = WindowProps());
 };
 } // namespace Engine

@@ -5,7 +5,6 @@
 
 namespace Engine
 {
-/// @brief Event for when a window is closed
 class WindowCloseEvent : public Event
 {
   public:
@@ -15,7 +14,6 @@ class WindowCloseEvent : public Event
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 };
 
-/// @brief Event for when a window is resized
 class WindowResizeEvent : public Event
 {
   public:
@@ -38,7 +36,6 @@ class WindowResizeEvent : public Event
     unsigned int m_Width, m_Height;
 };
 
-/// @brief Event for when a window gains focus
 class WindowFocusEvent : public Event
 {
   public:
@@ -48,7 +45,6 @@ class WindowFocusEvent : public Event
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 };
 
-/// @brief Event for when a window loses focus
 class WindowLostFocusEvent : public Event
 {
   public:
@@ -58,7 +54,6 @@ class WindowLostFocusEvent : public Event
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 };
 
-/// @brief Event for when a window is moved
 class WindowMovedEvent : public Event
 {
   public:
@@ -81,7 +76,6 @@ class WindowMovedEvent : public Event
     int m_X, m_Y;
 };
 
-/// @brief Event for when the application ticks
 class AppTickEvent : public Event
 {
   public:
@@ -91,7 +85,6 @@ class AppTickEvent : public Event
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 };
 
-/// @brief Event for when the application updates
 class AppUpdateEvent : public Event
 {
   public:
@@ -101,7 +94,6 @@ class AppUpdateEvent : public Event
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 };
 
-/// @brief Event for when the application renders
 class AppRenderEvent : public Event
 {
   public:

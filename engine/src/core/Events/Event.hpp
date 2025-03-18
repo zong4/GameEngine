@@ -4,7 +4,6 @@
 
 namespace Engine
 {
-/// @brief Event types
 enum class EventType {
     None = 0,
     WindowClose,
@@ -24,7 +23,6 @@ enum class EventType {
     MouseScrolled
 };
 
-/// @brief One-hot enum for event categories
 enum EventCategory {
     None                     = 0,
     EventCategoryApplication = ENGINE_BIT(0),
@@ -34,7 +32,6 @@ enum EventCategory {
     EventCategoryMouseButton = ENGINE_BIT(4)
 };
 
-/// @brief Macros for event classes
 #define EVENT_CLASS_TYPE(type)                                                                                         \
     inline static EventType GetStaticType()                                                                            \
     {                                                                                                                  \
@@ -49,33 +46,29 @@ enum EventCategory {
         return #type;                                                                                                  \
     }
 
-/// @brief Macros for event categories
 #define EVENT_CLASS_CATEGORY(category)                                                                                 \
     virtual int GetCategoryFlags() const override                                                                      \
     {                                                                                                                  \
         return category;                                                                                               \
     }
 
-/// @brief Base class for all events
 class Event
 {
     friend class EventDispatcher;
 
   public:
-    virtual EventType          GetEventType() const     = 0;
-    virtual const char*        GetName() const          = 0;
-    virtual int                GetCategoryFlags() const = 0;
+    virtual EventType   GetEventType() const     = 0;
+    virtual const char* GetName() const          = 0;
+    virtual int         GetCategoryFlags() const = 0;
+    inline bool         IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
+    inline bool         IsHandled() const { return m_Handled; }
+
     virtual inline std::string ToString() const { return GetName(); }
-
-    inline bool IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
-
-    inline bool IsHandled() const { return m_Handled; }
 
   protected:
     bool m_Handled = false;
 };
 
-/// @brief Event dispatcher
 class EventDispatcher
 {
     template <typename T> using EventFn = std::function<bool(T&)>;

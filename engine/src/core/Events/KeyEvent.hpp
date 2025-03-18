@@ -5,7 +5,6 @@
 
 namespace Engine
 {
-/// @brief Event for key events
 class KeyEvent : public Event
 {
   public:
@@ -19,7 +18,6 @@ class KeyEvent : public Event
     int m_KeyCode;
 };
 
-/// @brief Event for key pressed events
 class KeyPressedEvent : public KeyEvent
 {
   public:
@@ -40,7 +38,6 @@ class KeyPressedEvent : public KeyEvent
     int m_RepeatCount;
 };
 
-/// @brief Event for key released events
 class KeyReleasedEvent : public KeyEvent
 {
   public:
@@ -56,7 +53,6 @@ class KeyReleasedEvent : public KeyEvent
     EVENT_CLASS_TYPE(KeyReleased)
 };
 
-/// @brief Event for key typed events
 class KeyTypedEvent : public KeyEvent
 {
   public:

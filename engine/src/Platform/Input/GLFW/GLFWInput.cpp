@@ -1,9 +1,10 @@
 #include "GLFWInput.hpp"
 
-#include <GLFW/glfw3.h>
-
 // Core
 #include "Core/Application/Application.hpp"
+
+// Platform
+#include <GLFW/glfw3.h>
 
 bool Engine::GLFWInput::IsKeyPressedImpl(int keycode)
 {

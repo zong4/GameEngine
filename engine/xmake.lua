@@ -17,7 +17,7 @@ elseif is_plat("macosx") then
     add_requires("glad")
 end
 
--- Function
+-- Functions
 add_requires("imgui")
 
 target("Engine")
@@ -46,5 +46,5 @@ target("Engine")
         add_packages("glad", {public=true})
     end
 
-    -- Function
+    -- Functions
     add_packages("imgui", {public=true})

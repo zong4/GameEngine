@@ -1,6 +1,7 @@
 #include "Input.hpp"
 
-#include "GLFW/GLFWInput.hpp"
+// Platform
+#include "Platform/Input/GLFW/GLFWInput.hpp"
 
 std::unique_ptr<Engine::Input> Engine::Input::s_Instance = nullptr;
 

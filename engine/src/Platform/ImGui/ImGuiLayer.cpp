@@ -1,7 +1,5 @@
 #include "ImGuiLayer.hpp"
 
-#include <imgui.h>
-
 // Core
 #include "Core/Application/Application.hpp"
 
@@ -11,6 +9,9 @@
 #include "Platform/Window/GLFW/GLFWWindow.hpp"
 #include "Platform/Window/GLFW/imgui_impl_glfw.h" // todo: unbind with glfw
 #include <glad/glad.h>                            // todo: unbind with opengl
+
+// Functions
+#include <imgui.h>
 
 void Engine::ImGuiLayer::OnAttach()
 {
