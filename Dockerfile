@@ -10,4 +10,4 @@ RUN sudo apt-get update && sudo apt-get install -y software-properties-common
 RUN sudo apt-get update && sudo add-apt-repository ppa:xmake-io/xmake
 RUN sudo apt update && sudo apt install xmake
 
-RUN sudo source run.sh
+# RUN sudo source run.sh
