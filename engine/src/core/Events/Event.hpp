@@ -88,4 +88,9 @@ class EventDispatcher
   private:
     Event& m_Event;
 };
+
+inline std::ostream& operator<<(std::ostream& os, const Event& event)
+{
+    return os << event.ToString();
+}
 } // namespace Engine

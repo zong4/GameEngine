@@ -58,7 +58,7 @@ void Engine::ImGuiLayer::OnUpdate()
 
 void Engine::ImGuiLayer::OnEvent(Event& event)
 {
-    ENGINE_INFO("{0}", event.ToString());
+    ENGINE_INFO("{0}", event);
 
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<MouseButtonPressedEvent>(ENGINE_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));

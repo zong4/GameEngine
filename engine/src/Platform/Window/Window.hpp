@@ -4,7 +4,6 @@
 
 // Core
 #include "Core/Events/Event.hpp"
-#include <memory>
 
 namespace Engine
 {

@@ -21,7 +21,7 @@ end
 -- add rules
 add_rules("plugin.compile_commands.autoupdate", {outputdir = ".vscode"})
 
-add_rules("mode.debug", "mode.release")
+add_rules("mode.debug") -- todo: add release mode
 if is_mode("debug") then
     add_defines("DEBUG")
 elseif is_mode("release") then
