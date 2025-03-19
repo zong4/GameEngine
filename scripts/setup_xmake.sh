@@ -1,3 +1,3 @@
-xmake clean --all --root
-xmake f -m debug -y --root
-xmake build --root
+xmake clean --all
+xmake f -m debug -y
+xmake build -y

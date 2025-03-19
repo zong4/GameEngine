@@ -6,7 +6,13 @@
 #include "Core/Events/MouseEvent.hpp"
 
 // Platform
+#ifdef PLATFORM_WINDOWS
 #include "Platform/Renderer/OpenGL/OpenGLRendererContext.hpp"
+#elif PLATFORM_LINUX
+#include "Platform/Renderer/OpenGL/OpenGLRendererContext.hpp"
+#elif PLATFORM_MACOSX
+#include "Platform/Renderer/OpenGL/OpenGLRendererContext.hpp"
+#endif
 
 void Engine::GLFWWindow::Shutdown()
 {
@@ -49,6 +55,7 @@ void Engine::GLFWWindow::Init(const WindowProps& props)
     }
     glfwSetErrorCallback(GLFWErrorCallback);
 
+    // glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     m_Window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
     if (!m_Window) {
         ENGINE_ERROR("Could not create window");

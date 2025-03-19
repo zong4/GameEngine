@@ -6,13 +6,13 @@ add_requires("spdlog")
 add_requires("glm")
 
 -- Platform
-if is_plat("windows") then
+if is_plat("windows") then -- todo: DirectX12
     add_requires("glfw")
     add_requires("glad")
-elseif is_plat("linux") then
+elseif is_plat("linux") then -- OpenGL
     add_requires("glfw")
     add_requires("glad")
-elseif is_plat("macosx") then
+elseif is_plat("macosx") then -- Vulkan
     add_requires("glfw")
     add_requires("glad")
 end
@@ -42,6 +42,8 @@ target("Engine")
         add_packages("glfw", {public=true})
         add_packages("glad", {public=true})
     elseif is_plat("macosx") then
+        -- remove_files("**/**/OpenGL/**")
+
         add_packages("glfw", {public=true})
         add_packages("glad", {public=true})
     end
