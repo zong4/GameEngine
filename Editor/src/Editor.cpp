@@ -17,8 +17,8 @@ class ExampleLayer : public Engine::Layer
     virtual void OnEvent(Engine::Event& event) override
     {
         if (event.GetEventType() == Engine::EventType::KeyPressed) {
-            EDITOR_INFO("Key pressed: {0} ({1})", (Engine::KeyPressedEvent&)event.GetKeyCode(),
-                        (char)(Engine::KeyPressedEvent&)event.GetKeyCode());
+            EDITOR_INFO("Key pressed: {0} ({1})", ((Engine::KeyPressedEvent&)event).GetKeyCode(),
+                        (char)((Engine::KeyPressedEvent&)event).GetKeyCode());
         }
     }
     virtual void OnDetach() override { EDITOR_INFO("ExampleLayer::OnDetach"); }

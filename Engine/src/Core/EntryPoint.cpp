@@ -13,4 +13,5 @@ int main(int argc, char** argv)
     app->Run();
 
     ENGINE_INFO("Engine shutdown");
+    return 0;
 }
