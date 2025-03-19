@@ -6,18 +6,17 @@
 #include "Core/Events/MouseEvent.hpp"
 
 // Platform
-#ifdef PLATFORM_WINDOWS
 #include "Platform/OpenGL/OpenGLRendererContext.hpp"
-#elif PLATFORM_LINUX
-#include "Platform/OpenGL/OpenGLRendererContext.hpp"
-#elif PLATFORM_MACOSX
-#include "Platform/OpenGL/OpenGLRendererContext.hpp"
-#endif
 
-void Engine::GLFWWindow::Shutdown()
+void Engine::GLFWWindow::OnUpdate()
 {
-    glfwDestroyWindow(m_Window);
-    glfwTerminate();
+    glfwPollEvents();
+    m_Context->SwapBuffers();
+}
+
+static void GLFWErrorCallback(int error, const char* description)
+{
+    ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
 }
 
 void Engine::GLFWWindow::SetVSync(bool enabled)
@@ -29,17 +28,6 @@ void Engine::GLFWWindow::SetVSync(bool enabled)
         glfwSwapInterval(0);
     }
     m_Data.VSync = enabled;
-}
-
-void Engine::GLFWWindow::OnUpdate()
-{
-    glfwPollEvents();
-    m_Context->SwapBuffers();
-}
-
-static void GLFWErrorCallback(int error, const char* description)
-{
-    ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
 }
 
 void Engine::GLFWWindow::Init(const WindowProps& props)
@@ -170,4 +158,10 @@ void Engine::GLFWWindow::Init(const WindowProps& props)
     });
 
     ENGINE_INFO("Window created");
+}
+
+void Engine::GLFWWindow::Shutdown()
+{
+    glfwDestroyWindow(m_Window);
+    glfwTerminate();
 }

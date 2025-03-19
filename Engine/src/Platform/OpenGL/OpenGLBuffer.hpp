@@ -13,9 +13,6 @@ class OpenGLVertexBuffer : public VertexBuffer
 
     void Bind() const override;
     void Unbind() const override;
-
-  private:
-    uint32_t m_RendererID;
 };
 
 class OpenGLIndexBuffer : public IndexBuffer
@@ -26,9 +23,5 @@ class OpenGLIndexBuffer : public IndexBuffer
 
     void Bind() const override;
     void Unbind() const override;
-
-  private:
-    uint32_t m_RendererID;
-    uint32_t m_Count;
 };
 } // namespace Engine

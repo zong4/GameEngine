@@ -1,8 +1,5 @@
 #include "OpenGLBuffer.hpp"
 
-// Core
-#include "Core/Renderer/Buffer.hpp"
-
 // Platform
 #include <glad/glad.h>
 
