@@ -7,13 +7,13 @@ namespace Engine
 class VertexBuffer
 {
   public:
-    VertexBuffer(float* vertices, uint32_t size) {}
+    VertexBuffer()          = default;
     virtual ~VertexBuffer() = default;
 
     virtual void Bind() const   = 0;
     virtual void Unbind() const = 0;
 
-    static VertexBuffer* Create(float* vertices, uint32_t size);
+    static std::unique_ptr<VertexBuffer> Create(float* vertices, uint32_t size);
 
   protected:
     uint32_t m_RendererID;
@@ -22,16 +22,17 @@ class VertexBuffer
 class IndexBuffer
 {
   public:
-    IndexBuffer(uint32_t* indices, uint32_t count) : m_Count(count) {}
+    IndexBuffer()          = default;
     virtual ~IndexBuffer() = default;
 
     virtual void Bind() const   = 0;
     virtual void Unbind() const = 0;
 
-    static IndexBuffer* Create(uint32_t* indices, uint32_t count);
+    static std::unique_ptr<IndexBuffer> Create(uint32_t* indices, uint32_t count);
 
   public:
     uint32_t GetCount() const { return m_Count; }
+    void     SetCount(uint32_t count) { m_Count = count; }
 
   protected:
     uint32_t m_RendererID;

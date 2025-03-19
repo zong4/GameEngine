@@ -11,8 +11,8 @@ class OpenGLVertexBuffer : public VertexBuffer
     OpenGLVertexBuffer(float* vertices, uint32_t size);
     ~OpenGLVertexBuffer();
 
-    void Bind() const override;
-    void Unbind() const override;
+    virtual void Bind() const override;
+    virtual void Unbind() const override;
 };
 
 class OpenGLIndexBuffer : public IndexBuffer
@@ -21,7 +21,7 @@ class OpenGLIndexBuffer : public IndexBuffer
     OpenGLIndexBuffer(uint32_t* indices, uint32_t count);
     ~OpenGLIndexBuffer();
 
-    void Bind() const override;
-    void Unbind() const override;
+    virtual void Bind() const override;
+    virtual void Unbind() const override;
 };
 } // namespace Engine

@@ -50,7 +50,7 @@ void Engine::GLFWWindow::Init(const WindowProps& props)
         return;
     }
 
-    m_Context = std::make_unique<OpenGLRendererContext>(m_Window);
+    m_Context = RendererContext::Create(m_Window);
     m_Context->Init();
 
     glfwSetWindowUserPointer(m_Window, &m_Data);

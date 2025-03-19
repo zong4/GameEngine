@@ -5,6 +5,8 @@
 // Core
 #include "Core/Events/ApplicationEvent.hpp"
 #include "Core/Layer/LayerStack.hpp"
+#include "Core/Renderer/Buffer.hpp"
+#include "Core/Renderer/Shader.hpp"
 #include "Core/Window/Window.hpp"
 
 // Platform
@@ -42,7 +44,10 @@ class Application
     ImGuiLayer* m_ImGuiLayer;
     LayerStack  m_LayerStack;
 
-    unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+    unsigned int                  m_VertexArray;
+    std::unique_ptr<VertexBuffer> m_VertexBuffer;
+    std::unique_ptr<IndexBuffer>  m_IndexBuffer;
+    std::unique_ptr<Shader>       m_Shader;
 };
 
 extern std::unique_ptr<Application> CreateApplication();
