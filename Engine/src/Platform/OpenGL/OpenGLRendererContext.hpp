@@ -1,7 +1,7 @@
 #pragma once
 
 // Platform
-#include "Platform/Renderer/RendererContext.hpp"
+#include "Core/Renderer/RendererContext.hpp"
 #include <GLFW/glfw3.h>
 
 namespace Engine

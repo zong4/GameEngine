@@ -1,7 +1,7 @@
 #pragma once
 
-// Platform
-#include "Platform/Input/Input.hpp"
+// Core
+#include "Core/Input/Input.hpp"
 
 namespace Engine
 {

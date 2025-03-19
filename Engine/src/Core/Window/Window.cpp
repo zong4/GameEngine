@@ -1,7 +1,7 @@
 #include "Window.hpp"
 
 // Platform
-#include "Platform/Window/GLFW/GLFWWindow.hpp"
+#include "Platform/GLFW/GLFWWindow.hpp"
 
 std::unique_ptr<Engine::Window> Engine::Window::Create(const WindowProps& props)
 {

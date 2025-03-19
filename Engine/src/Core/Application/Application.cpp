@@ -1,7 +1,7 @@
 #include "Application.hpp"
 
 // Platform
-#include "Platform/Input/Input.hpp"
+#include "Core/Input/Input.hpp"
 #include <glad/glad.h> // todo: unbind with opengl
 
 Engine::Application* Engine::Application::s_Instance = nullptr;

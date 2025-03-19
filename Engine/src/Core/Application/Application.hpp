@@ -5,10 +5,10 @@
 // Core
 #include "Core/Events/ApplicationEvent.hpp"
 #include "Core/Layer/LayerStack.hpp"
+#include "Core/Window/Window.hpp"
 
 // Platform
 #include "Platform/ImGui/ImGuiLayer.hpp"
-#include "Platform/Window/Window.hpp"
 
 namespace Engine
 {

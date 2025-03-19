@@ -7,11 +7,11 @@
 
 // Platform
 #ifdef PLATFORM_WINDOWS
-#include "Platform/Renderer/OpenGL/OpenGLRendererContext.hpp"
+#include "Platform/OpenGL/OpenGLRendererContext.hpp"
 #elif PLATFORM_LINUX
-#include "Platform/Renderer/OpenGL/OpenGLRendererContext.hpp"
+#include "Platform/OpenGL/OpenGLRendererContext.hpp"
 #elif PLATFORM_MACOSX
-#include "Platform/Renderer/OpenGL/OpenGLRendererContext.hpp"
+#include "Platform/OpenGL/OpenGLRendererContext.hpp"
 #endif
 
 void Engine::GLFWWindow::Shutdown()

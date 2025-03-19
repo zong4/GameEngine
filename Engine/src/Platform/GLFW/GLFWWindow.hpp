@@ -1,8 +1,10 @@
 #pragma once
 
+// Core
+#include "Core/Renderer/RendererContext.hpp"
+#include "Core/Window/Window.hpp"
+
 // Platform
-#include "Platform/Renderer/RendererContext.hpp"
-#include "Platform/Window/Window.hpp"
 #include <GLFW/glfw3.h>
 
 namespace Engine
@@ -16,7 +18,7 @@ class GLFWWindow : public Window
     inline unsigned int GetWidth() const override { return m_Data.Width; }
     inline unsigned int GetHeight() const override { return m_Data.Height; }
     inline void*        GetNativeWindow() const override { return m_Window; }
-    inline bool         IsVSync() const override { return m_Data.VSync; }
+    inline bool         GetVSync() const override { return m_Data.VSync; }
     void                SetVSync(bool enabled) override;
     inline void         SetEventCallback(const std::function<void(Event&)>& callback) override
     {

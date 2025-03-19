@@ -26,14 +26,15 @@ class Window
     Window(const Window&)            = delete;
     Window& operator=(const Window&) = delete;
 
-    virtual unsigned int GetWidth() const                                              = 0;
-    virtual unsigned int GetHeight() const                                             = 0;
-    virtual void*        GetNativeWindow() const                                       = 0;
-    virtual bool         IsVSync() const                                               = 0;
-    virtual void         SetVSync(bool enabled)                                        = 0;
-    virtual void         SetEventCallback(const std::function<void(Event&)>& callback) = 0;
+    virtual void OnUpdate()                                                    = 0;
+    virtual void SetEventCallback(const std::function<void(Event&)>& callback) = 0;
 
-    virtual void OnUpdate() = 0;
+  public:
+    virtual unsigned int GetWidth() const        = 0;
+    virtual unsigned int GetHeight() const       = 0;
+    virtual void*        GetNativeWindow() const = 0;
+    virtual bool         GetVSync() const        = 0;
+    virtual void         SetVSync(bool enabled)  = 0;
 
     static std::unique_ptr<Window> Create(const WindowProps& props = WindowProps());
 };

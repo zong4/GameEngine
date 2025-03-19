@@ -1,8 +1,7 @@
 #pragma once
 
-// Platform
-#include "Platform/Renderer/Buffer.hpp"
-#include <cstdint>
+// Core
+#include "Core/Renderer/Buffer.hpp"
 
 namespace Engine
 {

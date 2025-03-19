@@ -4,7 +4,7 @@
 #include "Core/Application/Application.hpp"
 
 // Platform
-#include "Platform/Window/GLFW/GLFWWindow.hpp"
+#include "Platform/GLFW/GLFWWindow.hpp"
 
 // Functions
 #include <imgui.h>
