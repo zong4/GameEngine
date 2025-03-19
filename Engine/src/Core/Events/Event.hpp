@@ -60,13 +60,14 @@ class Event
     Event()          = default;
     virtual ~Event() = default;
 
+    virtual inline std::string ToString() const { return GetName(); }
+
+  public:
     virtual EventType   GetEventType() const     = 0;
     virtual const char* GetName() const          = 0;
     virtual int         GetCategoryFlags() const = 0;
     inline bool         IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
     inline bool         IsHandled() const { return m_Handled; }
-
-    virtual inline std::string ToString() const { return GetName(); }
 
   protected:
     bool m_Handled = false;

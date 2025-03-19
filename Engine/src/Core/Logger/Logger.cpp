@@ -1,5 +1,6 @@
 #include "Logger.hpp"
 
+// Core
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 std::shared_ptr<spdlog::logger> Engine::Logger::s_EngineLogger;

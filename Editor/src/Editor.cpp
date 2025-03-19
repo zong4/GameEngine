@@ -5,23 +5,23 @@ class ExampleLayer : public Engine::Layer
   public:
     ExampleLayer() : Layer("ExampleLayer") {}
 
-    void OnAttach() override { EDITOR_INFO("ExampleLayer::Attach"); }
-    void OnUpdate() override
+    virtual void OnAttach() override { EDITOR_INFO("ExampleLayer::OnAttach"); }
+    virtual void OnUpdate() override
     {
         if (Engine::Input::IsKeyPressed(ENGINE_KEY_TAB))
             EDITOR_INFO("Tab key is pressed");
     }
-    void BeginRender() override {}
-    void OnImGuiRender() override {}
-    void EndRender() override {}
-    void OnEvent(Engine::Event& event) override
+    virtual void BeginRender() override {}
+    virtual void OnImGuiRender() override {}
+    virtual void EndRender() override {}
+    virtual void OnEvent(Engine::Event& event) override
     {
         if (event.GetEventType() == Engine::EventType::KeyPressed) {
             Engine::KeyPressedEvent& e = (Engine::KeyPressedEvent&)event;
             EDITOR_INFO("Key pressed: {0} ({1})", e.GetKeyCode(), (char)e.GetKeyCode());
         }
     }
-    void OnDetach() override { EDITOR_INFO("ExampleLayer::Detach"); }
+    virtual void OnDetach() override { EDITOR_INFO("ExampleLayer::OnDetach"); }
 };
 
 class Editor : public Engine::Application
@@ -31,6 +31,7 @@ class Editor : public Engine::Application
     {
         EDITOR_INFO("Editor constructor");
         PushLayer(new ExampleLayer());
+        PushLayer(new Engine::ImGuiLayer());
     }
     ~Editor() { EDITOR_INFO("Editor destructor"); }
 };
