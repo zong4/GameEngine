@@ -7,7 +7,7 @@
 
 Engine::Application* Engine::Application::s_Instance = nullptr;
 
-Engine::Application::Application() : m_Camera(std::make_shared<OrthographicCamera>(-1, 1, -1, 1))
+Engine::Application::Application() : m_Camera(std::make_shared<OrthographicCamera>(-2.0f, 2.0f, -2.0f, 2.0f))
 {
     ENGINE_ASSERT(!s_Instance, "Application already exists");
     s_Instance = this;
@@ -15,10 +15,11 @@ Engine::Application::Application() : m_Camera(std::make_shared<OrthographicCamer
     // Initialize core systems
     {
         Input::Init();
-        Renderer::Init();
 
         m_Window = Window::Create();
         m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));
+
+        Renderer::Init();
     }
     ENGINE_INFO("Application is initialized");
 
@@ -84,6 +85,8 @@ void Engine::Application::Run()
     while (m_Running) {
         RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         RenderCommand::Clear();
+
+        m_Camera->SetRotation(45.0f);
 
         Renderer::BeginScene(m_Camera);
         {
