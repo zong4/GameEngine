@@ -14,6 +14,9 @@ std::unique_ptr<Engine::VertexBuffer> Engine::VertexBuffer::Create(float* vertic
         return nullptr;
     case RendererAPI::OpenGL:
         return std::make_unique<OpenGLVertexBuffer>(vertices, size);
+    default:
+        ENGINE_ASSERT(false, "Unknown RendererAPI!");
+        return nullptr;
     }
 }
 
@@ -25,5 +28,8 @@ std::unique_ptr<Engine::IndexBuffer> Engine::IndexBuffer::Create(uint32_t* indic
         return nullptr;
     case RendererAPI::OpenGL:
         return std::make_unique<OpenGLIndexBuffer>(indices, count);
+    default:
+        ENGINE_ASSERT(false, "Unknown RendererAPI!");
+        return nullptr;
     }
 }

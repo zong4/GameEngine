@@ -14,5 +14,8 @@ std::unique_ptr<Engine::Window> Engine::Window::Create(const WindowProps& props)
         return nullptr;
     case RendererAPI::OpenGL:
         return std::make_unique<GLFWWindow>(props);
+    default:
+        ENGINE_ASSERT(false, "Unknown RendererAPI!");
+        return nullptr;
     }
 }

@@ -14,5 +14,8 @@ std::unique_ptr<Engine::RendererContext> Engine::RendererContext::Create(void* w
         return nullptr;
     case RendererAPI::OpenGL:
         return std::make_unique<OpenGLRendererContext>(static_cast<GLFWwindow*>(window));
+    default:
+        ENGINE_ASSERT(false, "Unknown RendererAPI!");
+        return nullptr;
     }
 }

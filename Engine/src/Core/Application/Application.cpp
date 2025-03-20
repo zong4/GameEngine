@@ -51,8 +51,7 @@ void Engine::Application::Init()
     glBindVertexArray(m_VertexArray);
 
     float vertices[3 * 7] = {
-        -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, 0.5f, -0.5f, 0.0f, 0.2f,
-        0.3f,  0.8f,  1.0f, 0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f,  1.0f,
+        -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, 0.5f, -0.5f,0.0f, 0.2f, 0.8f, 0.8f, 1.0f, 0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f,  1.0f,
     };
     m_VertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
 
@@ -67,7 +66,7 @@ void Engine::Application::Init()
         glEnableVertexAttribArray(index);
         glVertexAttribPointer(index, element.GetComponentCount(), ShaderDataTypeToOpenGLBaseType(element.GetType()),
                               element.GetNormalized() ? GL_TRUE : GL_FALSE, m_VertexBuffer->GetLayout().GetStride(),
-                              reinterpret_cast<const void*>(static_cast<uintptr_t>(element.GetOffset())));
+                            reinterpret_cast<const void*>(static_cast<uintptr_t>(element.GetOffset())));
         index++;
     }
 
@@ -80,8 +79,12 @@ void Engine::Application::Init()
         layout(location = 0) in vec3 a_Position;
         layout(location = 1) in vec4 a_Color;
 
+        out vec3 v_Position;
+
         void main()
         {
+            v_Position = a_Position;
+            
             gl_Position = vec4(a_Position, 1.0);
         }
     )";
@@ -91,9 +94,11 @@ void Engine::Application::Init()
 
         layout(location = 0) out vec4 color;
 
+        in vec3 v_Position;
+
         void main()
         {
-            color = vec4(1.0, 0.0, 0.0, 1.0);
+            color = vec4(v_Position, 1.0);
         }
     )";
 

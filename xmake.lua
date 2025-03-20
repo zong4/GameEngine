@@ -4,7 +4,7 @@ set_xmakever("2.9.8")
 set_version("1.0.0", {build = "%Y%m%d%H%M"})
 
 -- set common flags
-set_warnings("all")
+set_warnings("all", "error")
 set_languages("cxx20")
 
 if is_plat("windows") then

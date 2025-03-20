@@ -20,7 +20,7 @@ bool Engine::GLFWInput::IsMouseButtonPressedImpl(int button)
     return state == GLFW_PRESS;
 }
 
-std::pair<float, float> Engine::GLFWInput::GetMousePositionImpl()
+std::pair<double, double> Engine::GLFWInput::GetMousePositionImpl()
 {
     auto   window = static_cast<GLFWwindow*>(Engine::Application::Get().GetWindow().GetNativeWindow());
     double xpos, ypos;
@@ -28,13 +28,13 @@ std::pair<float, float> Engine::GLFWInput::GetMousePositionImpl()
     return {xpos, ypos};
 }
 
-float Engine::GLFWInput::GetMouseXImpl()
+double Engine::GLFWInput::GetMouseXImpl()
 {
     auto [x, y] = GetMousePositionImpl();
     return x;
 }
 
-float Engine::GLFWInput::GetMouseYImpl()
+double Engine::GLFWInput::GetMouseYImpl()
 {
     auto [x, y] = GetMousePositionImpl();
     return y;

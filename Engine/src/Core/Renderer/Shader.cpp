@@ -14,5 +14,8 @@ std::unique_ptr<Engine::Shader> Engine::Shader::Create(const std::string& vertex
         return nullptr;
     case RendererAPI::OpenGL:
         return std::make_unique<OpenGLShader>(vertexSrc, fragmentSrc);
+    default:
+        ENGINE_ASSERT(false, "Unknown RendererAPI!");
+        return nullptr;
     }
 }

@@ -82,12 +82,10 @@ class BufferLayout
   private:
     void CalculateOffsetsAndStride()
     {
-        uint32_t offset = 0;
         m_Stride        = 0;
         for (auto& element : m_Elements) {
-            element.SetOffset(offset);
-            offset += ShaderDataTypeSize(element.GetType());
-            m_Stride += offset;
+            element.SetOffset(m_Stride);
+            m_Stride += ShaderDataTypeSize(element.GetType());
         }
     }
 
