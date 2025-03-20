@@ -8,14 +8,14 @@ namespace Engine
 class GLFWInput : public Input
 {
   public:
-    GLFWInput()          = default;
-    virtual ~GLFWInput() = default;
+    GLFWInput();
+    virtual ~GLFWInput();
 
   protected:
-    virtual bool                    IsKeyPressedImpl(int keycode) override;
-    virtual bool                    IsMouseButtonPressedImpl(int button) override;
+    virtual bool                      IsKeyPressedImpl(int keycode) override;
+    virtual bool                      IsMouseButtonPressedImpl(int button) override;
     virtual std::pair<double, double> GetMousePositionImpl() override;
-    virtual double                  GetMouseXImpl() override;
-    virtual double                  GetMouseYImpl() override;
+    virtual double                    GetMouseXImpl() override;
+    virtual double                    GetMouseYImpl() override;
 };
 } // namespace Engine

@@ -12,7 +12,7 @@ class OpenGLRendererContext : public RendererContext
 {
   public:
     OpenGLRendererContext(GLFWwindow* windowHandle) : m_WindowHandle(windowHandle) {}
-    virtual ~OpenGLRendererContext() = default;
+    virtual ~OpenGLRendererContext();
 
     virtual void Init() override;
     virtual void SwapBuffers() override;

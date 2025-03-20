@@ -15,4 +15,6 @@ void Engine::Logger::Init()
 
     s_EditorLogger = spdlog::stdout_color_mt("EDITOR");
     s_EditorLogger->set_level(spdlog::level::trace);
+
+    ENGINE_INFO("Logger is initialized");
 }

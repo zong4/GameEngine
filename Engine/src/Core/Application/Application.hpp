@@ -5,25 +5,21 @@
 // Core
 #include "Core/Events/ApplicationEvent.hpp"
 #include "Core/Layer/LayerStack.hpp"
-#include "Core/Renderer/Buffer.hpp"
+#include "Core/Renderer/BufferLayout.hpp"
+#include "Core/Renderer/IndexBuffer.hpp"
 #include "Core/Renderer/Shader.hpp"
+#include "Core/Renderer/VertexBuffer.hpp"
 #include "Core/Window/Window.hpp"
-
-// Platform
-#include "Platform/ImGui/ImGuiLayer.hpp"
 
 namespace Engine
 {
 class Application
 {
   public:
-    Application() { Init(); }
+    Application();
     virtual ~Application()                     = default;
     Application(const Application&)            = delete;
     Application& operator=(const Application&) = delete;
-
-    inline static Application& Get() { return *s_Instance; }
-    inline Window&             GetWindow() { return *m_Window; }
 
     void Run();
     void OnEvent(Event& e);
@@ -31,8 +27,11 @@ class Application
     inline void PushLayer(Layer* layer) { m_LayerStack.PushLayer(layer); }
     inline void PushOverlay(Layer* overlay) { m_LayerStack.PushOverlay(overlay); }
 
+  public:
+    inline static Application& Get() { return *s_Instance; }
+    inline Window&             GetWindow() { return *m_Window; }
+
   private:
-    void Init();
     bool OnWindowClose(WindowCloseEvent& e);
 
   private:
@@ -40,10 +39,9 @@ class Application
 
     bool                    m_Running = true;
     std::unique_ptr<Window> m_Window; // todo: more windows
+    LayerStack              m_LayerStack;
 
-    ImGuiLayer* m_ImGuiLayer;
-    LayerStack  m_LayerStack;
-
+    // Renderer
     unsigned int                  m_VertexArray;
     std::unique_ptr<VertexBuffer> m_VertexBuffer;
     std::unique_ptr<IndexBuffer>  m_IndexBuffer;

@@ -2,13 +2,11 @@
 
 // Core
 #include "Core/Input/Input.hpp"
-#include "Core/Renderer/BufferLayout.hpp"
-#include "Core/Renderer/Shader.hpp"
 
 // Platform
 #include <glad/glad.h> // todo: unbind with opengl
-#include <sys/stat.h>
 
+// todo: change location
 static GLint ShaderDataTypeToOpenGLBaseType(Engine::ShaderDataType type)
 {
     switch (type) {
@@ -26,54 +24,58 @@ static GLint ShaderDataTypeToOpenGLBaseType(Engine::ShaderDataType type)
         return GL_INT;
     case Engine::ShaderDataType::Bool:
         return GL_BOOL;
+    default:
+        ENGINE_ASSERT(false, "Unknown ShaderDataType!");
+        return 0;
     }
-
-    ENGINE_ASSERT(false, "Unknown ShaderDataType!");
-    return 0;
 }
 
 Engine::Application* Engine::Application::s_Instance = nullptr;
 
-void Engine::Application::Init()
+Engine::Application::Application()
 {
     ENGINE_ASSERT(!s_Instance, "Application already exists");
     s_Instance = this;
 
-    Input::Init();
+    // Initialize core systems
+    {
+        Input::Init();
 
-    m_Window = std::unique_ptr<Window>(Window::Create());
-    m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));
-
-    m_ImGuiLayer = new ImGuiLayer();
-    PushOverlay(m_ImGuiLayer);
-
-    glGenVertexArrays(1, &m_VertexArray);
-    glBindVertexArray(m_VertexArray);
-
-    float vertices[3 * 7] = {
-        -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, 0.5f, -0.5f,0.0f, 0.2f, 0.8f, 0.8f, 1.0f, 0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f,  1.0f,
-    };
-    m_VertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
-
-    BufferLayout layout = {
-        {ShaderDataType::Float3, "a_Position"},
-        {ShaderDataType::Float4, "a_Color"},
-    };
-    m_VertexBuffer->SetLayout(layout);
-
-    uint32_t index = 0;
-    for (auto& element : m_VertexBuffer->GetLayout()) {
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, element.GetComponentCount(), ShaderDataTypeToOpenGLBaseType(element.GetType()),
-                              element.GetNormalized() ? GL_TRUE : GL_FALSE, m_VertexBuffer->GetLayout().GetStride(),
-                            reinterpret_cast<const void*>(static_cast<uintptr_t>(element.GetOffset())));
-        index++;
+        m_Window = Window::Create();
+        m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));
     }
+    ENGINE_INFO("Application is initialized");
 
-    uint32_t indices[3] = {0, 1, 2};
-    m_IndexBuffer       = IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
+    // todo: remove
+    {
+        glGenVertexArrays(1, &m_VertexArray);
+        glBindVertexArray(m_VertexArray);
 
-    std::string vertexSrc = R"(
+        float vertices[3 * 7] = {
+            -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, 0.5f, -0.5f, 0.0f, 0.2f,
+            0.8f,  0.8f,  1.0f, 0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f,  1.0f,
+        };
+        m_VertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
+
+        BufferLayout layout = {
+            {ShaderDataType::Float3, "a_Position"},
+            {ShaderDataType::Float4, "a_Color"},
+        };
+        m_VertexBuffer->SetLayout(layout);
+
+        uint32_t index = 0;
+        for (auto& element : m_VertexBuffer->GetLayout()) {
+            glEnableVertexAttribArray(index);
+            glVertexAttribPointer(index, element.GetComponentCount(), ShaderDataTypeToOpenGLBaseType(element.GetType()),
+                                  element.GetNormalized() ? GL_TRUE : GL_FALSE, m_VertexBuffer->GetLayout().GetStride(),
+                                  reinterpret_cast<const void*>(static_cast<uintptr_t>(element.GetOffset())));
+            index++;
+        }
+
+        uint32_t indices[3] = {0, 1, 2};
+        m_IndexBuffer       = IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
+
+        std::string vertexSrc = R"(
         #version 330 core
 
         layout(location = 0) in vec3 a_Position;
@@ -89,7 +91,7 @@ void Engine::Application::Init()
         }
     )";
 
-    std::string fragmentSrc = R"(
+        std::string fragmentSrc = R"(
         #version 330 core
 
         layout(location = 0) out vec4 color;
@@ -102,13 +104,13 @@ void Engine::Application::Init()
         }
     )";
 
-    m_Shader = Shader::Create(vertexSrc, fragmentSrc);
+        m_Shader = Shader::Create(vertexSrc, fragmentSrc);
+    }
 }
 
 void Engine::Application::Run()
 {
     ENGINE_INFO("Application running");
-
     while (m_Running) {
         glClearColor(255, 0, 255, 0.5);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -117,19 +119,17 @@ void Engine::Application::Run()
         glBindVertexArray(m_VertexArray);
         glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
+        // todo: not sure about the sort
         for (auto& layer : m_LayerStack) {
             layer->OnUpdate();
         }
-
-        m_ImGuiLayer->BeginRender();
         for (auto& layer : m_LayerStack) {
+            layer->BeginRender();
             layer->OnImGuiRender();
+            layer->EndRender();
         }
-        m_ImGuiLayer->EndRender();
-
         m_Window->OnUpdate();
     }
-
     ENGINE_INFO("Application shutdown");
 }
 

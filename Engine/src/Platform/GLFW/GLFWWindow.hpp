@@ -12,8 +12,8 @@ namespace Engine
 class GLFWWindow : public Window
 {
   public:
-    GLFWWindow(const WindowProps& props) { Init(props); }
-    ~GLFWWindow() override { Shutdown(); }
+    GLFWWindow(const WindowProps& props);
+    virtual ~GLFWWindow() override;
 
     void        OnUpdate() override;
     inline void SetEventCallback(const std::function<void(Event&)>& callback) override
@@ -27,10 +27,6 @@ class GLFWWindow : public Window
     inline void*        GetNativeWindow() const override { return m_Window; }
     inline bool         GetVSync() const override { return m_Data.VSync; }
     void                SetVSync(bool enabled) override;
-
-  private:
-    void Init(const WindowProps& props);
-    void Shutdown();
 
   private:
     GLFWwindow*                      m_Window;

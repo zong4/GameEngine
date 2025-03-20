@@ -29,7 +29,7 @@ enum EventCategory {
     EventCategoryInput       = ENGINE_BIT(1),
     EventCategoryKeyboard    = ENGINE_BIT(2),
     EventCategoryMouse       = ENGINE_BIT(3),
-    EventCategoryMouseButton = ENGINE_BIT(4)
+    EventCategoryMouseButton = ENGINE_BIT(4),
 };
 
 #define EVENT_CLASS_TYPE(type)                                                                                         \
@@ -47,7 +47,7 @@ enum EventCategory {
     }
 
 #define EVENT_CLASS_CATEGORY(category)                                                                                 \
-    virtual int GetCategoryFlags() const override                                                                      \
+    inline virtual int GetCategoryFlags() const override                                                               \
     {                                                                                                                  \
         return category;                                                                                               \
     }

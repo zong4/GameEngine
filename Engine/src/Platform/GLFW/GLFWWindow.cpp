@@ -8,29 +8,12 @@
 // Platform
 #include "Platform/OpenGL/OpenGLRendererContext.hpp"
 
-void Engine::GLFWWindow::OnUpdate()
-{
-    glfwPollEvents();
-    m_Context->SwapBuffers();
-}
-
 static void GLFWErrorCallback(int error, const char* description)
 {
     ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
 }
 
-void Engine::GLFWWindow::SetVSync(bool enabled)
-{
-    if (enabled) {
-        glfwSwapInterval(1);
-    }
-    else {
-        glfwSwapInterval(0);
-    }
-    m_Data.VSync = enabled;
-}
-
-void Engine::GLFWWindow::Init(const WindowProps& props)
+Engine::GLFWWindow::GLFWWindow(const WindowProps& props)
 {
     m_Data.Title  = props.Title;
     m_Data.Width  = props.Width;
@@ -157,11 +140,30 @@ void Engine::GLFWWindow::Init(const WindowProps& props)
         data.EventCallback(event);
     });
 
-    ENGINE_INFO("Window created");
+    ENGINE_INFO("GLFW window is initialized");
 }
 
-void Engine::GLFWWindow::Shutdown()
+Engine::GLFWWindow::~GLFWWindow()
 {
     glfwDestroyWindow(m_Window);
     glfwTerminate();
+
+    ENGINE_INFO("GLFW window is destroyed");
+}
+
+void Engine::GLFWWindow::OnUpdate()
+{
+    glfwPollEvents();
+    m_Context->SwapBuffers();
+}
+
+void Engine::GLFWWindow::SetVSync(bool enabled)
+{
+    if (enabled) {
+        glfwSwapInterval(1);
+    }
+    else {
+        glfwSwapInterval(0);
+    }
+    m_Data.VSync = enabled;
 }

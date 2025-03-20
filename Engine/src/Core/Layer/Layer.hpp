@@ -2,8 +2,8 @@
 
 #include "EnginePCH.hpp"
 
-// Core
-#include "Core/Events/Event.hpp"
+// tood: template to change files
+class Event;
 
 namespace Engine
 {

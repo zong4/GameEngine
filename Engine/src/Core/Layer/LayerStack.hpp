@@ -1,7 +1,5 @@
 #pragma once
 
-#include "EnginePCH.hpp"
-
 // Core
 #include "Core/Layer/Layer.hpp"
 

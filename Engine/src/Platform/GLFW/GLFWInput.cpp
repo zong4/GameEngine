@@ -6,6 +6,16 @@
 // Platform
 #include <GLFW/glfw3.h>
 
+Engine::GLFWInput::GLFWInput()
+{
+    ENGINE_INFO("GLFW input system is initialized");
+}
+
+Engine::GLFWInput::~GLFWInput()
+{
+    ENGINE_INFO("GLFW input system is destroyed");
+}
+
 bool Engine::GLFWInput::IsKeyPressedImpl(int keycode)
 {
     auto window = static_cast<GLFWwindow*>(Engine::Application::Get().GetWindow().GetNativeWindow());

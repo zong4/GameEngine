@@ -1,7 +1,8 @@
 #pragma once
 
 // Core
-#include "Core/Renderer/Buffer.hpp"
+#include "Core/Renderer/IndexBuffer.hpp"
+#include "Core/Renderer/VertexBuffer.hpp"
 
 namespace Engine
 {

@@ -1,5 +1,11 @@
 #pragma once
 
+// todo: across platform
+#ifdef PLATFORM_WINDOWS
+#elif PLATFORM_LINUX
+#elif PLATFORM_MACOSX
+#endif
+
 // from glfw3.h
 #define ENGINE_MOUSE_BUTTON_1 0
 #define ENGINE_MOUSE_BUTTON_2 1

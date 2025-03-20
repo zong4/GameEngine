@@ -31,6 +31,7 @@ class Editor : public Engine::Application
     {
         EDITOR_INFO("Editor constructor");
         PushLayer(new ExampleLayer());
+        PushOverlay(new Engine::ImGuiLayer());
     }
     ~Editor() { EDITOR_INFO("Editor destructor"); }
 };

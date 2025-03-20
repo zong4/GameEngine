@@ -84,11 +84,15 @@ Engine::OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::stri
     // Always detach shaders after a successful link
     glDetachShader(m_RendererID, vertexShader);
     glDetachShader(m_RendererID, fragmentShader);
+
+    ENGINE_INFO("OpenGL shader is created with ID: {0}", m_RendererID);
 }
 
 Engine::OpenGLShader::~OpenGLShader()
 {
     glDeleteProgram(m_RendererID);
+
+    ENGINE_INFO("OpenGL shader is deleted with ID: {0}", m_RendererID);
 }
 
 void Engine::OpenGLShader::Bind() const

@@ -1,5 +1,11 @@
 #pragma once
 
+// todo: across platform
+#ifdef PLATFORM_WINDOWS
+#elif PLATFORM_LINUX
+#elif PLATFORM_MACOSX
+#endif
+
 // from glfw3.h
 #define ENGINE_KEY_SPACE 32
 #define ENGINE_KEY_APOSTROPHE 39 /* ' */

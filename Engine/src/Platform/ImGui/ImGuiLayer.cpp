@@ -12,6 +12,10 @@
 #include <imgui_impl_opengl3.h>
 #include <imgui_internal.h>
 
+Engine::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
+{
+}
+
 void Engine::ImGuiLayer::OnAttach()
 {
     // Set up ImGui context
@@ -36,6 +40,8 @@ void Engine::ImGuiLayer::OnAttach()
     void* native_window = Application::Get().GetWindow().GetNativeWindow();
     ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(native_window), true);
     ImGui_ImplOpenGL3_Init("#version 120");
+
+    ENGINE_INFO("ImGui layer is initialized");
 }
 
 void Engine::ImGuiLayer::BeginRender()
@@ -74,4 +80,6 @@ void Engine::ImGuiLayer::OnDetach()
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
+
+    ENGINE_INFO("ImGui layer is destroyed");
 }
