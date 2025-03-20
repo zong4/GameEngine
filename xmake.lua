@@ -4,7 +4,6 @@ set_xmakever("2.9.8")
 set_version("1.0.0", {build = "%Y%m%d%H%M"})
 
 -- set common flags
-set_warnings("all", "error")
 set_languages("cxx20")
 
 if is_plat("windows") then
@@ -25,8 +24,10 @@ add_rules("plugin.compile_commands.autoupdate", {outputdir = ".vscode"})
 
 add_rules("mode.debug", "mode.release")
 if is_mode("debug") then
+    set_warnings("all", "error")
     add_defines("DEBUG")
 elseif is_mode("release") then
+        set_warnings("all")
     add_defines("RELEASE")
 end
 

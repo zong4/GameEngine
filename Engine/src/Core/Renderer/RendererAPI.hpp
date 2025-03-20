@@ -7,6 +7,9 @@ namespace Engine
 class RendererAPI
 {
   public:
+    RendererAPI()          = default;
+    virtual ~RendererAPI() = default;
+
     enum class API {
         OpenGL = 1,
     };
