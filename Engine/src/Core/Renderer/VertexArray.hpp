@@ -23,6 +23,6 @@ class VertexArray
     virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& indexBuffer)       = 0;
 
   protected:
-    uint32_t m_RendererID;
+    uint32_t m_RendererID = 0;
 };
 } // namespace Engine

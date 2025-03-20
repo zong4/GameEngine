@@ -70,7 +70,7 @@ void Engine::OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<Engine::Ve
         glVertexAttribPointer(m_VertexBufferIndex, element.GetComponentCount(),
                               ShaderDataTypeToOpenGLBaseType(element.GetType()),
                               element.GetNormalized() ? GL_TRUE : GL_FALSE, layout.GetStride(),
-                              reinterpret_cast<const void*>(element.GetOffset()));
+                              reinterpret_cast<const void*>(static_cast<uintptr_t>(element.GetOffset())));
         m_VertexBufferIndex++;
     }
 

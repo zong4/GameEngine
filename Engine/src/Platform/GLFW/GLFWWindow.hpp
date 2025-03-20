@@ -29,13 +29,13 @@ class GLFWWindow : public Window
     void                SetVSync(bool enabled) override;
 
   private:
-    GLFWwindow*                      m_Window;
+    GLFWwindow*                      m_Window = nullptr;
     std::unique_ptr<RendererContext> m_Context;
 
     struct WindowData {
         std::string  Title;
-        unsigned int Width, Height;
-        bool         VSync;
+        unsigned int Width = 0, Height = 0;
+        bool         VSync = false;
 
         std::function<void(Event&)> EventCallback;
     };

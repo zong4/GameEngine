@@ -15,15 +15,11 @@ void Engine::OpenGLRendererAPI::Init()
 void Engine::OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
 {
     glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
-
-    ENGINE_INFO("OpenGL renderer API is drawing indexed");
 }
 
 void Engine::OpenGLRendererAPI::Clear()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    ENGINE_INFO("OpenGL renderer API is clearing");
 }
 
 void Engine::OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
@@ -36,6 +32,4 @@ void Engine::OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t wid
 void Engine::OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 {
     glClearColor(color.r, color.g, color.b, color.a);
-
-    ENGINE_INFO("OpenGL renderer API is setting clear color");
 }

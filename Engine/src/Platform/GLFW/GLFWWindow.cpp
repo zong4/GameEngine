@@ -18,7 +18,7 @@ Engine::GLFWWindow::GLFWWindow(const WindowProps& props)
     m_Data.Title  = props.Title;
     m_Data.Width  = props.Width;
     m_Data.Height = props.Height;
-    ENGINE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
+    ENGINE_INFO("GLFW window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
     if (!glfwInit()) {
         ENGINE_ERROR("Could not initialize GLFW");
