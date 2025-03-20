@@ -2,6 +2,8 @@
 
 #include "EnginePCH.hpp"
 
+#define ENGINE_BIT(x) (1 << x)
+
 namespace Engine
 {
 enum class EventType {

@@ -1,6 +1,5 @@
 #pragma once
 
-// Core
 #include "Core/Renderer/Shader.hpp"
 
 namespace Engine

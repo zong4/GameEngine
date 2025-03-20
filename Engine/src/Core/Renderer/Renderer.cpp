@@ -1,9 +1,19 @@
 #include "Renderer.hpp"
 
-#ifdef PLATFORM_WINDOWS
-Engine::RendererAPI Engine::Renderer::s_RendererAPI = Engine::RendererAPI::OpenGL;
-#elif PLATFORM_LINUX
-Engine::RendererAPI Engine::Renderer::s_RendererAPI = Engine::RendererAPI::OpenGL;
-#elif PLATFORM_MACOSX
-Engine::RendererAPI Engine::Renderer::s_RendererAPI = Engine::RendererAPI::OpenGL;
-#endif
+void Engine::Renderer::BeginScene()
+{
+}
+
+void Engine::Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray)
+{
+    vertexArray->Bind();
+    RenderCommand::DrawIndexed(vertexArray);
+}
+
+void Engine::Renderer::EndScene()
+{
+}
+
+void Engine::Renderer::Shutdown()
+{
+}

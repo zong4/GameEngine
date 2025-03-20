@@ -1,6 +1,5 @@
 #pragma once
 
-// Core
 #include "Core/Renderer/VertexBuffer.hpp"
 
 namespace Engine

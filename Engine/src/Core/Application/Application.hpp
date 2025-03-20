@@ -5,10 +5,8 @@
 // Core
 #include "Core/Events/ApplicationEvent.hpp"
 #include "Core/Layer/LayerStack.hpp"
-#include "Core/Renderer/BufferLayout.hpp"
-#include "Core/Renderer/IndexBuffer.hpp"
 #include "Core/Renderer/Shader.hpp"
-#include "Core/Renderer/VertexBuffer.hpp"
+#include "Core/Renderer/VertexArray.hpp"
 #include "Core/Window/Window.hpp"
 
 namespace Engine
@@ -42,10 +40,8 @@ class Application
     LayerStack              m_LayerStack;
 
     // Renderer
-    unsigned int                  m_VertexArray;
-    std::unique_ptr<VertexBuffer> m_VertexBuffer;
-    std::unique_ptr<IndexBuffer>  m_IndexBuffer;
-    std::unique_ptr<Shader>       m_Shader;
+    std::shared_ptr<VertexArray> m_VertexArray;
+    std::shared_ptr<Shader>      m_Shader;
 };
 
 extern std::unique_ptr<Application> CreateApplication();

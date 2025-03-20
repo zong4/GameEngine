@@ -14,7 +14,7 @@ class VertexBuffer
     virtual void Bind() const   = 0;
     virtual void Unbind() const = 0;
 
-    static std::unique_ptr<VertexBuffer> Create(float* vertices, uint32_t size);
+    static std::shared_ptr<VertexBuffer> Create(float* vertices, uint32_t size);
 
   public:
     inline const BufferLayout& GetLayout() const { return m_Layout; }

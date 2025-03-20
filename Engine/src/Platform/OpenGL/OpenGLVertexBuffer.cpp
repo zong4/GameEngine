@@ -1,6 +1,5 @@
 #include "OpenGLVertexBuffer.hpp"
 
-// Platform
 #include <glad/glad.h>
 
 Engine::OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)

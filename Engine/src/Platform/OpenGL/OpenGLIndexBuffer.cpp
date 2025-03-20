@@ -1,6 +1,5 @@
 #include "OpenGLIndexBuffer.hpp"
 
-// Platform
 #include <glad/glad.h>
 
 Engine::OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count)

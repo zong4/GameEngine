@@ -1,6 +1,5 @@
 #include "OpenGLRendererContext.hpp"
 
-// Platform
 #include <glad/glad.h>
 
 void Engine::OpenGLRendererContext::Init()

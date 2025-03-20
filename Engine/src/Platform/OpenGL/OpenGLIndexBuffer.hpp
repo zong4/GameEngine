@@ -1,6 +1,5 @@
 #pragma once
 
-// Core
 #include "Core/Renderer/IndexBuffer.hpp"
 
 namespace Engine

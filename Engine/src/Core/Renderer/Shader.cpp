@@ -1,16 +1,13 @@
 #include "Shader.hpp"
 
-// Core
-#include "Core/Renderer/Renderer.hpp"
-
-// Platform
+#include "Core/Renderer/RendererAPI.hpp"
 #include "Platform/OpenGL/OpenGLShader.hpp"
 
-std::unique_ptr<Engine::Shader> Engine::Shader::Create(const std::string& vertexSrc, const std::string& fragmentSrc)
+std::shared_ptr<Engine::Shader> Engine::Shader::Create(const std::string& vertexSrc, const std::string& fragmentSrc)
 {
-    switch (Renderer::GetAPI()) {
-    case RendererAPI::OpenGL:
-        return std::make_unique<OpenGLShader>(vertexSrc, fragmentSrc);
+    switch (RendererAPI::GetAPI()) {
+    case RendererAPI::API::OpenGL:
+        return std::make_shared<OpenGLShader>(vertexSrc, fragmentSrc);
     default:
         ENGINE_ASSERT(false, "Unknown RendererAPI!");
         return nullptr;

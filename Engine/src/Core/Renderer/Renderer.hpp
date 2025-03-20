@@ -1,15 +1,17 @@
 #pragma once
 
+#include "Core/Renderer/RenderCommand.hpp"
+
 namespace Engine
 {
-enum class RendererAPI { OpenGL = 1, /*Vulkan = 2, DirectX = 3, Metal = 4*/ };
-
 class Renderer
 {
   public:
-    inline static RendererAPI GetAPI() { return s_RendererAPI; }
-
-  private:
-    static RendererAPI s_RendererAPI;
+    inline static void Init() { RenderCommand::Init(); }
+    static void        BeginScene();
+    static void        Submit(const std::shared_ptr<VertexArray>& vertexArray);
+    static void        EndScene();
+    inline static void Clear() { RenderCommand::Clear(); }
+    static void        Shutdown();
 };
 } // namespace Engine

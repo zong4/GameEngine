@@ -1,6 +1,5 @@
 #include "OpenGLShader.hpp"
 
-// Platform
 #include <glad/glad.h>
 
 Engine::OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
