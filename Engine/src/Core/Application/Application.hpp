@@ -5,6 +5,7 @@
 // Core
 #include "Core/Events/ApplicationEvent.hpp"
 #include "Core/Layer/LayerStack.hpp"
+#include "Core/Renderer/OrthographicCamera.hpp"
 #include "Core/Renderer/Shader.hpp"
 #include "Core/Renderer/VertexArray.hpp"
 #include "Core/Window/Window.hpp"
@@ -40,8 +41,9 @@ class Application
     LayerStack              m_LayerStack;
 
     // Renderer
-    std::shared_ptr<VertexArray> m_VertexArray;
-    std::shared_ptr<Shader>      m_Shader;
+    std::shared_ptr<VertexArray>        m_VertexArray;
+    std::shared_ptr<Shader>             m_Shader;
+    std::shared_ptr<OrthographicCamera> m_Camera;
 };
 
 extern std::unique_ptr<Application> CreateApplication();

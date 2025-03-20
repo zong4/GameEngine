@@ -29,13 +29,13 @@ class Window
     virtual void OnUpdate()                                                    = 0;
     virtual void SetEventCallback(const std::function<void(Event&)>& callback) = 0;
 
+    static std::unique_ptr<Window> Create(const WindowProps& props = WindowProps());
+
   public:
     virtual unsigned int GetWidth() const        = 0;
     virtual unsigned int GetHeight() const       = 0;
     virtual void*        GetNativeWindow() const = 0;
     virtual bool         GetVSync() const        = 0;
     virtual void         SetVSync(bool enabled)  = 0;
-
-    static std::unique_ptr<Window> Create(const WindowProps& props = WindowProps());
 };
 } // namespace Engine

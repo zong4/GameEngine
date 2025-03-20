@@ -1,6 +1,5 @@
 #pragma once
 
-// Core
 #include "Core/Layer/Layer.hpp"
 
 namespace Engine

@@ -2,9 +2,6 @@
 
 #include "EnginePCH.hpp"
 
-// Core
-#include <glm/glm.hpp>
-
 namespace Engine
 {
 inline std::ostream& operator<<(std::ostream& os, const glm::vec2& vec)

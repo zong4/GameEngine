@@ -103,3 +103,33 @@ void Engine::OpenGLShader::Unbind() const
 {
     glUseProgram(0);
 }
+
+void Engine::OpenGLShader::SetUniformMat4f(const std::string& name, const glm::mat4& matrix)
+{
+    glUniformMatrix4fv(glGetUniformLocation(m_RendererID, name.c_str()), 1, GL_FALSE, &matrix[0][0]);
+}
+
+void Engine::OpenGLShader::SetUniform1i(const std::string& name, int value)
+{
+    glUniform1i(glGetUniformLocation(m_RendererID, name.c_str()), value);
+}
+
+void Engine::OpenGLShader::SetUniform1f(const std::string& name, float value)
+{
+    glUniform1f(glGetUniformLocation(m_RendererID, name.c_str()), value);
+}
+
+void Engine::OpenGLShader::SetUniform2f(const std::string& name, float v0, float v1)
+{
+    glUniform2f(glGetUniformLocation(m_RendererID, name.c_str()), v0, v1);
+}
+
+void Engine::OpenGLShader::SetUniform3f(const std::string& name, float v0, float v1, float v2)
+{
+    glUniform3f(glGetUniformLocation(m_RendererID, name.c_str()), v0, v1, v2);
+}
+
+void Engine::OpenGLShader::SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
+{
+    glUniform4f(glGetUniformLocation(m_RendererID, name.c_str()), v0, v1, v2, v3);
+}

@@ -9,6 +9,7 @@
 #include <fstream>
 #include <functional>
 #include <future>
+#include <glm/glm.hpp>
 #include <map>
 #include <memory>
 #include <mutex>
