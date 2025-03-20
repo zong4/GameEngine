@@ -6,10 +6,11 @@ set_version("1.0.0", {build = "%Y%m%d%H%M"})
 -- set common flags
 set_warnings("all")
 set_languages("cxx20")
-add_cxxflags("/utf-8") -- fix spdlog
 
 if is_plat("windows") then
-    set_arch("x64") 
+    add_cxxflags("/utf-8") -- fix spdlog error
+
+    set_arch("x64")
     add_defines("PLATFORM_WINDOWS")
 elseif is_plat("linux") then
     set_arch("arm64")

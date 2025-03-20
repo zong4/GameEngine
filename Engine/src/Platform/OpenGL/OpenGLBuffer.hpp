@@ -2,6 +2,7 @@
 
 // Core
 #include "Core/Renderer/Buffer.hpp"
+#include "Core/Renderer/BufferLayout.hpp"
 
 namespace Engine
 {

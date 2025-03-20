@@ -2,9 +2,35 @@
 
 // Core
 #include "Core/Input/Input.hpp"
+#include "Core/Renderer/BufferLayout.hpp"
+#include "Core/Renderer/Shader.hpp"
 
 // Platform
 #include <glad/glad.h> // todo: unbind with opengl
+#include <sys/stat.h>
+
+static GLint ShaderDataTypeToOpenGLBaseType(Engine::ShaderDataType type)
+{
+    switch (type) {
+    case Engine::ShaderDataType::Float:
+    case Engine::ShaderDataType::Float2:
+    case Engine::ShaderDataType::Float3:
+    case Engine::ShaderDataType::Float4:
+    case Engine::ShaderDataType::Mat3:
+    case Engine::ShaderDataType::Mat4:
+        return GL_FLOAT;
+    case Engine::ShaderDataType::Int:
+    case Engine::ShaderDataType::Int2:
+    case Engine::ShaderDataType::Int3:
+    case Engine::ShaderDataType::Int4:
+        return GL_INT;
+    case Engine::ShaderDataType::Bool:
+        return GL_BOOL;
+    }
+
+    ENGINE_ASSERT(false, "Unknown ShaderDataType!");
+    return 0;
+}
 
 Engine::Application* Engine::Application::s_Instance = nullptr;
 
@@ -24,13 +50,26 @@ void Engine::Application::Init()
     glGenVertexArrays(1, &m_VertexArray);
     glBindVertexArray(m_VertexArray);
 
-    float vertices[3 * 3] = {
-        -0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.0f, 0.5f, 0.0f,
+    float vertices[3 * 7] = {
+        -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, 0.5f, -0.5f, 0.0f, 0.2f,
+        0.3f,  0.8f,  1.0f, 0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f,  1.0f,
     };
     m_VertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
 
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+    BufferLayout layout = {
+        {ShaderDataType::Float3, "a_Position"},
+        {ShaderDataType::Float4, "a_Color"},
+    };
+    m_VertexBuffer->SetLayout(layout);
+
+    uint32_t index = 0;
+    for (auto& element : m_VertexBuffer->GetLayout()) {
+        glEnableVertexAttribArray(index);
+        glVertexAttribPointer(index, element.GetComponentCount(), ShaderDataTypeToOpenGLBaseType(element.GetType()),
+                              element.GetNormalized() ? GL_TRUE : GL_FALSE, m_VertexBuffer->GetLayout().GetStride(),
+                              reinterpret_cast<const void*>(static_cast<uintptr_t>(element.GetOffset())));
+        index++;
+    }
 
     uint32_t indices[3] = {0, 1, 2};
     m_IndexBuffer       = IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
@@ -39,6 +78,7 @@ void Engine::Application::Init()
         #version 330 core
 
         layout(location = 0) in vec3 a_Position;
+        layout(location = 1) in vec4 a_Color;
 
         void main()
         {

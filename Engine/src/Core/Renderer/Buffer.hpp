@@ -2,6 +2,9 @@
 
 #include "EnginePCH.hpp"
 
+// Core
+#include "Core/Renderer/BufferLayout.hpp"
+
 namespace Engine
 {
 class VertexBuffer
@@ -15,8 +18,13 @@ class VertexBuffer
 
     static std::unique_ptr<VertexBuffer> Create(float* vertices, uint32_t size);
 
+  public:
+    inline const BufferLayout& GetLayout() const { return m_Layout; }
+    inline void                SetLayout(const BufferLayout& layout) { m_Layout = layout; }
+
   protected:
-    uint32_t m_RendererID;
+    uint32_t     m_RendererID;
+    BufferLayout m_Layout;
 };
 
 class IndexBuffer
@@ -31,8 +39,8 @@ class IndexBuffer
     static std::unique_ptr<IndexBuffer> Create(uint32_t* indices, uint32_t count);
 
   public:
-    uint32_t GetCount() const { return m_Count; }
-    void     SetCount(uint32_t count) { m_Count = count; }
+    inline uint32_t GetCount() const { return m_Count; }
+    inline void     SetCount(uint32_t count) { m_Count = count; }
 
   protected:
     uint32_t m_RendererID;
