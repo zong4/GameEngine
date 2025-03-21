@@ -6,7 +6,7 @@
 Engine::RendererAPI::API Engine::RendererAPI::s_API = Engine::RendererAPI::API::OpenGL;
 #elif PLATFORM_LINUX
 Engine::RendererAPI::API Engine::RendererAPI::s_API = Engine::RendererAPI::API::OpenGL;
-#elif PLATFORM_MACOSX
+#elif __APPLE__
 Engine::RendererAPI::API Engine::RendererAPI::s_API = Engine::RendererAPI::API::OpenGL;
 #endif
 

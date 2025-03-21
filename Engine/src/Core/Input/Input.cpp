@@ -10,7 +10,7 @@ void Engine::Input::Init()
     s_Instance = std::make_unique<GLFWInput>();
 #elif PLATFORM_LINUX
     s_Instance = std::make_unique<GLFWInput>();
-#elif PLATFORM_MACOSX
+#elif __APPLE__
     s_Instance = std::make_unique<GLFWInput>();
 #endif
     ENGINE_ASSERT(s_Instance, "Input system is not initialized");

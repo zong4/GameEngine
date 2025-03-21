@@ -49,7 +49,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
 
     stbi_image_free(data);
 
-        GLenum err = glGetError();
+    GLenum err = glGetError();
     if (err != GL_NO_ERROR) {
         EDITOR_ERROR("OpenGL error after texture creation: 0x{0:x}", err);
     }
@@ -62,7 +62,7 @@ Engine::OpenGLTexture2D::~OpenGLTexture2D()
 
 void Engine::OpenGLTexture2D::Bind(uint32_t slot) const
 {
-    glActiveTexture(GL_TEXTURE0 + slot); 
+    glActiveTexture(GL_TEXTURE0 + slot);
     glBindTexture(GL_TEXTURE_2D, m_RendererID);
 }
 

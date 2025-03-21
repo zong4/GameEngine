@@ -3,7 +3,7 @@
 // todo: across platform
 #ifdef PLATFORM_WINDOWS
 #elif PLATFORM_LINUX
-#elif PLATFORM_MACOSX
+#elif __APPLE__
 #endif
 
 // from glfw3.h

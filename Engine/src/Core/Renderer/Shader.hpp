@@ -27,6 +27,6 @@ class Shader
     virtual void SetUniform1i(const std::string& name, int value)                              = 0;
 
   protected:
-    uint32_t m_RendererID =0;
+    uint32_t m_RendererID = 0;
 };
 } // namespace Engine

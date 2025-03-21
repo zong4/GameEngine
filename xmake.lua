@@ -27,9 +27,8 @@ if is_plat("windows") then
 elseif is_plat("linux") then
     set_arch("arm64")
     add_defines("PLATFORM_LINUX")
-elseif is_plat("macosx") then
+elseif is_plat("macosx") or is_plat("iphoneos") then
     set_arch("arm64")
-    add_defines("PLATFORM_MACOSX")
 end
 
 -- includes sub-projects
