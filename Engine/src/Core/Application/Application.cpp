@@ -2,17 +2,23 @@
 
 #include <GLFW/glfw3.h> // todo: remove
 
-Engine::Application* Engine::Application::s_Instance = nullptr;
+std::unique_ptr<Engine::Application> Engine::Application::s_Instance = nullptr;
 
 Engine::Application::Application()
 {
     ENGINE_ASSERT(!s_Instance, "Application already exists");
-    s_Instance = this;
+    s_Instance.reset(this);
 
     m_Window = Window::Create();
     m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));
 
     ENGINE_INFO("Application is initialized");
+}
+
+Engine::Application::~Application()
+{
+    s_Instance.release();
+    ENGINE_INFO("Application shutdown");
 }
 
 void Engine::Application::Run()
@@ -27,15 +33,14 @@ void Engine::Application::Run()
             layer->OnUpdate(timestep);
         }
 
+        m_ImGuilayer->BeginRender();
         for (auto& layer : m_LayerStack) {
-            layer->BeginRender();
             layer->OnImGuiRender();
-            layer->EndRender();
         }
+        m_ImGuilayer->EndRender();
 
         m_Window->OnUpdate();
     }
-    ENGINE_INFO("Application shutdown");
 }
 
 void Engine::Application::OnEvent(Event& event)

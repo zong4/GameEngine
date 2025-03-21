@@ -7,16 +7,14 @@ class ExampleLayer : public Engine::Layer
     virtual ~ExampleLayer();
 
     virtual void OnUpdate(Engine::Timestep timestep) override;
-    virtual void BeginRender() override;
     virtual void OnImGuiRender() override;
-    virtual void EndRender() override;
 
     virtual void OnEvent(Engine::Event& event) override;
 
   private:
     std::shared_ptr<Engine::VertexArray> m_VertexArray;
     std::shared_ptr<Engine::Shader>      m_Shader;
-    glm::vec4                            m_Color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    glm::vec4                           m_Color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
     std::shared_ptr<Engine::OrthographicCamera> m_Camera;
     float                                       m_CameraMoveSpeed     = -5.0f;

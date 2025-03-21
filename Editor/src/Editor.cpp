@@ -8,8 +8,8 @@ class Editor : public Engine::Application
         Engine::Input::Init();
         Engine::Renderer::Init();
 
-        PushLayer(new ExampleLayer());
-        PushOverlay(new Engine::ImGuiLayer());
+        PushLayer(std::make_shared<ExampleLayer>());
+        PushOverlay(std::make_shared<Engine::ImGuiLayer>());
 
         EDITOR_INFO("Editor is initialized");
     }

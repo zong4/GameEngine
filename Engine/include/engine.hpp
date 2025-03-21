@@ -1,6 +1,5 @@
 #pragma once
 
-// Core
 #include "Core/Application/Application.hpp"
 #include "Core/Events/ApplicationEvent.hpp"
 #include "Core/Events/KeyEvent.hpp"
@@ -13,6 +12,5 @@
 #include "Core/Renderer/Renderer.hpp"
 #include "Core/Renderer/Shader.hpp"
 #include "Core/Renderer/VertexArray.hpp"
-
-// Platform
 #include "Platform/ImGui/ImGuiLayer.hpp" // todo: functions
+#include <imgui.h>

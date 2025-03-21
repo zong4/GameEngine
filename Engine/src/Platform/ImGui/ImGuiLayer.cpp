@@ -33,7 +33,7 @@ Engine::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
     }
 
     // Set up platform/renderer bindings
-    void* native_window = Application::Get().GetWindow().GetNativeWindow();
+    void* native_window = Application::Get()->GetWindow()->GetNativeWindow();
     ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(native_window), true);
     ImGui_ImplOpenGL3_Init("#version 120");
 
@@ -56,8 +56,8 @@ void Engine::ImGuiLayer::OnImGuiRender()
 void Engine::ImGuiLayer::EndRender()
 {
     ImGuiIO&     io  = ImGui::GetIO();
-    Application& app = Application::Get();
-    io.DisplaySize   = ImVec2(static_cast<float>(app.GetWindow().GetWidth()), static_cast<float>(app.GetWindow().GetHeight()));
+    auto& app = Application::Get();
+    io.DisplaySize   = ImVec2(static_cast<float>(app->GetWindow()->GetWidth()), static_cast<float>(app->GetWindow()->GetHeight()));
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

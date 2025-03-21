@@ -7,19 +7,19 @@ namespace Engine
 class LayerStack
 {
   public:
-    ~LayerStack();
+    ~LayerStack() = default;
 
-    void PushLayer(Layer* layer);
-    void PushOverlay(Layer* overlay);
-    void PopLayer(Layer* layer);
-    void PopOverlay(Layer* overlay);
+    void PushLayer(std::shared_ptr<Layer> layer);
+    void PushOverlay(std::shared_ptr<Layer> overlay);
+    void PopLayer(std::shared_ptr<Layer> layer);
+    void PopOverlay(std::shared_ptr<Layer> overlay);
 
   public:
-    inline std::vector<Layer*>::iterator begin() { return m_Layers.begin(); }
-    inline std::vector<Layer*>::iterator end() { return m_Layers.end(); }
+    inline std::vector<std::shared_ptr<Layer>>::iterator begin() { return m_Layers.begin(); }
+    inline std::vector<std::shared_ptr<Layer>>::iterator end() { return m_Layers.end(); }
 
   private:
     unsigned int        m_LayerInsertIndex = 0;
-    std::vector<Layer*> m_Layers; // todo: use smart pointers
+    std::vector<std::shared_ptr<Layer>> m_Layers; // todo: use smart pointers
 };
 } // namespace Engine

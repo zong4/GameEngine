@@ -18,21 +18,21 @@ Engine::GLFWInput::~GLFWInput()
 
 bool Engine::GLFWInput::IsKeyPressedImpl(int keycode)
 {
-    auto window = static_cast<GLFWwindow*>(Engine::Application::Get().GetWindow().GetNativeWindow());
+    auto window = static_cast<GLFWwindow*>(Engine::Application::Get()->GetWindow()->GetNativeWindow());
     auto state  = glfwGetKey(window, keycode);
     return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
 bool Engine::GLFWInput::IsMouseButtonPressedImpl(int button)
 {
-    auto window = static_cast<GLFWwindow*>(Engine::Application::Get().GetWindow().GetNativeWindow());
+    auto window = static_cast<GLFWwindow*>(Engine::Application::Get()->GetWindow()->GetNativeWindow());
     auto state  = glfwGetMouseButton(window, button);
     return state == GLFW_PRESS;
 }
 
 std::pair<double, double> Engine::GLFWInput::GetMousePositionImpl()
 {
-    auto   window = static_cast<GLFWwindow*>(Engine::Application::Get().GetWindow().GetNativeWindow());
+    auto   window = static_cast<GLFWwindow*>(Engine::Application::Get()->GetWindow()->GetNativeWindow());
     double xpos, ypos;
     glfwGetCursorPos(window, &xpos, &ypos);
     return {xpos, ypos};
