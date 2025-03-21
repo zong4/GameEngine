@@ -1,5 +1,6 @@
 #pragma once
 
+#include "glm/fwd.hpp"
 #include <algorithm>
 #include <array>
 #include <chrono>

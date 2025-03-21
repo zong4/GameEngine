@@ -6,8 +6,8 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
 
     m_VertexArray = Engine::VertexArray::Create();
 
-    float vertices[3 * 7] = {
-        -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, 0.5f, -0.5f, 0.0f, 0.2f, 0.8f, 0.8f, 1.0f, 0.0f, 0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f,
+    float vertices[4 * 3] = {
+        -0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.5f, 0.5f, 0.0f, -0.5f, 0.5f, 0.0f,
     };
     std::shared_ptr<Engine::VertexBuffer> vertexBuffer = Engine::VertexBuffer::Create(vertices, sizeof(vertices));
 
@@ -26,7 +26,6 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
         #version 330 core
 
         layout(location = 0) in vec3 a_Position;
-        layout(location = 1) in vec4 a_Color;
 
         uniform mat4 u_Transform;
         uniform mat4 u_ViewProjection;
@@ -49,7 +48,7 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
 
         void main()
         {
-            color = vec4(v_Position * 0.5 + 0.5, 1.0);
+            color = u_Color;
         }
     )";
     m_Shader                = Engine::Shader::Create(vertexSrc, fragmentSrc);
@@ -109,6 +108,14 @@ void ExampleLayer::OnUpdate(Engine::Timestep timestep)
 
     Engine::Renderer::BeginScene(m_Camera);
     {
+        glm::vec4 redColor  = {0.8f, 0.2f, 0.2f, 1.0f};
+        glm::vec4 blueColor = {0.2f, 0.2f, 0.8f, 1.0f};
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 5; j++)
+                if ((i + j) % 2 == 0)
+                    m_Shader->SetUniform3f("u_Color", redColor);
+                else
+                    m_Shader->SetUniform3f("u_Color", blueColor);
         Engine::Renderer::Submit(m_Shader, m_VertexArray,
                                  glm::translate(glm::mat4(1.0f), m_ObjectPosition) *
                                      glm::rotate(glm::mat4(1.0f), glm::radians(m_ObjectRotation), glm::vec3(0, 0, 1)));
