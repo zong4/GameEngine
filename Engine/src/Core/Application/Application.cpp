@@ -17,7 +17,7 @@ Engine::Application::Application()
 
 Engine::Application::~Application()
 {
-    s_Instance.reset();
+    s_Instance.release();
     ENGINE_INFO("Application shutdown");
 }
 
