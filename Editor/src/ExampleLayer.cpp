@@ -109,17 +109,10 @@ void ExampleLayer::OnUpdate(Engine::Timestep timestep)
 
     Engine::Renderer::BeginScene(m_Camera);
     {
-        glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
-        glm::vec4 redColor  = {0.8f, 0.2f, 0.2f, 1.0f};
-        glm::vec4 blueColor = {0.2f, 0.2f, 0.8f, 1.0f};
-   
+        glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
-                if ((i + j) % 2 == 0)
-                    m_Shader->SetUniform4f("u_Color", redColor);
-                else
-                    m_Shader->SetUniform4f("u_Color", blueColor);
                 glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(i * 0.11f, j * 0.11f, 0.0f)) * scale;
                 Engine::Renderer::Submit(m_Shader, m_VertexArray, transform);
             }
@@ -134,6 +127,9 @@ void ExampleLayer::BeginRender()
 
 void ExampleLayer::OnImGuiRender()
 {
+    ImGui::Begin();
+    ImGui::ColorEditor3("Color", glm::value_ptr(m_Color));
+    ImGui::End();
 }
 
 void ExampleLayer::EndRender()
