@@ -36,6 +36,8 @@ class Application
     bool                    m_Running = true;
     std::unique_ptr<Window> m_Window; // todo: more windows
     LayerStack              m_LayerStack;
+
+    float m_LastFrameTime = 0.0f;
 };
 
 extern std::unique_ptr<Application> CreateApplication();

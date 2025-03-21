@@ -61,15 +61,35 @@ ExampleLayer::~ExampleLayer()
     EDITOR_INFO("ExampleLayer is destroyed");
 }
 
-void ExampleLayer::OnUpdate()
+void ExampleLayer::OnUpdate(Engine::Timestep timestep)
 {
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_W)) {
+        m_Camera->SetPosition({m_Camera->GetPosition().x, m_Camera->GetPosition().y + m_CameraSpeed * timestep, m_Camera->GetPosition().z});
+    }
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_S)) {
+        m_Camera->SetPosition({m_Camera->GetPosition().x, m_Camera->GetPosition().y - m_CameraSpeed * timestep, m_Camera->GetPosition().z});
+    }
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_A)) {
+        m_Camera->SetPosition({m_Camera->GetPosition().x - m_CameraSpeed * timestep, m_Camera->GetPosition().y, m_Camera->GetPosition().z});
+    }
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_D)) {
+        m_Camera->SetPosition({m_Camera->GetPosition().x + m_CameraSpeed * timestep, m_Camera->GetPosition().y, m_Camera->GetPosition().z});
+    }
+
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_Q)) {
+        m_Camera->SetRotation(m_Camera->GetRotation() + m_CameraRotationSpeed * timestep);
+    }
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_E)) {
+        m_Camera->SetRotation(m_Camera->GetRotation() - m_CameraRotationSpeed * timestep);
+    }
+
     Engine::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     Engine::RenderCommand::Clear();
 
     Engine::Renderer::BeginScene(m_Camera);
-
-    Engine::Renderer::Submit(m_Shader, m_VertexArray);
-
+    {
+        Engine::Renderer::Submit(m_Shader, m_VertexArray);
+    }
     Engine::Renderer::EndScene();
 }
 
@@ -87,31 +107,4 @@ void ExampleLayer::EndRender()
 
 void ExampleLayer::OnEvent(Engine::Event& event)
 {
-    Engine::EventDispatcher dispatcher(event);
-    dispatcher.Dispatch<Engine::KeyPressedEvent>(ENGINE_BIND_EVENT_FN(ExampleLayer::OnKeyPressed));
-}
-
-bool ExampleLayer::OnKeyPressed(Engine::KeyPressedEvent& event)
-{
-    if (event.GetKeyCode() == ENGINE_KEY_W) {
-        m_Camera->SetPosition(m_Camera->GetPosition() + glm::vec3(0.0f, m_CameraSpeed, 0.0f));
-    }
-    if (event.GetKeyCode() == ENGINE_KEY_S) {
-        m_Camera->SetPosition(m_Camera->GetPosition() - glm::vec3(0.0f, m_CameraSpeed, 0.0f));
-    }
-    if (event.GetKeyCode() == ENGINE_KEY_A) {
-        m_Camera->SetPosition(m_Camera->GetPosition() - glm::vec3(m_CameraSpeed, 0.0f, 0.0f));
-    }
-    if (event.GetKeyCode() == ENGINE_KEY_D) {
-        m_Camera->SetPosition(m_Camera->GetPosition() + glm::vec3(m_CameraSpeed, 0.0f, 0.0f));
-    }
-
-    if (event.GetKeyCode() == ENGINE_KEY_Q) {
-        m_Camera->SetRotation(m_Camera->GetRotation() + m_CameraRotationSpeed);
-    }
-    if (event.GetKeyCode() == ENGINE_KEY_E) {
-        m_Camera->SetRotation(m_Camera->GetRotation() - m_CameraRotationSpeed);
-    }
-
-    return false;
 }

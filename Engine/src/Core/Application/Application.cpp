@@ -1,5 +1,7 @@
 #include "Application.hpp"
 
+#include <GLFW/glfw3.h> // todo: remove
+
 Engine::Application* Engine::Application::s_Instance = nullptr;
 
 Engine::Application::Application()
@@ -17,15 +19,20 @@ void Engine::Application::Run()
 {
     ENGINE_INFO("Application running");
     while (m_Running) {
-        // todo: not sure about the sort
+        float    time     = static_cast<float>(glfwGetTime());
+        Timestep timestep = time - m_LastFrameTime;
+        m_LastFrameTime   = time;
+
         for (auto& layer : m_LayerStack) {
-            layer->OnUpdate();
+            layer->OnUpdate(timestep);
         }
+
         for (auto& layer : m_LayerStack) {
             layer->BeginRender();
             layer->OnImGuiRender();
             layer->EndRender();
         }
+
         m_Window->OnUpdate();
     }
     ENGINE_INFO("Application shutdown");
