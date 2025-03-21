@@ -16,10 +16,7 @@ class GLFWWindow : public Window
     virtual ~GLFWWindow() override;
 
     void        OnUpdate() override;
-    inline void SetEventCallback(const std::function<void(Event&)>& callback) override
-    {
-        m_Data.EventCallback = callback;
-    }
+    inline void SetEventCallback(const std::function<void(Event&)>& callback) override { m_Data.EventCallback = callback; }
 
   public:
     inline unsigned int GetWidth() const override { return m_Data.Width; }

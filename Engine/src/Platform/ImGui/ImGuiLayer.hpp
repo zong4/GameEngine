@@ -12,14 +12,12 @@ class ImGuiLayer : public Layer
 {
   public:
     ImGuiLayer();
-    virtual ~ImGuiLayer() = default;
+    virtual ~ImGuiLayer();
 
-    virtual void OnAttach() override;
     virtual void OnUpdate() override {}
     virtual void BeginRender() override;
     virtual void OnImGuiRender() override;
     virtual void EndRender() override;
     virtual void OnEvent(Event& event) override {}
-    virtual void OnDetach() override;
 };
 }; // namespace Engine

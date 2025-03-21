@@ -12,10 +12,7 @@ struct WindowProps {
     unsigned int Width;
     unsigned int Height;
 
-    WindowProps(const std::string& title = "Game Engine", unsigned int width = 1280, unsigned int height = 720)
-        : Title(title), Width(width), Height(height)
-    {
-    }
+    WindowProps(const std::string& title, unsigned int width, unsigned int height) : Title(title), Width(width), Height(height) {}
 };
 
 class Window
@@ -29,7 +26,7 @@ class Window
     virtual void OnUpdate()                                                    = 0;
     virtual void SetEventCallback(const std::function<void(Event&)>& callback) = 0;
 
-    static std::unique_ptr<Window> Create(const WindowProps& props = WindowProps());
+    static std::unique_ptr<Window> Create(const WindowProps& props = WindowProps("Game Engine", 1280, 720));
 
   public:
     virtual unsigned int GetWidth() const        = 0;

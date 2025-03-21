@@ -14,10 +14,6 @@
 
 Engine::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
 {
-}
-
-void Engine::ImGuiLayer::OnAttach()
-{
     // Set up ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -61,8 +57,7 @@ void Engine::ImGuiLayer::EndRender()
 {
     ImGuiIO&     io  = ImGui::GetIO();
     Application& app = Application::Get();
-    io.DisplaySize =
-        ImVec2(static_cast<float>(app.GetWindow().GetWidth()), static_cast<float>(app.GetWindow().GetHeight()));
+    io.DisplaySize   = ImVec2(static_cast<float>(app.GetWindow().GetWidth()), static_cast<float>(app.GetWindow().GetHeight()));
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -75,7 +70,7 @@ void Engine::ImGuiLayer::EndRender()
     }
 }
 
-void Engine::ImGuiLayer::OnDetach()
+Engine::ImGuiLayer::~ImGuiLayer()
 {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();

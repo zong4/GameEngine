@@ -13,8 +13,6 @@ class Layer
     Layer(const std::string& name = "Layer") : m_DebugName(name) {}
     virtual ~Layer() = default;
 
-    virtual void OnAttach()            = 0;
-    virtual void OnDetach()            = 0;
     virtual void OnUpdate()            = 0;
     virtual void BeginRender()         = 0;
     virtual void OnImGuiRender()       = 0;

@@ -2,7 +2,7 @@ BasedOnStyle: LLVM  # 基于 LLVM 风格，简洁高效:cite[1]:cite[8]
 Language: Cpp
 
 # 基础格式
-ColumnLimit: 120    # 放宽行宽限制，适应现代宽屏显示器:cite[8]
+ColumnLimit: 160    # 放宽行宽限制，适应现代宽屏显示器:cite[8]
 IndentWidth: 4      # 4 空格缩进，提升可读性:cite[2]:cite[5]
 TabWidth: 4
 UseTab: Never       # 强制使用空格而非 Tab:cite[8]

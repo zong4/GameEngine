@@ -11,7 +11,7 @@ class Renderer
   public:
     static void Init();
     static void BeginScene(const std::shared_ptr<OrthographicCamera>& camera);
-    static void Submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader);
+    static void Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray);
     static void EndScene();
     static void Clear();
     static void Shutdown();
