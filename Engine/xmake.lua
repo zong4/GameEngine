@@ -4,6 +4,7 @@
 -- Core
 add_requires("spdlog")
 add_requires("glm")
+add_requires("stb")
 
 -- Platform
 if is_plat("windows") then -- todo: DirectX12
@@ -33,6 +34,7 @@ target("Engine")
     -- Core
     add_packages("spdlog", {public=true})
     add_packages("glm", {public=true})
+    add_packages("stb", {public=true})
     
     -- Platform
     if is_plat("windows") then

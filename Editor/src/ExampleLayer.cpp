@@ -7,10 +7,7 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
     m_VertexArray = Engine::VertexArray::Create();
 
     float vertices[4 * 5] = {
-        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-        0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-        0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 
-        -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.5f, 0.5f, 0.0f, 1.0f, 1.0f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
     };
     std::shared_ptr<Engine::VertexBuffer> vertexBuffer = Engine::VertexBuffer::Create(vertices, sizeof(vertices));
 
@@ -49,6 +46,7 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
         #version 330 core
 
         uniform vec4 u_Color;
+        uniform sample2D u_Texture;
 
         in vec3 v_Position;
         in vec2 v_TexCoord;
@@ -61,6 +59,9 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
         }
     )";
     m_Shader                = Engine::Shader::Create(vertexSrc, fragmentSrc);
+
+    m_Texture = Engine::Texture2D::Create("assets/textures/head.png");
+    m_Shader->SetUniform1i("u_Texture", 0);
 
     EDITOR_INFO("ExampleLayer is initialized");
 }

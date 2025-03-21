@@ -11,6 +11,7 @@
 #include "Core/Renderer/OrthographicCamera.hpp"
 #include "Core/Renderer/Renderer.hpp"
 #include "Core/Renderer/Shader.hpp"
+#include "Core/Renderer/Texture2D.hpp"
 #include "Core/Renderer/VertexArray.hpp"
 #include "Platform/ImGui/ImGuiLayer.hpp" // todo: functions
 #include <imgui.h>
