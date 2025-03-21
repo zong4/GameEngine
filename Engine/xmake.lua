@@ -13,7 +13,7 @@ if is_plat("windows") then -- todo: DirectX12
 elseif is_plat("linux") then -- OpenGL
     add_requires("glfw")
     add_requires("glad")
-elseif is_plat("macosx") then -- Vulkan
+elseif is_plat("macosx") or is_plat("iphoneos") then -- Vulkan
     add_requires("glfw")
     add_requires("glad")
 end
@@ -34,20 +34,22 @@ target("Engine")
     -- Core
     add_packages("spdlog", {public=true})
     add_packages("glm", {public=true})
-    add_packages("stb", {public=true})
     
     -- Platform
     if is_plat("windows") then
-        add_packages("glfw", {public=true})
-        add_packages("glad", {public=true})
+        add_packages("glfw", {private=true})
+        add_packages("glad", {private=true})
+        add_packages("stb", {private=true})
     elseif is_plat("linux") then
-        add_packages("glfw", {public=true})
-        add_packages("glad", {public=true})
-    elseif is_plat("macosx") then
+        add_packages("glfw", {private=true})
+        add_packages("glad", {private=true})
+        add_packages("stb", {private=true})
+    elseif is_plat("macosx") or is_plat("iphoneos") then
         -- remove_files("**/**/OpenGL/**")
 
-        add_packages("glfw", {public=true})
-        add_packages("glad", {public=true})
+        add_packages("glfw", {private=true})
+        add_packages("glad", {private=true})
+        add_packages("stb", {private=true})
     end
 
     -- Functions
