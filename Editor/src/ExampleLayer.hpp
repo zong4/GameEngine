@@ -16,6 +16,7 @@ class ExampleLayer : public Engine::Layer
     std::shared_ptr<Engine::Shader>      m_Shader;
     glm::vec4                            m_Color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     std::shared_ptr<Engine::Texture2D>   m_Texture;
+    std::shared_ptr<Engine::Texture2D>   m_TextureBG;
 
     std::shared_ptr<Engine::OrthographicCamera> m_Camera;
     float                                       m_CameraMoveSpeed     = -5.0f;

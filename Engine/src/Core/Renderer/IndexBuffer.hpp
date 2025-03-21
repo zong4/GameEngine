@@ -20,7 +20,7 @@ class IndexBuffer
     inline void     SetCount(uint32_t count) { m_Count = count; }
 
   protected:
-    uint32_t m_RendererID;
-    uint32_t m_Count;
+    uint32_t m_RendererID = 0;
+    uint32_t m_Count = 0;
 };
 } // namespace Engine

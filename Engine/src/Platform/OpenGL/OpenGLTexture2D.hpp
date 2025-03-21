@@ -11,5 +11,6 @@ class OpenGLTexture2D : public Texture2D
     virtual ~OpenGLTexture2D();
 
     virtual void Bind(uint32_t slot = 0) const override;
+    virtual void Unbind() const override;
 };
 } // namespace Engine

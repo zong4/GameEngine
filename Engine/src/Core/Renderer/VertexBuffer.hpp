@@ -20,7 +20,7 @@ class VertexBuffer
     inline void                SetLayout(const BufferLayout& layout) { m_Layout = layout; }
 
   protected:
-    uint32_t     m_RendererID;
+    uint32_t     m_RendererID = 0;
     BufferLayout m_Layout;
 };
 } // namespace Engine

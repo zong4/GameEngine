@@ -7,6 +7,7 @@
 
 // Platform
 #include "Platform/OpenGL/OpenGLRendererContext.hpp"
+#include <glad/glad.h>
 
 static void GLFWErrorCallback(int error, const char* description)
 {
@@ -26,7 +27,10 @@ Engine::GLFWWindow::GLFWWindow(const WindowProps& props)
     }
     glfwSetErrorCallback(GLFWErrorCallback);
 
-    // glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);         
     m_Window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
     if (!m_Window) {
         ENGINE_ERROR("Could not create window");

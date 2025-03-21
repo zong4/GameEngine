@@ -35,7 +35,7 @@ Engine::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
     // Set up platform/renderer bindings
     void* native_window = Application::Get()->GetWindow()->GetNativeWindow();
     ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(native_window), true);
-    ImGui_ImplOpenGL3_Init("#version 120");
+    ImGui_ImplOpenGL3_Init("#version 450");
 
     ENGINE_INFO("ImGui layer is initialized");
 }

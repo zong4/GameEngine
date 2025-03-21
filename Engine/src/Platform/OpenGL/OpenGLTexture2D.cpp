@@ -1,41 +1,58 @@
-#include "OpenGLTexture2D.hpp"
+﻿#include "OpenGLTexture2D.hpp"
 
 #include <glad/glad.h>
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
 Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(path)
 {
+    std::ifstream file(m_Path);
+    ENGINE_ASSERT(file, "Texture file not found: {0}", m_Path);
+
     int width, height, channels;
     stbi_set_flip_vertically_on_load(1);
-    stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
-    ENGINE_ASSERT(data, "Failed to load image: {0}", path);
+    stbi_uc* data = stbi_load(m_Path.c_str(), &width, &height, &channels, 0);
+    ENGINE_ASSERT(data, "Failed to load image: {0}", m_Path);
 
     m_Width  = width;
     m_Height = height;
 
+    GLenum internalFormat = 0, format = 0;
+    if (channels == 4) {
+        internalFormat = GL_RGBA8;
+        format         = GL_RGBA;
+    }
+    else if (channels == 3) {
+        internalFormat = GL_RGB8;
+        format         = GL_RGB;
+    }
+    else {
+        ENGINE_ASSERT(false, "Unknown image format: {0}", m_Path);
+    }
+
     glGenTextures(1, &m_RendererID);
     glBindTexture(GL_TEXTURE_2D, m_RendererID);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    // Fix RGB/RGBA alignment issue on OpenGL
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, m_Width, m_Height, 0, format, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
 
-    GLenum format = 0;
-    if (channels == 4) {
-        format = GL_RGBA;
-    }
-    else if (channels == 3) {
-        format = GL_RGB;
-    }
-    else {
-        ENGINE_ASSERT(false, "Unknown image format: {0}", path);
-    }
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, format, GL_UNSIGNED_BYTE, data);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
     stbi_image_free(data);
+
+        GLenum err = glGetError();
+    if (err != GL_NO_ERROR) {
+        EDITOR_ERROR("OpenGL error after texture creation: 0x{0:x}", err);
+    }
 }
 
 Engine::OpenGLTexture2D::~OpenGLTexture2D()
@@ -45,6 +62,11 @@ Engine::OpenGLTexture2D::~OpenGLTexture2D()
 
 void Engine::OpenGLTexture2D::Bind(uint32_t slot) const
 {
-    glActiveTexture(GL_TEXTURE0 + slot);
+    glActiveTexture(GL_TEXTURE0 + slot); 
     glBindTexture(GL_TEXTURE_2D, m_RendererID);
+}
+
+void Engine::OpenGLTexture2D::Unbind() const
+{
+    glBindTexture(GL_TEXTURE_2D, 0);
 }

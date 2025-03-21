@@ -7,10 +7,11 @@ namespace Engine
 class Texture
 {
   public:
-    Texture(const std::string& path) : m_Path(path) {}
+    Texture(const std::string& path) : m_Path(std::string(PROJECT_DIR) + "/" + path) {}
     virtual ~Texture() = default;
 
     virtual void Bind(uint32_t slot = 0) const = 0;
+    virtual void Unbind() const                = 0;
 
   public:
     inline virtual uint32_t GetWidth() const { return m_Width; }
