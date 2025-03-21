@@ -18,6 +18,11 @@ class ExampleLayer : public Engine::Layer
     std::shared_ptr<Engine::Shader>      m_Shader;
 
     std::shared_ptr<Engine::OrthographicCamera> m_Camera;
-    float                                       m_CameraSpeed         = -5.0f;
+    float                                       m_CameraMoveSpeed     = -5.0f;
     float                                       m_CameraRotationSpeed = -180.0f;
+
+    glm::vec3 m_ObjectPosition      = glm::vec3(0.0f, 0.0f, 0.0f);
+    float     m_ObjectRotation      = 0.0f;
+    float     m_ObjectMoveSpeed     = 5.0f;
+    float     m_ObjectRotationSpeed = 180.f;
 };

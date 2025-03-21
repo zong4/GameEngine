@@ -28,6 +28,7 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
         layout(location = 0) in vec3 a_Position;
         layout(location = 1) in vec4 a_Color;
 
+        uniform mat4 u_Transform;
         uniform mat4 u_ViewProjection;
 
         out vec3 v_Position;
@@ -36,7 +37,7 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
         {
             v_Position = a_Position;
             
-            gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+            gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
         }
     )";
     std::string fragmentSrc = R"(
@@ -64,16 +65,16 @@ ExampleLayer::~ExampleLayer()
 void ExampleLayer::OnUpdate(Engine::Timestep timestep)
 {
     if (Engine::Input::IsKeyPressed(ENGINE_KEY_W)) {
-        m_Camera->SetPosition({m_Camera->GetPosition().x, m_Camera->GetPosition().y + m_CameraSpeed * timestep, m_Camera->GetPosition().z});
+        m_Camera->SetPosition({m_Camera->GetPosition().x, m_Camera->GetPosition().y + m_CameraMoveSpeed * timestep, m_Camera->GetPosition().z});
     }
     if (Engine::Input::IsKeyPressed(ENGINE_KEY_S)) {
-        m_Camera->SetPosition({m_Camera->GetPosition().x, m_Camera->GetPosition().y - m_CameraSpeed * timestep, m_Camera->GetPosition().z});
+        m_Camera->SetPosition({m_Camera->GetPosition().x, m_Camera->GetPosition().y - m_CameraMoveSpeed * timestep, m_Camera->GetPosition().z});
     }
     if (Engine::Input::IsKeyPressed(ENGINE_KEY_A)) {
-        m_Camera->SetPosition({m_Camera->GetPosition().x - m_CameraSpeed * timestep, m_Camera->GetPosition().y, m_Camera->GetPosition().z});
+        m_Camera->SetPosition({m_Camera->GetPosition().x - m_CameraMoveSpeed * timestep, m_Camera->GetPosition().y, m_Camera->GetPosition().z});
     }
     if (Engine::Input::IsKeyPressed(ENGINE_KEY_D)) {
-        m_Camera->SetPosition({m_Camera->GetPosition().x + m_CameraSpeed * timestep, m_Camera->GetPosition().y, m_Camera->GetPosition().z});
+        m_Camera->SetPosition({m_Camera->GetPosition().x + m_CameraMoveSpeed * timestep, m_Camera->GetPosition().y, m_Camera->GetPosition().z});
     }
 
     if (Engine::Input::IsKeyPressed(ENGINE_KEY_Q)) {
@@ -83,12 +84,34 @@ void ExampleLayer::OnUpdate(Engine::Timestep timestep)
         m_Camera->SetRotation(m_Camera->GetRotation() - m_CameraRotationSpeed * timestep);
     }
 
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_I)) {
+        m_ObjectPosition.y += m_ObjectMoveSpeed * timestep;
+    }
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_K)) {
+        m_ObjectPosition.y -= m_ObjectMoveSpeed * timestep;
+    }
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_J)) {
+        m_ObjectPosition.x -= m_ObjectMoveSpeed * timestep;
+    }
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_L)) {
+        m_ObjectPosition.x += m_ObjectMoveSpeed * timestep;
+    }
+
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_U)) {
+        m_ObjectRotation += m_ObjectRotationSpeed * timestep;
+    }
+    if (Engine::Input::IsKeyPressed(ENGINE_KEY_O)) {
+        m_ObjectRotation -= m_ObjectRotationSpeed * timestep;
+    }
+
     Engine::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     Engine::RenderCommand::Clear();
 
     Engine::Renderer::BeginScene(m_Camera);
     {
-        Engine::Renderer::Submit(m_Shader, m_VertexArray);
+        Engine::Renderer::Submit(m_Shader, m_VertexArray,
+                                 glm::translate(glm::mat4(1.0f), m_ObjectPosition) *
+                                     glm::rotate(glm::mat4(1.0f), glm::radians(m_ObjectRotation), glm::vec3(0, 0, 1)));
     }
     Engine::Renderer::EndScene();
 }

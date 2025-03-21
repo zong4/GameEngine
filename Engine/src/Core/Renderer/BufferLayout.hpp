@@ -66,10 +66,7 @@ class BufferLayout
 {
   public:
     BufferLayout() = default;
-    BufferLayout(const std::initializer_list<BufferElement>& elements) : m_Elements(elements)
-    {
-        CalculateOffsetsAndStride();
-    }
+    BufferLayout(const std::initializer_list<BufferElement>& elements) : m_Elements(elements) { CalculateOffsetsAndStride(); }
 
   public:
     inline const std::vector<BufferElement>&          GetElements() const { return m_Elements; }
