@@ -9,7 +9,7 @@ cmake_install.cmake
 CMakeLists.txt
 
 # VSCode cache
-.vscode/
+.cache/
 
 # Xmake cache
 .xmake/

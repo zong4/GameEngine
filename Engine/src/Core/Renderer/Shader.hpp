@@ -13,7 +13,7 @@ class Shader
     virtual void Bind() const   = 0;
     virtual void Unbind() const = 0;
 
-    static std::shared_ptr<Shader> Create(const std::string& vertexSrc, const std::string& fragmentSrc);
+    static std::shared_ptr<Shader> Create(const std::string& vertexFilepath, const std::string& fragmentFilepath);
 
   public:
     virtual void SetUniformMat4f(const std::string& name, const glm::mat4& matrix)             = 0;
