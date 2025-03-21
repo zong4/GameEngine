@@ -43,20 +43,20 @@ class Logger
 
 #define ENGINE_WARN(...) ::Engine::Logger::GetEngineLogger()->warn(__VA_ARGS__)
 #define ENGINE_ERROR(...) ::Engine::Logger::GetEngineLogger()->error(__VA_ARGS__)
-#define ENGINE_ASSERT(x, ...)                                                                                          \
-    {                                                                                                                  \
-        if (!(x)) {                                                                                                    \
-            ENGINE_ERROR("Assertion failed: {0}", __VA_ARGS__);                                                        \
-            DEBUG_BREAK();                                                                                             \
-        }                                                                                                              \
+#define ENGINE_ASSERT(x, ...)                                                                                                                                  \
+    {                                                                                                                                                          \
+        if (!(x)) {                                                                                                                                            \
+            ENGINE_ERROR("Assertion failed: {0}", __VA_ARGS__);                                                                                                \
+            DEBUG_BREAK();                                                                                                                                     \
+        }                                                                                                                                                      \
     }
 
 #define EDITOR_WARN(...) ::Engine::Logger::GetEditorLogger()->warn(__VA_ARGS__)
 #define EDITOR_ERROR(...) ::Engine::Logger::GetEditorLogger()->error(__VA_ARGS__)
-#define EDITOR_ASSERT(x, ...)                                                                                          \
-    {                                                                                                                  \
-        if (!(x)) {                                                                                                    \
-            EDITOR_ERROR("Assertion failed: {0}", __VA_ARGS__);                                                        \
-            DEBUG_BREAK();                                                                                             \
-        }                                                                                                              \
+#define EDITOR_ASSERT(x, ...)                                                                                                                                  \
+    {                                                                                                                                                          \
+        if (!(x)) {                                                                                                                                            \
+            EDITOR_ERROR("Assertion failed: {0}", __VA_ARGS__);                                                                                                \
+            DEBUG_BREAK();                                                                                                                                     \
+        }                                                                                                                                                      \
     }

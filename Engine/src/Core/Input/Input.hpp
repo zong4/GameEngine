@@ -15,8 +15,8 @@ class Input
     static void Init();
 
   public:
-    inline static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
-    inline static bool IsMouseButtonPressed(int button) { return s_Instance->IsMouseButtonPressedImpl(button); }
+    inline static bool                      IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
+    inline static bool                      IsMouseButtonPressed(int button) { return s_Instance->IsMouseButtonPressedImpl(button); }
     inline static std::pair<double, double> GetMousePosition() { return s_Instance->GetMousePositionImpl(); }
     inline static double                    GetMouseX() { return s_Instance->GetMouseXImpl(); }
     inline static double                    GetMouseY() { return s_Instance->GetMouseYImpl(); }

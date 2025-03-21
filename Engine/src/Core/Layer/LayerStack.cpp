@@ -1,6 +1,6 @@
 #include "LayerStack.hpp"
 
-void Engine::LayerStack::PushLayer(std::shared_ptr<Layer>  layer)
+void Engine::LayerStack::PushLayer(std::shared_ptr<Layer> layer)
 {
     m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, layer);
     m_LayerInsertIndex++;

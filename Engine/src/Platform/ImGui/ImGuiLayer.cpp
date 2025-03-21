@@ -55,9 +55,9 @@ void Engine::ImGuiLayer::OnImGuiRender()
 
 void Engine::ImGuiLayer::EndRender()
 {
-    ImGuiIO&     io  = ImGui::GetIO();
-    auto& app = Application::Get();
-    io.DisplaySize   = ImVec2(static_cast<float>(app->GetWindow()->GetWidth()), static_cast<float>(app->GetWindow()->GetHeight()));
+    ImGuiIO& io    = ImGui::GetIO();
+    auto&    app   = Application::Get();
+    io.DisplaySize = ImVec2(static_cast<float>(app->GetWindow()->GetWidth()), static_cast<float>(app->GetWindow()->GetHeight()));
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

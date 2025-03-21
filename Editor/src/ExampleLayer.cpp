@@ -6,13 +6,14 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
 
     m_VertexArray = Engine::VertexArray::Create();
 
-    float vertices[4 * 3] = {
-        -0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f, 0.5f, 0.5f, 0.0f, -0.5f, 0.5f, 0.0f,
+    float vertices[4 * 5] = {
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.5f, 0.5f, 0.0f, 1.0f, 1.0f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
     };
     std::shared_ptr<Engine::VertexBuffer> vertexBuffer = Engine::VertexBuffer::Create(vertices, sizeof(vertices));
 
     Engine::BufferLayout layout = {
         {Engine::ShaderDataType::Float3, "a_Position"},
+        {Engine::ShaderDataType::Float2, "a_TexCoord"},
     };
     vertexBuffer->SetLayout(layout);
     m_VertexArray->AddVertexBuffer(vertexBuffer);
@@ -25,6 +26,7 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
         #version 330 core
 
         layout(location = 0) in vec3 a_Position;
+        layout(location = 1) in vec2 a_TexCoord;
 
         uniform mat4 u_Transform;
         uniform mat4 u_ViewProjection;

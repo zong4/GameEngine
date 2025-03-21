@@ -19,7 +19,7 @@ class LayerStack
     inline std::vector<std::shared_ptr<Layer>>::iterator end() { return m_Layers.end(); }
 
   private:
-    unsigned int        m_LayerInsertIndex = 0;
+    unsigned int                        m_LayerInsertIndex = 0;
     std::vector<std::shared_ptr<Layer>> m_Layers; // todo: use smart pointers
 };
 } // namespace Engine

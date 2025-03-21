@@ -67,8 +67,7 @@ void Engine::OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<Engine::Ve
     const auto& layout = vertexBuffer->GetLayout();
     for (const auto& element : layout) {
         glEnableVertexAttribArray(m_VertexBufferIndex);
-        glVertexAttribPointer(m_VertexBufferIndex, element.GetComponentCount(),
-                              ShaderDataTypeToOpenGLBaseType(element.GetType()),
+        glVertexAttribPointer(m_VertexBufferIndex, element.GetComponentCount(), ShaderDataTypeToOpenGLBaseType(element.GetType()),
                               element.GetNormalized() ? GL_TRUE : GL_FALSE, layout.GetStride(),
                               reinterpret_cast<const void*>(static_cast<uintptr_t>(element.GetOffset())));
         m_VertexBufferIndex++;

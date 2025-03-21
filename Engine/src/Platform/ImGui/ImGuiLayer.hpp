@@ -13,9 +13,9 @@ class ImGuiLayer : public Layer
     virtual ~ImGuiLayer();
 
     virtual void OnUpdate(Timestep timestep) override {}
-     void BeginRender();
+    void         BeginRender();
     virtual void OnImGuiRender() override;
-     void EndRender();
+    void         EndRender();
     virtual void OnEvent(Event& event) override {}
 };
 }; // namespace Engine
