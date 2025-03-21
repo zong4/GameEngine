@@ -13,12 +13,11 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
 
     Engine::BufferLayout layout = {
         {Engine::ShaderDataType::Float3, "a_Position"},
-        {Engine::ShaderDataType::Float4, "a_Color"},
     };
     vertexBuffer->SetLayout(layout);
     m_VertexArray->AddVertexBuffer(vertexBuffer);
 
-    uint32_t                             indices[3]  = {0, 1, 2};
+    uint32_t                             indices[6]  = {0, 1, 2, 2, 3, 0};
     std::shared_ptr<Engine::IndexBuffer> indexBuffer = Engine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
     m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -42,9 +41,11 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
     std::string fragmentSrc = R"(
         #version 330 core
 
-        layout(location = 0) out vec4 color;
+        uniform vec4 u_Color;
 
         in vec3 v_Position;
+
+        layout(location = 0) out vec4 color;
 
         void main()
         {
@@ -108,17 +109,21 @@ void ExampleLayer::OnUpdate(Engine::Timestep timestep)
 
     Engine::Renderer::BeginScene(m_Camera);
     {
+        glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
         glm::vec4 redColor  = {0.8f, 0.2f, 0.2f, 1.0f};
         glm::vec4 blueColor = {0.2f, 0.2f, 0.8f, 1.0f};
-        for (int i = 0; i < 5; i++)
-            for (int j = 0; j < 5; j++)
+   
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
                 if ((i + j) % 2 == 0)
-                    m_Shader->SetUniform3f("u_Color", redColor);
+                    m_Shader->SetUniform4f("u_Color", redColor);
                 else
-                    m_Shader->SetUniform3f("u_Color", blueColor);
-        Engine::Renderer::Submit(m_Shader, m_VertexArray,
-                                 glm::translate(glm::mat4(1.0f), m_ObjectPosition) *
-                                     glm::rotate(glm::mat4(1.0f), glm::radians(m_ObjectRotation), glm::vec3(0, 0, 1)));
+                    m_Shader->SetUniform4f("u_Color", blueColor);
+                glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(i * 0.11f, j * 0.11f, 0.0f)) * scale;
+                Engine::Renderer::Submit(m_Shader, m_VertexArray, transform);
+            }
+        }
     }
     Engine::Renderer::EndScene();
 }
