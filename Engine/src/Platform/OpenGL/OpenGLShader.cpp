@@ -2,8 +2,8 @@
 
 Engine::OpenGLShader::OpenGLShader(const std::string& vertexFilepath, const std::string& fragmentFilepath)
 {
-    std::string vertexSource   = ReadFile(std::string(PROJECT_DIR) + "/" + vertexFilepath);
-    std::string fragmentSource = ReadFile(std::string(PROJECT_DIR) + "/" + fragmentFilepath);
+    std::string vertexSource   = ReadFile(std::string(vertexFilepath));
+    std::string fragmentSource = ReadFile(std::string(fragmentFilepath));
 
     Compile(std::unordered_map<GLenum, std::string>{{GL_VERTEX_SHADER, vertexSource}, {GL_FRAGMENT_SHADER, fragmentSource}});
 }
