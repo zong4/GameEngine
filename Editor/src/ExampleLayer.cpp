@@ -63,6 +63,9 @@ ExampleLayer::~ExampleLayer()
 
 void ExampleLayer::OnUpdate()
 {
+    Engine::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
+    Engine::RenderCommand::Clear();
+
     Engine::Renderer::BeginScene(m_Camera);
 
     Engine::Renderer::Submit(m_Shader, m_VertexArray);
