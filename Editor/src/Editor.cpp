@@ -3,17 +3,26 @@
 class Editor : public Engine::Application
 {
   public:
-    Editor() : Engine::Application()
+      Editor()
+      {
+    }
+
+      void Init() override
     {
+        Application::Init();
         PushLayer<Editor2D>();
         PushOverlay<Engine::ImGuiLayer>();
-
-        EDITOR_INFO("Editor is constructed");
     }
-    virtual ~Editor() noexcept override = default;
+
+      virtual ~Editor() noexcept override
+      { 
+    }
+
+      void Shutdown() override { Application::Shutdown(); }
 };
 
-std::shared_ptr<Engine::Application> Engine::CreateApplication()
+std::unique_ptr<Engine::Application>& Engine::Application::Create()
 {
-    return std::make_shared<Editor>();
+    s_Instance = std::make_unique<Editor>();
+    return Application::Get();
 }

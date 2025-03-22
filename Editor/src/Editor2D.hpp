@@ -8,7 +8,6 @@ class Editor2D : public Engine::Layer
 
     virtual void OnUpdate(const Engine::Timestep& timestep) override;
     virtual void OnImGuiRender() override;
-
     virtual void OnEvent(Engine::Event& event) override;
 
   private:

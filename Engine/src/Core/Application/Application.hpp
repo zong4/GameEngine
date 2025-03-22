@@ -6,22 +6,27 @@
 
 namespace Engine
 {
-class Application : public std::enable_shared_from_this<Application>
+class Application
 {
   public:
-    Application();
-    virtual ~Application();
+    Application()                              = default;
+    virtual ~Application()                     = default;
     Application(const Application&)            = delete;
     Application& operator=(const Application&) = delete;
 
+             virtual void Init();
     void Run();
+             virtual void Shutdown();
     void OnEvent(Event& e);
 
     template <typename T, typename... Args> void PushLayer(Args&&... args) { m_LayerStack.PushLayer(std::make_unique<T>(std::forward<Args>(args)...)); }
     template <typename T, typename... Args> void PushOverlay(Args&&... args) { m_LayerStack.PushOverlay(std::make_unique<T>(std::forward<Args>(args)...)); }
+       
+
+    static std::unique_ptr<Application>& Create();
 
   public:
-    static std::shared_ptr<Application> Get() { return s_Instance.lock(); }
+    static std::unique_ptr<Application>& Get() { return s_Instance; }
     std::unique_ptr<Window>&            GetWindow() { return m_Window; }
 
   private:
@@ -29,7 +34,7 @@ class Application : public std::enable_shared_from_this<Application>
     bool OnWindowResize(WindowResizeEvent& e);
 
   private:
-    static std::weak_ptr<Application> s_Instance;
+    static std::unique_ptr<Application> s_Instance;
     std::unique_ptr<Window>           m_Window;
     LayerStack                        m_LayerStack;
 
@@ -37,6 +42,4 @@ class Application : public std::enable_shared_from_this<Application>
     bool                                           m_Minimized = false;
     std::chrono::high_resolution_clock::time_point m_LastFrameTime;
 };
-
-extern std::shared_ptr<Application> CreateApplication();
 } // namespace Engine

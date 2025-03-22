@@ -8,10 +8,10 @@ int main(int argc, char** argv)
 {
     Engine::Logger::Init();
 
-    ENGINE_INFO("Engine startup");
-    auto app = Engine::CreateApplication();
+    auto& app = Engine::Application::Create();
+    app->Init();
     app->Run();
-    ENGINE_INFO("Engine shutdown");
+    app->Shutdown();
 
     return 0;
 }

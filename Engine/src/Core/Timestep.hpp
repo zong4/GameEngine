@@ -8,15 +8,15 @@ class Timestep
 {
   public:
     Timestep() = default;
-    Timestep(std::chrono::duration<double> time) : m_Time(time) {}
+    Timestep(std::chrono::duration<float> time) : m_Time(time) {}
 
-    operator double() const { return m_Time.count(); }
+    operator float() const { return m_Time.count(); }
 
   public:
-    double Seconds() const { return m_Time.count(); }
-    double Milliseconds() const { return m_Time.count() * 1000.0; }
+    float Seconds() const { return m_Time.count(); }
+    float Milliseconds() const { return m_Time.count() * 1000.0f; }
 
   private:
-    std::chrono::duration<double> m_Time;
+    std::chrono::duration<float> m_Time;
 };
 } // namespace Engine

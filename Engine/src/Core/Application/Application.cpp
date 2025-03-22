@@ -4,27 +4,17 @@
 #include "Core/Renderer/Renderer.hpp"
 #include "Platform/ImGui/ImGuiLayer.hpp"
 
-std::weak_ptr<Engine::Application> Engine::Application::s_Instance;
+std::unique_ptr<Engine::Application> Engine::Application::s_Instance = nullptr;
 
-Engine::Application::Application()
+void Engine::Application::Init()
 {
-    ENGINE_ASSERT(s_Instance.expired(), "Application already exists");
-    s_Instance = std::static_pointer_cast<Application>(shared_from_this());
-
     m_Window = Window::Create();
     m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));
 
     Engine::Input::Init();
     Engine::Renderer::Init();
 
-    ENGINE_INFO("Application is constructed");
-}
-
-Engine::Application::~Application()
-{
-    Engine::Renderer::Shutdown();
-    Engine::Input::Shutdown();
-    ENGINE_INFO("Application is destructed");
+    ENGINE_INFO("Application is initialized");
 }
 
 void Engine::Application::Run()
@@ -51,6 +41,14 @@ void Engine::Application::Run()
 
         m_Window->OnUpdate();
     }
+}
+
+void Engine::Application::Shutdown()
+{
+    Engine::Renderer::Shutdown();
+    Engine::Input::Shutdown();
+
+    ENGINE_INFO("Application is shutdown");
 }
 
 void Engine::Application::OnEvent(Event& event)

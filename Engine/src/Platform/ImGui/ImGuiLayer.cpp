@@ -65,7 +65,7 @@ void Engine::ImGuiLayer::BeginRender()
 void Engine::ImGuiLayer::EndRender()
 {
     ImGuiIO& io    = ImGui::GetIO();
-    auto     app   = Application::Get();
+    auto&     app   = Application::Get();
     io.DisplaySize = ImVec2(static_cast<float>(app->GetWindow()->GetWidth()), static_cast<float>(app->GetWindow()->GetHeight()));
 
     ImGui::Render();
