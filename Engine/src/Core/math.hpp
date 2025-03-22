@@ -4,7 +4,7 @@
 
 namespace Engine
 {
-    inline std::ostream& operator<<(std::ostream& os, const glm::vec2& vec)
+inline std::ostream& operator<<(std::ostream& os, const glm::vec2& vec)
 {
     os << "vec2: (" << vec.x << ", " << vec.y << ")";
     return os;

@@ -4,10 +4,9 @@
 #include "Platform/Input/Input.hpp"
 #include "Platform/Input/KeyCodes.hpp"
 #include "Platform/Input/MouseButtonCodes.hpp"
-#include "Platform/Renderer/Renderer.hpp"
+#include "Platform/Renderer/RenderCommand.hpp"
+#include "Platform/Renderer/Renderer2D.hpp"
 #include "Platform/Renderer/ShaderLibrary.hpp"
-#include "Platform/Renderer/Texture2D.hpp"
-#include "Platform/Renderer/VertexArray.hpp"
 
 // Core
 #include "Core/Application/Application.hpp"

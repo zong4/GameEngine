@@ -7,6 +7,7 @@ namespace Engine
 class Texture
 {
   public:
+    Texture(uint32_t width, uint32_t height) : m_Width(width), m_Height(height) {}
     Texture(const std::string& path) : m_Path(std::string(PROJECT_DIR) + "/" + path) {}
     virtual ~Texture() = default;
 
@@ -16,6 +17,7 @@ class Texture
   public:
     virtual uint32_t GetWidth() const { return m_Width; }
     virtual uint32_t GetHeight() const { return m_Height; }
+    virtual void     SetData(void* data, uint32_t size) = 0;
 
   protected:
     std::string m_Path;

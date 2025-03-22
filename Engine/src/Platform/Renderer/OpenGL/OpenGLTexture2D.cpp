@@ -4,6 +4,21 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
+Engine::OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height) : Texture2D(width, height)
+{
+    glGenTextures(1, &m_RendererID);
+    glBindTexture(GL_TEXTURE_2D, m_RendererID);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
 Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(path)
 {
     std::ifstream file(m_Path);
@@ -69,4 +84,9 @@ void Engine::OpenGLTexture2D::Bind(uint32_t slot) const
 void Engine::OpenGLTexture2D::Unbind() const
 {
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Engine::OpenGLTexture2D::SetData(void* data, uint32_t size)
+{
+    ENGINE_ASSERT(false, "Not implemented");
 }

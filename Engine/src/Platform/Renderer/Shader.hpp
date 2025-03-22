@@ -15,6 +15,9 @@ class Shader
 
     static std::unique_ptr<Shader> Create(const std::string& filepath);
 
+  public:
+    virtual void SetMat4(const std::string& name, const glm::mat4& matrix) = 0;
+
     virtual void SetUniformMat4f(const std::string& name, const glm::mat4& matrix)             = 0;
     virtual void SetUniform4f(const std::string& name, glm::vec4 vector)                       = 0;
     virtual void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3) = 0;

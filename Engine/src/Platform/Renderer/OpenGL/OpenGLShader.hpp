@@ -14,6 +14,9 @@ class OpenGLShader : public Shader
     virtual void Bind() const override;
     virtual void Unbind() const override;
 
+  public:
+    virtual void SetMat4(const std::string& name, const glm::mat4& matrix) override;
+
     virtual void SetUniformMat4f(const std::string& name, const glm::mat4& matrix) override;
     virtual void SetUniform4f(const std::string& name, glm::vec4 vector) override { SetUniform4f(name, vector.x, vector.y, vector.z, vector.w); }
     virtual void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3) override;

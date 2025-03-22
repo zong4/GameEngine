@@ -1,10 +1,14 @@
 #include "Renderer.hpp"
 
+#include "Platform/Renderer/RenderCommand.hpp"
+#include "Platform/Renderer/Renderer2D.hpp"
+
 Engine::Renderer::SceneData Engine::Renderer::m_SceneData = {};
 
 void Engine::Renderer::Init()
 {
     RenderCommand::Init();
+    Renderer2D::Init();
     ENGINE_INFO("Renderer initialized");
 }
 

@@ -9,6 +9,7 @@ class RenderCommand
   public:
     static void Init() { s_RendererAPI->Init(); }
     static void DrawIndexed(const std::unique_ptr<VertexArray>& vertexArray) { s_RendererAPI->DrawIndexed(vertexArray); }
+    static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) { s_RendererAPI->DrawIndexed(vertexArray); }
     static void Clear() { s_RendererAPI->Clear(); }
 
   public:

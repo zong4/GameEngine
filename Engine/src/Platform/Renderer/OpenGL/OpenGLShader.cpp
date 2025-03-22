@@ -37,6 +37,11 @@ void Engine::OpenGLShader::Unbind() const
     glUseProgram(0);
 }
 
+void Engine::OpenGLShader::SetMat4(const std::string& name, const glm::mat4& matrix)
+{
+    SetUniformMat4f(name, matrix);
+}
+
 void Engine::OpenGLShader::SetUniformMat4f(const std::string& name, const glm::mat4& matrix)
 {
     glUniformMatrix4fv(glGetUniformLocation(m_RendererID, name.c_str()), 1, GL_FALSE, &matrix[0][0]);
