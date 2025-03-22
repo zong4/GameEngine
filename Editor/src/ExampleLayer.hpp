@@ -1,3 +1,4 @@
+#include "Core/Renderer/Shader.hpp"
 #include <engine.hpp>
 
 class ExampleLayer : public Engine::Layer
@@ -13,7 +14,7 @@ class ExampleLayer : public Engine::Layer
 
   private:
     std::shared_ptr<Engine::VertexArray> m_VertexArray;
-    std::shared_ptr<Engine::Shader>      m_Shader;
+    std::shared_ptr<Engine::Shader>      m_ShaderLibrary;
     glm::vec4                            m_Color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     std::shared_ptr<Engine::Texture2D>   m_Texture;
     std::shared_ptr<Engine::Texture2D>   m_TextureBG;

@@ -22,7 +22,7 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
     std::shared_ptr<Engine::IndexBuffer> indexBuffer = Engine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
     m_VertexArray->SetIndexBuffer(indexBuffer);
 
-    m_Shader = Engine::Shader::Create("Editor/assets/shaders/Texture.glsl");
+    m_ShaderLibrary = Engine::Shader::Create("Editor/assets/shaders/Texture.glsl");
 
     m_Texture   = Engine::Texture2D::Create("Editor/assets/textures/head.png");
     m_TextureBG = Engine::Texture2D::Create("Editor/assets/textures/02.jpg");
@@ -82,19 +82,19 @@ void ExampleLayer::OnUpdate(Engine::Timestep timestep)
 
     Engine::Renderer::BeginScene(m_Camera);
     {
-        m_Shader->Bind();
+        m_ShaderLibrary->Bind();
         m_Texture->Bind();
-        m_Shader->SetUniform1i("u_Texture", 0);
-        m_Shader->SetUniform4f("u_Color", m_Color);
+        m_ShaderLibrary->SetUniform1i("u_Texture", 0);
+        m_ShaderLibrary->SetUniform4f("u_Color", m_Color);
 
         glm::mat4 scale     = glm::scale(glm::mat4(1.0f), glm::vec3(1.0f));
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), m_ObjectPosition) * scale;
-        Engine::Renderer::Submit(m_Shader, m_VertexArray, transform);
+        Engine::Renderer::Submit(m_ShaderLibrary, m_VertexArray, transform);
 
         m_TextureBG->Bind();
-        m_Shader->SetUniform1i("u_Texture", 0);
-        m_Shader->SetUniform4f("u_Color", m_Color);
-        Engine::Renderer::Submit(m_Shader, m_VertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
+        m_ShaderLibrary->SetUniform1i("u_Texture", 0);
+        m_ShaderLibrary->SetUniform4f("u_Color", m_Color);
+        Engine::Renderer::Submit(m_ShaderLibrary, m_VertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.0f)));
     }
     Engine::Renderer::EndScene();
 }
