@@ -2,8 +2,6 @@
 
 ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
 {
-    m_Camera = std::make_shared<Engine::OrthographicCamera>(-1.6f, 1.6f, -0.9f, 0.9f);
-
     m_VertexArray = Engine::VertexArray::Create();
 
     float vertices[4 * 5] = {
@@ -37,25 +35,7 @@ ExampleLayer::~ExampleLayer()
 
 void ExampleLayer::OnUpdate(Engine::Timestep timestep)
 {
-    if (Engine::Input::IsKeyPressed(ENGINE_KEY_W)) {
-        m_Camera->SetPosition({m_Camera->GetPosition().x, m_Camera->GetPosition().y + m_CameraMoveSpeed * timestep, m_Camera->GetPosition().z});
-    }
-    if (Engine::Input::IsKeyPressed(ENGINE_KEY_S)) {
-        m_Camera->SetPosition({m_Camera->GetPosition().x, m_Camera->GetPosition().y - m_CameraMoveSpeed * timestep, m_Camera->GetPosition().z});
-    }
-    if (Engine::Input::IsKeyPressed(ENGINE_KEY_A)) {
-        m_Camera->SetPosition({m_Camera->GetPosition().x - m_CameraMoveSpeed * timestep, m_Camera->GetPosition().y, m_Camera->GetPosition().z});
-    }
-    if (Engine::Input::IsKeyPressed(ENGINE_KEY_D)) {
-        m_Camera->SetPosition({m_Camera->GetPosition().x + m_CameraMoveSpeed * timestep, m_Camera->GetPosition().y, m_Camera->GetPosition().z});
-    }
-
-    if (Engine::Input::IsKeyPressed(ENGINE_KEY_Q)) {
-        m_Camera->SetRotation(m_Camera->GetRotation() + m_CameraRotationSpeed * timestep);
-    }
-    if (Engine::Input::IsKeyPressed(ENGINE_KEY_E)) {
-        m_Camera->SetRotation(m_Camera->GetRotation() - m_CameraRotationSpeed * timestep);
-    }
+    m_CameraController->OnUpdate(timestep);
 
     if (Engine::Input::IsKeyPressed(ENGINE_KEY_I)) {
         m_ObjectPosition.y += m_ObjectMoveSpeed * timestep;
@@ -80,7 +60,7 @@ void ExampleLayer::OnUpdate(Engine::Timestep timestep)
     Engine::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     Engine::RenderCommand::Clear();
 
-    Engine::Renderer::BeginScene(m_Camera);
+    Engine::Renderer::BeginScene(m_CameraController->GetCamera());
     {
         m_ShaderLibrary->Bind();
         m_Texture->Bind();

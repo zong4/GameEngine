@@ -7,6 +7,7 @@ namespace Engine
 class OrthographicCamera
 {
   public:
+    OrthographicCamera() = default;
     OrthographicCamera(float left, float right, float bottom, float top);
 
   public:

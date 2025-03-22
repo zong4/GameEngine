@@ -8,7 +8,7 @@ void Engine::Renderer::Init()
     ENGINE_INFO("Renderer initialized");
 }
 
-void Engine::Renderer::BeginScene(const std::shared_ptr<OrthographicCamera>& camera)
+void Engine::Renderer::BeginScene(const OrthographicCamera& camera)
 {
     m_SceneData.Camera = camera;
 }
@@ -19,7 +19,7 @@ void Engine::Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::
 
     shader->Bind();
     shader->SetUniformMat4f("u_Transform", transform);
-    shader->SetUniformMat4f("u_ViewProjection", m_SceneData.Camera->GetViewProjectionMatrix());
+    shader->SetUniformMat4f("u_ViewProjection", m_SceneData.Camera.GetViewProjectionMatrix());
 
     RenderCommand::DrawIndexed(vertexArray);
 }

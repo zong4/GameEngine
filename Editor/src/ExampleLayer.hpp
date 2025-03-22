@@ -1,4 +1,3 @@
-#include "Core/Renderer/Shader.hpp"
 #include <engine.hpp>
 
 class ExampleLayer : public Engine::Layer
@@ -19,9 +18,7 @@ class ExampleLayer : public Engine::Layer
     std::shared_ptr<Engine::Texture2D>   m_Texture;
     std::shared_ptr<Engine::Texture2D>   m_TextureBG;
 
-    std::shared_ptr<Engine::OrthographicCamera> m_Camera;
-    float                                       m_CameraMoveSpeed     = -5.0f;
-    float                                       m_CameraRotationSpeed = -180.0f;
+    std::shared_ptr<Engine::OrthographicCameraController> m_CameraController = std::make_shared<Engine::OrthographicCameraController>(16.0f / 9.0f, false);
 
     glm::vec3 m_ObjectPosition      = glm::vec3(0.0f, 0.0f, 0.0f);
     float     m_ObjectRotation      = 0.0f;

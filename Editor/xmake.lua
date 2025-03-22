@@ -1,7 +1,6 @@
 target("Editor")
     add_headerfiles("src/**.hpp")
     add_files("src/**.cpp")
-
     add_includedirs("assets")
 
     add_deps("Engine")
