@@ -50,7 +50,6 @@ void Engine::Renderer2D::BeginScene(const OrthographicCamera& camera)
 {
     s_Data->TextureShader->Bind();
     s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
-    s_Data->TextureShader->SetMat4("u_Transform", glm::mat4(1.0f));
 }
 
 void Engine::Renderer2D::EndScene()
@@ -69,6 +68,8 @@ void Engine::Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& si
 void Engine::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 {
     s_Data->TextureShader->Bind();
+    s_Data->TextureShader->SetMat4("u_Transform", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f}));
+
     s_Data->TextureShader->SetUniform4f("u_Color", color);
 
     s_Data->QuadVertexArray->Bind();
