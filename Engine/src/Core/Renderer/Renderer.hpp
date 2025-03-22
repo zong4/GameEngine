@@ -16,6 +16,9 @@ class Renderer
     static void Clear();
     static void Shutdown();
 
+    public:
+    static void OnWindowResize(uint32_t width, uint32_t height);
+
   public:
     struct SceneData {
         OrthographicCamera Camera;

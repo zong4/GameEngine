@@ -30,11 +30,14 @@ class Application : public std::enable_shared_from_this<Application>
 
   private:
     bool OnWindowClose(WindowCloseEvent& e);
+    bool OnWindowResize(WindowResizeEvent& e);
 
   private:
     static std::unique_ptr<Application> s_Instance;
 
     bool                        m_Running = true;
+    bool                        m_Minimized = false;
+
     std::unique_ptr<Window>     m_Window; // todo: more windows
     LayerStack                  m_LayerStack;
     std::unique_ptr<ImGuiLayer> m_ImGuilayer;

@@ -1,4 +1,4 @@
-; find . -name "*.cpp" -o -name "*.hpp" | xargs clang-format -i
+# find . -name "*.cpp" -o -name "*.hpp" | xargs clang-format -i
 
 BasedOnStyle: LLVM  # 基于 LLVM 风格，简洁高效:cite[1]:cite[8]
 Language: Cpp

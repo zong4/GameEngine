@@ -88,4 +88,5 @@ void ExampleLayer::OnImGuiRender()
 
 void ExampleLayer::OnEvent(Engine::Event& event)
 {
+    m_CameraController->OnEvent(event);
 }
