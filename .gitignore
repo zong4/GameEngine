@@ -10,6 +10,7 @@ CMakeLists.txt
 
 # VSCode cache
 .cache/
+compile_commands.json
 
 # Xmake cache
 .xmake/

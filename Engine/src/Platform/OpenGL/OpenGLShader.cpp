@@ -15,7 +15,7 @@ static GLenum ShaderTypeFromString(const std::string& type)
 
 Engine::OpenGLShader::OpenGLShader(const std::string& filepath) : Shader(filepath)
 {
-    std::string source        = ReadFile(std::string(filepath));
+    std::string source        = ReadFile(std::string(m_Name));
     auto        shaderSources = Preprocess(source);
     Compile(shaderSources);
 }
