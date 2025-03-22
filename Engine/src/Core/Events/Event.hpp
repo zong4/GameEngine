@@ -2,8 +2,6 @@
 
 #include "EnginePCH.hpp"
 
-#define ENGINE_BIT(x) (1 << x)
-
 namespace Engine
 {
 enum class EventType {
@@ -25,14 +23,17 @@ enum class EventType {
     MouseScrolled
 };
 
-enum EventCategory {
-    None                     = 0,
-    EventCategoryApplication = ENGINE_BIT(0),
-    EventCategoryInput       = ENGINE_BIT(1),
-    EventCategoryKeyboard    = ENGINE_BIT(2),
-    EventCategoryMouse       = ENGINE_BIT(3),
-    EventCategoryMouseButton = ENGINE_BIT(4),
-};
+enum class EventCategory { None = 0, Application = 1 << 0, Input = 1 << 1, Keyboard = 1 << 2, Mouse = 1 << 3, MouseButton = 1 << 4 };
+
+constexpr EventCategory operator|(EventCategory lhs, EventCategory rhs) noexcept
+{
+    return static_cast<EventCategory>(static_cast<std::underlying_type_t<EventCategory>>(lhs) | static_cast<std::underlying_type_t<EventCategory>>(rhs));
+}
+
+constexpr bool operator&(EventCategory lhs, EventCategory rhs) noexcept
+{
+    return (static_cast<std::underlying_type_t<EventCategory>>(lhs) & static_cast<std::underlying_type_t<EventCategory>>(rhs)) != 0;
+}
 
 #define EVENT_CLASS_TYPE(type)                                                                                                                                 \
     inline static EventType GetStaticType()                                                                                                                    \
@@ -49,7 +50,7 @@ enum EventCategory {
     }
 
 #define EVENT_CLASS_CATEGORY(category)                                                                                                                         \
-    inline virtual int GetCategoryFlags() const override                                                                                                       \
+    inline virtual EventCategory GetCategoryFlags() const override                                                                                             \
     {                                                                                                                                                          \
         return category;                                                                                                                                       \
     }
@@ -65,11 +66,11 @@ class Event
     virtual inline std::string ToString() const { return GetName(); }
 
   public:
-    virtual EventType   GetEventType() const     = 0;
-    virtual const char* GetName() const          = 0;
-    virtual int         GetCategoryFlags() const = 0;
-    inline bool         IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
-    inline bool         IsHandled() const { return m_Handled; }
+    virtual EventType     GetEventType() const     = 0;
+    virtual const char*   GetName() const          = 0;
+    virtual EventCategory GetCategoryFlags() const = 0;
+    inline bool           IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
+    inline bool           IsHandled() const { return m_Handled; }
 
   protected:
     bool m_Handled = false;
@@ -77,16 +78,17 @@ class Event
 
 class EventDispatcher
 {
-    template <typename T> using EventFn = std::function<bool(T&)>;
-
   public:
-    EventDispatcher(Event& event) : m_Event(event) {}
+    explicit EventDispatcher(Event& event) : m_Event(event) {}
 
-    template <typename T> bool Dispatch(EventFn<T> func)
+    template <typename T, typename F> bool Dispatch(F&& handler)
     {
+        static_assert(std::is_base_of_v<Event, T>, "T must be an Event type");
         if (m_Event.GetEventType() == T::GetStaticType()) {
-            m_Event.m_Handled = func(*(T*)&m_Event);
-            return true;
+            if constexpr (std::is_invocable_r_v<bool, F, T&>) {
+                m_Event.m_Handled = handler(static_cast<T&>(m_Event));
+                return true;
+            }
         }
         return false;
     }

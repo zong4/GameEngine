@@ -1,6 +1,6 @@
-#include "Editor2D.hpp"
+#include "EditorLayer2D.hpp"
 
-Editor2D::Editor2D() : Layer("Editor2D")
+EditorLayer2D::EditorLayer2D() : Layer("EditorLayer2D")
 {
     m_VertexArray = Engine::VertexArray::Create();
 
@@ -23,15 +23,15 @@ Editor2D::Editor2D() : Layer("Editor2D")
     m_Texture       = Engine::Texture2D::Create("Editor/assets/textures/head.png");
     m_TextureBG     = Engine::Texture2D::Create("Editor/assets/textures/02.jpg");
 
-    EDITOR_INFO("Editor2D is constructed");
+    EDITOR_INFO("EditorLayer2D is constructed");
 }
 
-Editor2D::~Editor2D() noexcept
+EditorLayer2D::~EditorLayer2D() noexcept
 {
-    EDITOR_INFO("Editor2D is destructed");
+    EDITOR_INFO("EditorLayer2D is destructed");
 }
 
-void Editor2D::OnUpdate(const Engine::Timestep& timestep)
+void EditorLayer2D::OnUpdate(const Engine::Timestep& timestep)
 {
     m_CameraController.OnUpdate(timestep);
 
@@ -76,14 +76,14 @@ void Editor2D::OnUpdate(const Engine::Timestep& timestep)
     Engine::Renderer::EndScene();
 }
 
-void Editor2D::OnImGuiRender()
+void EditorLayer2D::OnImGuiRender()
 {
     ImGui::Begin("Settings");
     ImGui::ColorEdit4("Color", glm::value_ptr(m_Color));
     ImGui::End();
 }
 
-void Editor2D::OnEvent(Engine::Event& event)
+void EditorLayer2D::OnEvent(Engine::Event& event)
 {
     m_CameraController.OnEvent(event);
 }

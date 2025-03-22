@@ -1,10 +1,10 @@
 #include <engine.hpp>
 
-class Editor2D : public Engine::Layer
+class EditorLayer2D : public Engine::Layer
 {
   public:
-    Editor2D();
-    virtual ~Editor2D() noexcept override;
+    EditorLayer2D();
+    virtual ~EditorLayer2D() noexcept override;
 
     virtual void OnUpdate(const Engine::Timestep& timestep) override;
     virtual void OnImGuiRender() override;
