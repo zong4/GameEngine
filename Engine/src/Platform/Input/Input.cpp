@@ -7,7 +7,7 @@ std::unique_ptr<Engine::Input> Engine::Input::s_Instance = nullptr;
 void Engine::Input::Init()
 {
 #ifdef PLATFORM_WINDOWS
-    s_Instance = std::make_unique<DirectXInput>();
+    s_Instance = std::make_unique<GLFWInput>();
 #elif PLATFORM_LINUX
     s_Instance = std::make_unique<GLFWInput>();
 #elif __APPLE__

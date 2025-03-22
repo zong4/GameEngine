@@ -97,7 +97,7 @@ class EventDispatcher
     Event& m_Event;
 };
 
-constexpr std::ostream& operator<<(std::ostream& os, const Event& event)
+inline std::ostream& operator<<(std::ostream& os, const Event& event)
 {
     return os << event.ToString();
 }
