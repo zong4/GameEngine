@@ -30,8 +30,8 @@ class WindowResizeEvent : public Event
   public:
     EVENT_CLASS_TYPE(WindowResize)
     EVENT_CLASS_CATEGORY(EventCategory::Application)
-    inline unsigned int GetWidth() const { return m_Width; }
-    inline unsigned int GetHeight() const { return m_Height; }
+    unsigned int GetWidth() const { return m_Width; }
+    unsigned int GetHeight() const { return m_Height; }
 
   private:
     unsigned int m_Width, m_Height;
@@ -72,8 +72,8 @@ class WindowMovedEvent : public Event
   public:
     EVENT_CLASS_TYPE(WindowMoved)
     EVENT_CLASS_CATEGORY(EventCategory::Application)
-    inline int GetX() const { return m_X; }
-    inline int GetY() const { return m_Y; }
+    int GetX() const { return m_X; }
+    int GetY() const { return m_Y; }
 
   private:
     int m_X, m_Y;

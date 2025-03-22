@@ -1,6 +1,5 @@
 #include "EnginePCH.hpp"
 
-// Core
 #include "Core/Application/Application.hpp"
 #include "Core/Logger/Logger.hpp"
 

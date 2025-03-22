@@ -36,21 +36,21 @@ constexpr bool operator&(EventCategory lhs, EventCategory rhs) noexcept
 }
 
 #define EVENT_CLASS_TYPE(type)                                                                                                                                 \
-    inline static EventType GetStaticType()                                                                                                                    \
+    static EventType GetStaticType()                                                                                                                           \
     {                                                                                                                                                          \
         return EventType::type;                                                                                                                                \
     }                                                                                                                                                          \
-    inline virtual EventType GetEventType() const override                                                                                                     \
+    virtual EventType GetEventType() const override                                                                                                            \
     {                                                                                                                                                          \
         return GetStaticType();                                                                                                                                \
     }                                                                                                                                                          \
-    inline virtual const char* GetName() const override                                                                                                        \
+    virtual const char* GetName() const override                                                                                                               \
     {                                                                                                                                                          \
         return #type;                                                                                                                                          \
     }
 
 #define EVENT_CLASS_CATEGORY(category)                                                                                                                         \
-    inline virtual EventCategory GetCategoryFlags() const override                                                                                             \
+    virtual EventCategory GetCategoryFlags() const override                                                                                                    \
     {                                                                                                                                                          \
         return category;                                                                                                                                       \
     }
@@ -63,14 +63,14 @@ class Event
     Event()          = default;
     virtual ~Event() = default;
 
-    virtual inline std::string ToString() const { return GetName(); }
+    virtual std::string ToString() const { return GetName(); }
 
   public:
     virtual EventType     GetEventType() const     = 0;
     virtual const char*   GetName() const          = 0;
     virtual EventCategory GetCategoryFlags() const = 0;
-    inline bool           IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
-    inline bool           IsHandled() const { return m_Handled; }
+    bool                  IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
+    bool                  IsHandled() const { return m_Handled; }
 
   protected:
     bool m_Handled = false;
@@ -97,7 +97,7 @@ class EventDispatcher
     Event& m_Event;
 };
 
-inline std::ostream& operator<<(std::ostream& os, const Event& event)
+constexpr std::ostream& operator<<(std::ostream& os, const Event& event)
 {
     return os << event.ToString();
 }

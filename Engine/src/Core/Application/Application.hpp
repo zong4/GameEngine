@@ -2,7 +2,7 @@
 
 #include "Core/Events/ApplicationEvent.hpp"
 #include "Core/Layer/LayerStack.hpp"
-#include "Core/Window/Window.hpp"
+#include "Platform/Window/Window.hpp"
 
 namespace Engine
 {
@@ -19,8 +19,8 @@ class Application
     virtual void Shutdown();
     void         OnEvent(Event& e);
 
-    template <typename T, typename... Args> void PushLayer(Args&&... args) { m_LayerStack.PushLayer(std::make_unique<T>(std::forward<Args>(args)...)); }
-    template <typename T, typename... Args> void PushOverlay(Args&&... args) { m_LayerStack.PushOverlay(std::make_unique<T>(std::forward<Args>(args)...)); }
+    template <typename T, typename... Args> void PushLayer(Args&&... args) { m_LayerStack.PushLayer<T>(std::forward<Args>(args)...); }
+    template <typename T, typename... Args> void PushOverlay(Args&&... args) { m_LayerStack.PushOverlay<T>(std::forward<Args>(args)...); }
 
     static std::unique_ptr<Application>& Create();
 

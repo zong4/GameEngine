@@ -1,8 +1,8 @@
 #include "Application.hpp"
 
-#include "Core/Input/Input.hpp"
-#include "Core/Renderer/Renderer.hpp"
-#include "Platform/ImGui/ImGuiLayer.hpp"
+#include "Functions/ImGui/ImGuiLayer.hpp"
+#include "Platform/Input/Input.hpp"
+#include "Platform/Renderer/Renderer.hpp"
 
 std::unique_ptr<Engine::Application> Engine::Application::s_Instance = nullptr;
 
@@ -59,8 +59,9 @@ void Engine::Application::OnEvent(Event& event)
 
     for (auto& layer : std::ranges::reverse_view(m_LayerStack)) {
         layer->OnEvent(event);
-        if (event.IsHandled())
+        if (event.IsHandled()) {
             break;
+        }
     }
 }
 
@@ -74,7 +75,8 @@ bool Engine::Application::OnWindowResize(WindowResizeEvent& e)
 {
     m_Minimized = e.GetWidth() < 1 || e.GetHeight() < 1;
 
-    if (!m_Minimized)
+    if (!m_Minimized) {
         Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+    }
     return false;
 }

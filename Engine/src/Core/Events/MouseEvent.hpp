@@ -20,8 +20,8 @@ class MouseMovedEvent : public Event
   public:
     EVENT_CLASS_TYPE(MouseMoved)
     EVENT_CLASS_CATEGORY(EventCategory::Mouse | EventCategory::Input)
-    inline float GetX() const { return m_MouseX; }
-    inline float GetY() const { return m_MouseY; }
+    float GetX() const { return m_MouseX; }
+    float GetY() const { return m_MouseY; }
 
   private:
     float m_MouseX, m_MouseY;
@@ -42,8 +42,8 @@ class MouseScrolledEvent : public Event
   public:
     EVENT_CLASS_TYPE(MouseScrolled)
     EVENT_CLASS_CATEGORY(EventCategory::Mouse | EventCategory::Input)
-    inline float GetXOffset() const { return m_XOffset; }
-    inline float GetYOffset() const { return m_YOffset; }
+    float GetXOffset() const { return m_XOffset; }
+    float GetYOffset() const { return m_YOffset; }
 
   private:
     float m_XOffset, m_YOffset;
@@ -56,7 +56,7 @@ class MouseButtonEvent : public Event
 
   public:
     EVENT_CLASS_CATEGORY(EventCategory::MouseButton | EventCategory::Mouse | EventCategory::Input)
-    inline int GetMouseButton() const { return m_Button; }
+    int GetMouseButton() const { return m_Button; }
 
   protected:
     int m_Button;

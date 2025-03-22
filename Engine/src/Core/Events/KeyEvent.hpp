@@ -12,7 +12,7 @@ class KeyEvent : public Event
 
   public:
     EVENT_CLASS_CATEGORY(EventCategory::Keyboard | EventCategory::Input)
-    inline int GetKeyCode() const { return m_KeyCode; }
+    int GetKeyCode() const { return m_KeyCode; }
 
   protected:
     int m_KeyCode;
@@ -32,7 +32,7 @@ class KeyPressedEvent : public KeyEvent
 
   public:
     EVENT_CLASS_TYPE(KeyPressed)
-    inline int GetRepeatCount() const { return m_RepeatCount; }
+    int GetRepeatCount() const { return m_RepeatCount; }
 
   private:
     int m_RepeatCount;

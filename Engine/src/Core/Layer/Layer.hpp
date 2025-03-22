@@ -1,9 +1,6 @@
 #pragma once
 
-#include "EnginePCH.hpp"
-
-// tood: template to change files
-class Event;
+#include "Core/Events/Event.hpp"
 
 namespace Engine
 {
@@ -18,7 +15,7 @@ class Layer
     virtual void OnEvent(Event& event)                      = 0;
 
   public:
-    inline const std::string& GetName() const { return m_Name; }
+    const std::string& GetName() const { return m_Name; }
 
   protected:
     std::string m_Name;

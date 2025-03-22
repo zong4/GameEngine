@@ -10,8 +10,9 @@ class Logger
   public:
     static void Init();
 
-    inline static std::shared_ptr<spdlog::logger>& GetEngineLogger() { return s_EngineLogger; }
-    inline static std::shared_ptr<spdlog::logger>& GetEditorLogger() { return s_EditorLogger; }
+  public:
+    static std::shared_ptr<spdlog::logger>& GetEngineLogger() { return s_EngineLogger; }
+    static std::shared_ptr<spdlog::logger>& GetEditorLogger() { return s_EditorLogger; }
 
   private:
     static std::shared_ptr<spdlog::logger> s_EngineLogger;
