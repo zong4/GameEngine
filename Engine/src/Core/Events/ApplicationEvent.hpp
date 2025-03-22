@@ -1,35 +1,30 @@
 #pragma once
 
-// Core
 #include "Core/Events/Event.hpp"
 
 namespace Engine
 {
-class WindowCloseEvent : public Event
+class WindowCloseEvent : public EventBase<EventType::WindowClose, EventCategory::Application>
 {
   public:
     WindowCloseEvent() = default;
-
-  public:
-    EVENT_CLASS_TYPE(WindowClose)
-    EVENT_CLASS_CATEGORY(EventCategory::Application)
 };
 
-class WindowResizeEvent : public Event
+class WindowResizeEvent : public EventBase<EventType::WindowResize, EventCategory::Application>
 {
   public:
     WindowResizeEvent(unsigned int width, unsigned int height) : m_Width(width), m_Height(height) {}
 
-    std::string ToString() const override
+    std::string_view ToString() const override
     {
+        std::string_view  sv;
         std::stringstream ss;
         ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;
-        return ss.str();
+        sv = ss.str();
+        return sv;
     }
 
   public:
-    EVENT_CLASS_TYPE(WindowResize)
-    EVENT_CLASS_CATEGORY(EventCategory::Application)
     unsigned int GetWidth() const { return m_Width; }
     unsigned int GetHeight() const { return m_Height; }
 
@@ -37,41 +32,33 @@ class WindowResizeEvent : public Event
     unsigned int m_Width, m_Height;
 };
 
-class WindowFocusEvent : public Event
+class WindowFocusEvent : public EventBase<EventType::WindowFocus, EventCategory::Application>
 {
   public:
     WindowFocusEvent() = default;
-
-  public:
-    EVENT_CLASS_TYPE(WindowFocus)
-    EVENT_CLASS_CATEGORY(EventCategory::Application)
 };
 
-class WindowLostFocusEvent : public Event
+class WindowLostFocusEvent : public EventBase<EventType::WindowLostFocus, EventCategory::Application>
 {
   public:
     WindowLostFocusEvent() = default;
-
-  public:
-    EVENT_CLASS_TYPE(WindowLostFocus)
-    EVENT_CLASS_CATEGORY(EventCategory::Application)
 };
 
-class WindowMovedEvent : public Event
+class WindowMovedEvent : public EventBase<EventType::WindowMoved, EventCategory::Application>
 {
   public:
     WindowMovedEvent(int x, int y) : m_X(x), m_Y(y) {}
 
-    std::string ToString() const override
+    std::string_view ToString() const override
     {
+        std::string_view  sv;
         std::stringstream ss;
         ss << "WindowMovedEvent: " << m_X << ", " << m_Y;
-        return ss.str();
+        sv = ss.str();
+        return sv;
     }
 
   public:
-    EVENT_CLASS_TYPE(WindowMoved)
-    EVENT_CLASS_CATEGORY(EventCategory::Application)
     int GetX() const { return m_X; }
     int GetY() const { return m_Y; }
 
@@ -79,33 +66,21 @@ class WindowMovedEvent : public Event
     int m_X, m_Y;
 };
 
-class AppTickEvent : public Event
+class AppTickEvent : public EventBase<EventType::AppTick, EventCategory::Application>
 {
   public:
     AppTickEvent() = default;
-
-  public:
-    EVENT_CLASS_TYPE(AppTick)
-    EVENT_CLASS_CATEGORY(EventCategory::Application)
 };
 
-class AppUpdateEvent : public Event
+class AppUpdateEvent : public EventBase<EventType::AppUpdate, EventCategory::Application>
 {
   public:
     AppUpdateEvent() = default;
-
-  public:
-    EVENT_CLASS_TYPE(AppUpdate)
-    EVENT_CLASS_CATEGORY(EventCategory::Application)
 };
 
-class AppRenderEvent : public Event
+class AppRenderEvent : public EventBase<EventType::AppRender, EventCategory::Application>
 {
   public:
     AppRenderEvent() = default;
-
-  public:
-    EVENT_CLASS_TYPE(AppRender)
-    EVENT_CLASS_CATEGORY(EventCategory::Application)
 };
 } // namespace Engine

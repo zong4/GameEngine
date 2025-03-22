@@ -6,14 +6,14 @@ namespace Engine
 {
 enum class EventType {
     None = 0,
+    AppTick,
+    AppUpdate,
+    AppRender,
     WindowClose,
     WindowResize,
     WindowFocus,
     WindowLostFocus,
     WindowMoved,
-    AppTick,
-    AppUpdate,
-    AppRender,
     KeyPressed,
     KeyReleased,
     KeyTyped,
@@ -35,26 +35,6 @@ constexpr bool operator&(EventCategory lhs, EventCategory rhs) noexcept
     return (static_cast<std::underlying_type_t<EventCategory>>(lhs) & static_cast<std::underlying_type_t<EventCategory>>(rhs)) != 0;
 }
 
-#define EVENT_CLASS_TYPE(type)                                                                                                                                 \
-    static EventType GetStaticType()                                                                                                                           \
-    {                                                                                                                                                          \
-        return EventType::type;                                                                                                                                \
-    }                                                                                                                                                          \
-    virtual EventType GetEventType() const override                                                                                                            \
-    {                                                                                                                                                          \
-        return GetStaticType();                                                                                                                                \
-    }                                                                                                                                                          \
-    virtual const char* GetName() const override                                                                                                               \
-    {                                                                                                                                                          \
-        return #type;                                                                                                                                          \
-    }
-
-#define EVENT_CLASS_CATEGORY(category)                                                                                                                         \
-    virtual EventCategory GetCategoryFlags() const override                                                                                                    \
-    {                                                                                                                                                          \
-        return category;                                                                                                                                       \
-    }
-
 class Event
 {
     friend class EventDispatcher;
@@ -63,17 +43,34 @@ class Event
     Event()          = default;
     virtual ~Event() = default;
 
-    virtual std::string ToString() const { return GetName(); }
+    virtual std::string_view ToString() const { return GetName(); }
 
   public:
-    virtual EventType     GetEventType() const     = 0;
-    virtual const char*   GetName() const          = 0;
-    virtual EventCategory GetCategoryFlags() const = 0;
-    bool                  IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
-    bool                  IsHandled() const { return m_Handled; }
+    virtual EventType        GetEventType() const     = 0;
+    virtual EventCategory    GetCategoryFlags() const = 0;
+    virtual std::string_view GetName() const          = 0;
+    bool                     IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
+    bool                     IsHandled() const { return m_Handled; }
 
   protected:
     bool m_Handled = false;
+};
+
+template <EventType Type, EventCategory... Categories> class EventBase : public Event
+{
+  public:
+    static constexpr EventType GetStaticEventType() { return Type; }
+    EventType                  GetEventType() const final { return Type; }
+    EventCategory              GetCategoryFlags() const final { return (Categories | ...); }
+    std::string_view           GetName() const final { return m_Name; }
+
+  private:
+    static constexpr std::string_view m_Name = []() constexpr {
+        if constexpr (std::is_same_v<decltype(Type), EventType>) {
+            return "EventName";
+        }
+        return "UnknownEvent";
+    }();
 };
 
 class EventDispatcher
@@ -84,7 +81,7 @@ class EventDispatcher
     template <typename T, typename F> bool Dispatch(F&& handler)
     {
         static_assert(std::is_base_of_v<Event, T>, "T must be an Event type");
-        if (m_Event.GetEventType() == T::GetStaticType()) {
+        if (m_Event.GetEventType() == T::GetStaticEventType()) {
             if constexpr (std::is_invocable_r_v<bool, F, T&>) {
                 m_Event.m_Handled = handler(static_cast<T&>(m_Event));
                 return true;
