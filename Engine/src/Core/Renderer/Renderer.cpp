@@ -13,7 +13,7 @@ void Engine::Renderer::BeginScene(const OrthographicCamera& camera)
     m_SceneData.Camera = camera;
 }
 
-void Engine::Renderer::Submit(const std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
+void Engine::Renderer::Submit(const std::unique_ptr<Shader>& shader, const std::unique_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
 {
     vertexArray->Bind();
 

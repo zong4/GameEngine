@@ -1,19 +1,22 @@
 #pragma once
 
+#include <chrono>
+
 namespace Engine
 {
 class Timestep
 {
   public:
-    Timestep(float time = 0.0f) : m_Time(time) {}
+    Timestep() = default;
+    Timestep(std::chrono::duration<double> time) : m_Time(time) {}
 
-    operator float() const { return m_Time; }
+    operator double() const { return m_Time.count(); }
 
   public:
-    float GetSeconds() const { return m_Time; }
-    float GetMilliseconds() const { return m_Time * 1000.0f; }
+    double Seconds() const { return m_Time.count(); }
+    double Milliseconds() const { return m_Time.count() * 1000.0; }
 
   private:
-    float m_Time;
+    std::chrono::duration<double> m_Time;
 };
 } // namespace Engine

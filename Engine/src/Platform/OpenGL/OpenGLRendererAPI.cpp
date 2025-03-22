@@ -12,7 +12,7 @@ void Engine::OpenGLRendererAPI::Init()
     ENGINE_INFO("OpenGL renderer API is initialized");
 }
 
-void Engine::OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+void Engine::OpenGLRendererAPI::DrawIndexed(const std::unique_ptr<VertexArray>& vertexArray)
 {
     glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 }

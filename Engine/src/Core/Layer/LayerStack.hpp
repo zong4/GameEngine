@@ -9,6 +9,12 @@ class LayerStack
   public:
     ~LayerStack() = default;
 
+    template <typename T, typename... Args> void PushLayer(Args&&... args)
+    {
+        m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, std::make_shared<T>(std::forward<Args>(args)...));
+        m_LayerInsertIndex++;
+    }
+
     void PushLayer(std::shared_ptr<Layer> layer);
     void PushOverlay(std::shared_ptr<Layer> overlay);
     void PopLayer(std::shared_ptr<Layer> layer);

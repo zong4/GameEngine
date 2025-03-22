@@ -15,3 +15,8 @@ void Engine::Input::Init()
 #endif
     ENGINE_ASSERT(s_Instance, "Input system is not initialized");
 }
+
+void Engine::Input::Shutdown()
+{
+    ENGINE_INFO("Input system is shutting down");
+}

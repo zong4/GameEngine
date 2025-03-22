@@ -12,10 +12,11 @@ class ImGuiLayer : public Layer
     ImGuiLayer();
     virtual ~ImGuiLayer();
 
-    virtual void OnUpdate(Timestep timestep) override {}
-    void         BeginRender();
+    virtual void OnUpdate(const Engine::Timestep& timestep) override {}
     virtual void OnImGuiRender() override;
-    void         EndRender();
     virtual void OnEvent(Event& event) override {}
+
+    static void BeginRender();
+    static void EndRender();
 };
 }; // namespace Engine

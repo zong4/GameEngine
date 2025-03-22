@@ -13,6 +13,7 @@ class Input
     Input& operator=(const Input&) = delete;
 
     static void Init();
+    static void Shutdown();
 
   public:
     inline static bool                      IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }

@@ -1,49 +1,55 @@
 #include "Application.hpp"
 
+#include "Core/Input/Input.hpp"
 #include "Core/Renderer/Renderer.hpp"
-#include <GLFW/glfw3.h> // todo: remove
+#include "Platform/ImGui/ImGuiLayer.hpp"
 
-std::unique_ptr<Engine::Application> Engine::Application::s_Instance = nullptr;
+std::weak_ptr<Engine::Application> Engine::Application::s_Instance;
 
 Engine::Application::Application()
 {
-    ENGINE_ASSERT(!s_Instance, "4Application already exists");
-    s_Instance.reset(this);
+    ENGINE_ASSERT(s_Instance.expired(), "Application already exists");
+    s_Instance = std::static_pointer_cast<Application>(shared_from_this());
 
     m_Window = Window::Create();
     m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));
 
-    ENGINE_INFO("Application is initialized");
+    Engine::Input::Init();
+    Engine::Renderer::Init();
+
+    ENGINE_INFO("Application is constructed");
 }
 
 Engine::Application::~Application()
 {
-    s_Instance.release();
-    ENGINE_INFO("Application shutdown");
+    Engine::Renderer::Shutdown();
+    Engine::Input::Shutdown();
+    ENGINE_INFO("Application is destructed");
 }
 
 void Engine::Application::Run()
 {
-    ENGINE_INFO("Application running");
+    ENGINE_INFO("Application is running");
+
+    m_LastFrameTime = std::chrono::high_resolution_clock::now();
     while (m_Running) {
-        float    time     = static_cast<float>(glfwGetTime());
-        Timestep timestep = time - m_LastFrameTime;
-        m_LastFrameTime   = time;
+        auto     now = std::chrono::high_resolution_clock::now();
+        Timestep timestep(now - m_LastFrameTime);
+        m_LastFrameTime = now;
 
         if (!m_Minimized) {
             for (auto& layer : m_LayerStack) {
                 layer->OnUpdate(timestep);
             }
+
+            ImGuiLayer::BeginRender();
+            for (auto& layer : m_LayerStack) {
+                layer->OnImGuiRender();
+            }
+            ImGuiLayer::EndRender();
         }
 
-        
-            m_ImGuilayer->BeginRender();
-        for (auto& layer : m_LayerStack) {
-            layer->OnImGuiRender();
-        }
-        m_ImGuilayer->EndRender();
-
-            m_Window->OnUpdate();
+        m_Window->OnUpdate();
     }
 }
 
@@ -53,11 +59,10 @@ void Engine::Application::OnEvent(Event& event)
     dispatcher.Dispatch<WindowCloseEvent>(ENGINE_BIND_EVENT_FN(Application::OnWindowClose));
     dispatcher.Dispatch<WindowResizeEvent>(ENGINE_BIND_EVENT_FN(Application::OnWindowResize));
 
-    for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
-        (*--it)->OnEvent(event);
-        if (event.IsHandled()) {
+    for (auto& layer : std::ranges::reverse_view(m_LayerStack)) {
+        layer->OnEvent(event);
+        if (event.IsHandled())
             break;
-        }
     }
 }
 
@@ -69,12 +74,9 @@ bool Engine::Application::OnWindowClose(WindowCloseEvent& e)
 
 bool Engine::Application::OnWindowResize(WindowResizeEvent& e)
 {
-    if (e.GetWidth() == 0 || e.GetHeight() == 0) {
-        m_Minimized = true;
-        return false;
-    }
-    m_Minimized = false;
+    m_Minimized = e.GetWidth() < 1 || e.GetHeight() < 1;
 
-    Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+    if (!m_Minimized)
+        Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
     return false;
 }

@@ -1,22 +1,19 @@
-#include "ExampleLayer.hpp"
+#include "Editor2D.hpp"
 
 class Editor : public Engine::Application
 {
   public:
-    Editor()
+    Editor() : Engine::Application()
     {
-        Engine::Input::Init();
-        Engine::Renderer::Init();
+        PushLayer<Editor2D>();
+        PushOverlay<Engine::ImGuiLayer>();
 
-        PushLayer(std::make_shared<ExampleLayer>());
-        PushOverlay(std::make_shared<Engine::ImGuiLayer>());
-
-        EDITOR_INFO("Editor is initialized");
+        EDITOR_INFO("Editor is constructed");
     }
-    ~Editor() { EDITOR_INFO("Editor is shutdown"); }
+    virtual ~Editor() noexcept override = default;
 };
 
-std::unique_ptr<Engine::Application> Engine::CreateApplication()
+std::shared_ptr<Engine::Application> Engine::CreateApplication()
 {
-    return std::make_unique<Editor>();
+    return std::make_shared<Editor>();
 }

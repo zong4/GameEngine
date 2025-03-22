@@ -40,11 +40,13 @@ Engine::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
     ENGINE_INFO("ImGui layer is initialized");
 }
 
-void Engine::ImGuiLayer::BeginRender()
+Engine::ImGuiLayer::~ImGuiLayer()
 {
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui_ImplGlfw_NewFrame();
-    ImGui::NewFrame();
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
+    ENGINE_INFO("ImGui layer is destroyed");
 }
 
 void Engine::ImGuiLayer::OnImGuiRender()
@@ -53,10 +55,17 @@ void Engine::ImGuiLayer::OnImGuiRender()
     ImGui::ShowDemoWindow(&show);
 }
 
+void Engine::ImGuiLayer::BeginRender()
+{
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
+}
+
 void Engine::ImGuiLayer::EndRender()
 {
     ImGuiIO& io    = ImGui::GetIO();
-    auto&    app   = Application::Get();
+    auto     app   = Application::Get();
     io.DisplaySize = ImVec2(static_cast<float>(app->GetWindow()->GetWidth()), static_cast<float>(app->GetWindow()->GetHeight()));
 
     ImGui::Render();
@@ -68,13 +77,4 @@ void Engine::ImGuiLayer::EndRender()
         ImGui::RenderPlatformWindowsDefault();
         glfwMakeContextCurrent(backup_current_context);
     }
-}
-
-Engine::ImGuiLayer::~ImGuiLayer()
-{
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
-
-    ENGINE_INFO("ImGui layer is destroyed");
 }
