@@ -22,7 +22,7 @@ ExampleLayer::ExampleLayer() : Layer("ExampleLayer")
     std::shared_ptr<Engine::IndexBuffer> indexBuffer = Engine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
     m_VertexArray->SetIndexBuffer(indexBuffer);
 
-    m_Shader = Engine::Shader::Create("Editor/assets/shaders/Texture.vert", "Editor/assets/shaders/Texture.frag");
+    m_Shader = Engine::Shader::Create("Editor/assets/shaders/Texture.glsl");
 
     m_Texture   = Engine::Texture2D::Create("Editor/assets/textures/head.png");
     m_TextureBG = Engine::Texture2D::Create("Editor/assets/textures/02.jpg");
