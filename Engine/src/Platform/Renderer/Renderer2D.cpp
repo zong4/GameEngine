@@ -37,9 +37,9 @@ void Engine::Renderer2D::Init()
 
     s_Data->TextureShader = Shader::Create("Engine/assets/shaders/Texture.glsl");
 
-    s_Data->WhiteTexture = Texture2D::Create(1, 1);
-    // uint32_t whiteTextureData = 0xffffffff;
-    // s_Data->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+    s_Data->WhiteTexture      = Texture2D::Create(1, 1);
+    uint32_t whiteTextureData = 0xffffffff;
+    s_Data->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
 }
 
 void Engine::Renderer2D::Shutdown()
@@ -71,6 +71,8 @@ void Engine::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& si
     s_Data->TextureShader->SetMat4("u_Transform", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f}));
 
     s_Data->TextureShader->SetUniform4f("u_Color", color);
+
+    s_Data->WhiteTexture->Bind();
 
     s_Data->QuadVertexArray->Bind();
     RenderCommand::DrawIndexed(s_Data->QuadVertexArray);

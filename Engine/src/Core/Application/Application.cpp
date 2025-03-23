@@ -8,24 +8,28 @@ std::unique_ptr<Engine::Application> Engine::Application::s_Instance = nullptr;
 
 void Engine::Application::Init()
 {
+    Engine::Logger::Init();
+
     m_Window = Window::Create();
     m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));
 
     Engine::Input::Init();
     Engine::Renderer::Init();
 
-    ENGINE_INFO("Application is initialized");
+    Logger::EngineInfo("Application is initialized");
 }
 
 void Engine::Application::Run()
 {
-    ENGINE_INFO("Application is running");
+    Logger::EngineInfo("Application is running");
 
     m_LastFrameTime = std::chrono::high_resolution_clock::now();
     while (m_Running) {
         auto     now = std::chrono::high_resolution_clock::now();
         Timestep timestep(now - m_LastFrameTime);
         m_LastFrameTime = now;
+
+        Logger::EngineTrace(std::format("Frame time: {0}ms ({1}fps)", timestep.Milliseconds(), 1.0f / timestep.Seconds()));
 
         if (!m_Minimized) {
             for (auto& layer : m_LayerStack) {
@@ -48,7 +52,7 @@ void Engine::Application::Shutdown()
     Engine::Renderer::Shutdown();
     Engine::Input::Shutdown();
 
-    ENGINE_INFO("Application is shutdown");
+    Logger::EngineInfo("Application is shutdown");
 }
 
 void Engine::Application::OnEvent(Event& event)
@@ -68,6 +72,8 @@ void Engine::Application::OnEvent(Event& event)
 bool Engine::Application::OnWindowClose(WindowCloseEvent& e)
 {
     m_Running = false;
+
+    Logger::EngineTrace("Window close event is handled in Application");
     return true;
 }
 
@@ -78,5 +84,7 @@ bool Engine::Application::OnWindowResize(WindowResizeEvent& e)
     if (!m_Minimized) {
         Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
     }
+
+    Logger::EngineTrace("Window resize event is handled in Application");
     return false;
 }

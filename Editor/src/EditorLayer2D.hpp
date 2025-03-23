@@ -11,7 +11,7 @@ class EditorLayer2D : public Engine::Layer
     virtual void OnEvent(Engine::Event& event) override;
 
   private:
-    Engine::OrthographicCameraController m_CameraController = Engine::OrthographicCameraController(1280.0f / 720.0f);
+    Engine::OrthographicCameraController m_CameraController = Engine::OrthographicCameraController(1280.0f / 720.0f, true);
 
     std::unique_ptr<Engine::Shader>    m_ShaderLibrary;
     std::unique_ptr<Engine::Texture2D> m_Texture;

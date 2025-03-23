@@ -12,6 +12,6 @@ std::unique_ptr<Engine::Window> Engine::Window::Create(const WindowProps& props)
 #elif __APPLE__
     return std::make_unique<GLFWWindow>(props);
 #endif
-    ENGINE_ASSERT(false, "Window creation failed!");
+    Logger::EngineAssert(false, "Window creation failed!");
     return nullptr;
 }

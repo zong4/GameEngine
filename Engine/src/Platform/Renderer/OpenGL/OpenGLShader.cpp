@@ -9,7 +9,7 @@ static GLenum ShaderTypeFromString(const std::string& type)
         return GL_FRAGMENT_SHADER;
     }
 
-    ENGINE_ASSERT(false, "Unknown shader type!");
+    Engine::Logger::EngineAssert(false, "Unknown shader type!");
     return 0;
 }
 
@@ -24,7 +24,7 @@ Engine::OpenGLShader::~OpenGLShader()
 {
     glDeleteProgram(m_RendererID);
 
-    ENGINE_INFO("OpenGL shader is deleted with ID: {0}", m_RendererID);
+    Logger::EngineInfo(std::format("OpenGL shader is deleted with ID: {0}", m_RendererID));
 }
 
 void Engine::OpenGLShader::Bind() const
@@ -75,7 +75,7 @@ void Engine::OpenGLShader::SetUniform4f(const std::string& name, float v0, float
 std::string Engine::OpenGLShader::ReadFile(const std::string& filepath)
 {
     std::ifstream file(filepath, std::ios::in | std::ios::binary);
-    ENGINE_ASSERT(file, "Failed to open file: {0}", filepath);
+    Logger::EngineError(std::format("Failed to open file: {0}", filepath));
 
     std::string fileContent;
     file.seekg(0, std::ios::end);
@@ -85,7 +85,7 @@ std::string Engine::OpenGLShader::ReadFile(const std::string& filepath)
     file.read(&fileContent[0], fileContent.size());
     file.close();
 
-    ENGINE_INFO("File is read: {0}", filepath);
+    Logger::EngineInfo(std::format("File is read: {0}", filepath));
     return fileContent;
 }
 
@@ -99,14 +99,14 @@ std::unordered_map<GLenum, std::string> Engine::OpenGLShader::Preprocess(const s
     size_t pos = source.find(typeToken, 0);
     while (pos != std::string::npos) {
         size_t eol = source.find_first_of("\r\n", pos);
-        ENGINE_ASSERT(eol != std::string::npos, "Syntax error!");
+        Logger::EngineAssert(eol != std::string::npos, "Syntax error!");
 
         size_t      begin = pos + typeTokenLength + 1;
         std::string type  = source.substr(begin, eol - begin);
-        ENGINE_ASSERT(ShaderTypeFromString(type), "Invalid shader type specified!");
+        Logger::EngineAssert(ShaderTypeFromString(type), "Invalid shader type specified!");
 
         size_t nextLinePos = source.find_first_not_of("\r\n", eol);
-        ENGINE_ASSERT(nextLinePos != std::string::npos, "Syntax error!");
+        Logger::EngineAssert(nextLinePos != std::string::npos, "Syntax error!");
         pos = source.find(typeToken, nextLinePos);
 
         shaderSources[ShaderTypeFromString(type)] = source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
@@ -117,7 +117,7 @@ std::unordered_map<GLenum, std::string> Engine::OpenGLShader::Preprocess(const s
 
 void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 {
-    ENGINE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now!");
+    Logger::EngineAssert(shaderSources.size() <= 2, "We only support 2 shaders for now!");
 
     GLuint program = glCreateProgram();
 
@@ -143,8 +143,7 @@ void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>
 
             glDeleteShader(shader);
 
-            ENGINE_ERROR("{0}", infoLog.data());
-            ENGINE_ASSERT(false, "Shader compilation failure!");
+            Logger::EngineError(std::format("{0}", infoLog.data()));
             break;
         }
 
@@ -168,8 +167,7 @@ void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>
             glDeleteShader(id);
         }
 
-        ENGINE_ERROR("{0}", infoLog.data());
-        ENGINE_ASSERT(false, "Shader link failure!");
+        Logger::EngineError(std::format("{0}", infoLog.data()));
         return;
     }
 
@@ -179,5 +177,5 @@ void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>
     }
 
     m_RendererID = program;
-    ENGINE_INFO("OpenGL shader is created with ID: {0}", m_RendererID);
+    Logger::EngineTrace(std::format("OpenGL shader is created with ID: {0}", m_RendererID));
 }

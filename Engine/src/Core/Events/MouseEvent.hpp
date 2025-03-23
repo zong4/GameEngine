@@ -9,13 +9,11 @@ class MouseMovedEvent : public EventBase<EventType::MouseMoved, EventCategory::M
   public:
     MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) {}
 
-    std::string_view ToString() const override
+    std::string ToString() const override
     {
-        std::string_view  sv;
         std::stringstream ss;
         ss << "MouseMovedEvent: " << m_MouseX << ", " << m_MouseY;
-        sv = ss.str();
-        return sv;
+        return ss.str();
     }
 
   public:
@@ -31,13 +29,11 @@ class MouseScrolledEvent : public EventBase<EventType::MouseScrolled, EventCateg
   public:
     MouseScrolledEvent(float xOffset, float yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) {}
 
-    std::string_view ToString() const override
+    std::string ToString() const override
     {
-        std::string_view  sv;
         std::stringstream ss;
         ss << "MouseScrolledEvent: " << m_XOffset << ", " << m_YOffset;
-        sv = ss.str();
-        return sv;
+        return ss.str();
     }
 
   public:
@@ -65,13 +61,11 @@ class MouseButtonPressedEvent : public EventBase<EventType::MouseButtonPressed, 
   public:
     MouseButtonPressedEvent(int button) : m_Button(button) {}
 
-    std::string_view ToString() const override
+    std::string ToString() const override
     {
-        std::string_view  sv;
         std::stringstream ss;
         ss << "MouseButtonPressedEvent: " << m_Button;
-        sv = ss.str();
-        return sv;
+        return ss.str();
     }
 
   public:
@@ -86,13 +80,11 @@ class MouseButtonReleasedEvent : public EventBase<EventType::MouseButtonReleased
   public:
     MouseButtonReleasedEvent(int button) : m_Button(button) {}
 
-    std::string_view ToString() const override
+    std::string ToString() const override
     {
-        std::string_view  sv;
         std::stringstream ss;
         ss << "MouseButtonReleasedEvent: " << m_Button;
-        sv = ss.str();
-        return sv;
+        return ss.str();
     }
 
   private:

@@ -13,10 +13,10 @@ void Engine::Input::Init()
 #elif __APPLE__
     s_Instance = std::make_unique<GLFWInput>();
 #endif
-    ENGINE_ASSERT(s_Instance, "Input system is not initialized");
+    Logger::EngineAssert(s_Instance, "Input system is not initialized");
 }
 
 void Engine::Input::Shutdown()
 {
-    ENGINE_INFO("Input system is shutting down");
+    Logger::EngineInfo("Input system is shutting down");
 }

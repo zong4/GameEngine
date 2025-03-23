@@ -10,14 +10,14 @@ Engine::OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* indices, uint32_t count)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(uint32_t), indices, GL_STATIC_DRAW);
 
-    ENGINE_INFO("OpenGL index buffer is created with ID: {0}", m_RendererID);
+    Logger::EngineInfo(std::format("OpenGL index buffer is created with ID: {0}", m_RendererID));
 }
 
 Engine::OpenGLIndexBuffer::~OpenGLIndexBuffer()
 {
     glDeleteBuffers(1, &m_RendererID);
 
-    ENGINE_INFO("OpenGL index buffer is deleted with ID: {0}", m_RendererID);
+    Logger::EngineInfo(std::format("OpenGL index buffer is deleted with ID: {0}", m_RendererID));
 }
 
 void Engine::OpenGLIndexBuffer::Bind() const

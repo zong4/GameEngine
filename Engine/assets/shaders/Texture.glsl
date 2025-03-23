@@ -31,5 +31,5 @@ layout(location = 0) out vec4 out_color;
 
 void main()
 {
-    out_color = u_Color;
+    out_color = texture(u_Texture, v_TexCoord) * u_Color;
 }

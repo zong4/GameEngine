@@ -13,23 +13,21 @@ class WindowCloseEvent : public EventBase<EventType::WindowClose, EventCategory:
 class WindowResizeEvent : public EventBase<EventType::WindowResize, EventCategory::Application>
 {
   public:
-    WindowResizeEvent(unsigned int width, unsigned int height) : m_Width(width), m_Height(height) {}
+    WindowResizeEvent(std::size_t width, std::size_t height) : m_Width(width), m_Height(height) {}
 
-    std::string_view ToString() const override
+    std::string ToString() const override
     {
-        std::string_view  sv;
         std::stringstream ss;
         ss << "WindowResizeEvent: " << m_Width << ", " << m_Height;
-        sv = ss.str();
-        return sv;
+        return ss.str();
     }
 
   public:
-    unsigned int GetWidth() const { return m_Width; }
-    unsigned int GetHeight() const { return m_Height; }
+    std::size_t GetWidth() const { return m_Width; }
+    std::size_t GetHeight() const { return m_Height; }
 
   private:
-    unsigned int m_Width, m_Height;
+    std::size_t m_Width, m_Height;
 };
 
 class WindowFocusEvent : public EventBase<EventType::WindowFocus, EventCategory::Application>
@@ -49,13 +47,11 @@ class WindowMovedEvent : public EventBase<EventType::WindowMoved, EventCategory:
   public:
     WindowMovedEvent(int x, int y) : m_X(x), m_Y(y) {}
 
-    std::string_view ToString() const override
+    std::string ToString() const override
     {
-        std::string_view  sv;
         std::stringstream ss;
         ss << "WindowMovedEvent: " << m_X << ", " << m_Y;
-        sv = ss.str();
-        return sv;
+        return ss.str();
     }
 
   public:

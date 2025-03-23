@@ -21,13 +21,11 @@ class KeyPressedEvent : public EventBase<EventType::KeyPressed, EventCategory::K
   public:
     KeyPressedEvent(int keycode, int repeatCount) : m_KeyCode(keycode), m_RepeatCount(repeatCount) {}
 
-    std::string_view ToString() const override
+    std::string ToString() const override
     {
-        std::string_view  sv;
         std::stringstream ss;
         ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
-        sv = ss.str();
-        return sv;
+        return ss.str();
     }
 
   public:
@@ -44,13 +42,11 @@ class KeyReleasedEvent : public EventBase<EventType::KeyReleased, EventCategory:
   public:
     KeyReleasedEvent(int keycode) : m_KeyCode(keycode) {}
 
-    std::string_view ToString() const override
+    std::string ToString() const override
     {
-        std::string_view  sv;
         std::stringstream ss;
         ss << "KeyReleasedEvent: " << m_KeyCode;
-        sv = ss.str();
-        return sv;
+        return ss.str();
     }
 
   public:
@@ -65,13 +61,11 @@ class KeyTypedEvent : public EventBase<EventType::KeyTyped, EventCategory::Keybo
   public:
     KeyTypedEvent(int keycode) : m_KeyCode(keycode) {}
 
-    std::string_view ToString() const override
+    std::string ToString() const override
     {
-        std::string_view  sv;
         std::stringstream ss;
         ss << "KeyTypedEvent: " << m_KeyCode;
-        sv = ss.str();
-        return sv;
+        return ss.str();
     }
 
   public:

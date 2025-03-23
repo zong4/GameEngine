@@ -9,7 +9,7 @@ std::unique_ptr<Engine::Texture2D> Engine::Texture2D::Create(uint32_t width, uin
     case RendererAPI::API::OpenGL:
         return std::make_unique<OpenGLTexture2D>(width, height);
     default:
-        ENGINE_ASSERT(false, "Unknown RendererAPI");
+        Logger::EngineAssert(false, "Unknown RendererAPI");
         return nullptr;
     }
 }
@@ -20,7 +20,7 @@ std::unique_ptr<Engine::Texture2D> Engine::Texture2D::Create(const std::string& 
     case RendererAPI::API::OpenGL:
         return std::make_unique<OpenGLTexture2D>(path);
     default:
-        ENGINE_ASSERT(false, "Unknown RendererAPI");
+        Logger::EngineAssert(false, "Unknown RendererAPI");
         return nullptr;
     }
 }

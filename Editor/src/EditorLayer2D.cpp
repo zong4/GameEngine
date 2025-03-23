@@ -6,12 +6,12 @@ EditorLayer2D::EditorLayer2D() : Layer("EditorLayer2D")
     m_Texture       = Engine::Texture2D::Create("Editor/assets/textures/head.png");
     m_TextureBG     = Engine::Texture2D::Create("Editor/assets/textures/02.jpg");
 
-    EDITOR_INFO("EditorLayer2D is constructed");
+    Engine::Logger::EditorInfo("EditorLayer2D is constructed");
 }
 
 EditorLayer2D::~EditorLayer2D() noexcept
 {
-    EDITOR_INFO("EditorLayer2D is destructed");
+    Engine::Logger::EditorInfo("EditorLayer2D is destructed");
 }
 
 void EditorLayer2D::OnUpdate(const Engine::Timestep& timestep)

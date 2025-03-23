@@ -9,7 +9,7 @@ std::unique_ptr<Engine::VertexArray> Engine::VertexArray::Create()
     case RendererAPI::API::OpenGL:
         return std::make_unique<OpenGLVertexArray>();
     default:
-        ENGINE_ASSERT(false, "Unknown RendererAPI!");
+        Logger::EngineAssert(false, "Unknown RendererAPI!");
         return nullptr;
     }
 }

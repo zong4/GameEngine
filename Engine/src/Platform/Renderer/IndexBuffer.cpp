@@ -9,7 +9,7 @@ std::unique_ptr<Engine::IndexBuffer> Engine::IndexBuffer::Create(uint32_t* indic
     case RendererAPI::API::OpenGL:
         return std::make_unique<OpenGLIndexBuffer>(indices, count);
     default:
-        ENGINE_ASSERT(false, "Unknown RendererAPI!");
+        Logger::EngineAssert(false, "Unknown RendererAPI!");
         return nullptr;
     }
 }

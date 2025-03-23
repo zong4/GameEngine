@@ -8,11 +8,11 @@
 namespace Engine
 {
 struct WindowProps {
-    std::string  Title;
-    unsigned int Width;
-    unsigned int Height;
+    std::string Title;
+    std::size_t Width;
+    std::size_t Height;
 
-    WindowProps(const std::string& title, unsigned int width, unsigned int height) : Title(title), Width(width), Height(height) {}
+    WindowProps(const std::string& title, std::size_t width, std::size_t height) : Title(title), Width(width), Height(height) {}
 };
 
 class Window
@@ -29,10 +29,10 @@ class Window
     static std::unique_ptr<Window> Create(const WindowProps& props = WindowProps("Game Engine", 1280, 720));
 
   public:
-    virtual unsigned int GetWidth() const        = 0;
-    virtual unsigned int GetHeight() const       = 0;
-    virtual void*        GetNativeWindow() const = 0;
-    virtual bool         GetVSync() const        = 0;
-    virtual void         SetVSync(bool enabled)  = 0;
+    virtual std::size_t GetWidth() const        = 0;
+    virtual std::size_t GetHeight() const       = 0;
+    virtual void*       GetNativeWindow() const = 0;
+    virtual bool        GetVSync() const        = 0;
+    virtual void        SetVSync(bool enabled)  = 0;
 };
 } // namespace Engine

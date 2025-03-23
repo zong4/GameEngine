@@ -5,8 +5,10 @@
 void Editor::Init()
 {
     Application::Init();
-    PushLayer<EditorLayer2D>();
-    PushOverlay<Engine::ImGuiLayer>();
+    GetLayerStack().PushLayer<EditorLayer2D>();
+    GetLayerStack().PushOverlay<Engine::ImGuiLayer>();
+
+    Engine::Logger::EditorInfo("Editor is initialized");
 }
 
 void Editor::Run()
@@ -17,6 +19,8 @@ void Editor::Run()
 void Editor::Shutdown()
 {
     Application::Shutdown();
+
+    Engine::Logger::EditorInfo("Editor is shutdown");
 }
 
 std::unique_ptr<Engine::Application>& Engine::Application::Create()

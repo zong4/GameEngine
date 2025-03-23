@@ -9,7 +9,7 @@ void Engine::OpenGLRendererAPI::Init()
 
     glEnable(GL_DEPTH_TEST);
 
-    ENGINE_INFO("OpenGL renderer API is initialized");
+    Logger::EngineInfo("OpenGL renderer API is initialized");
 }
 
 void Engine::OpenGLRendererAPI::DrawIndexed(const std::unique_ptr<VertexArray>& vertexArray)
@@ -31,7 +31,7 @@ void Engine::OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t wid
 {
     glViewport(x, y, width, height);
 
-    ENGINE_INFO("OpenGL renderer API is setting viewport");
+    Logger::EngineInfo("OpenGL renderer API is setting viewport");
 }
 
 void Engine::OpenGLRendererAPI::SetClearColor(const glm::vec4& color)

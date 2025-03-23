@@ -22,12 +22,12 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height) : Text
 Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(path)
 {
     std::ifstream file(m_Path);
-    ENGINE_ASSERT(file, "Texture file not found: {0}", m_Path);
+    Logger::EngineError(std::format("Texture file not found: {0}", m_Path));
 
     int width, height, channels;
     stbi_set_flip_vertically_on_load(1);
     stbi_uc* data = stbi_load(m_Path.c_str(), &width, &height, &channels, 0);
-    ENGINE_ASSERT(data, "Failed to load image: {0}", m_Path);
+    Logger::EngineError(std::format("Failed to load image: {0}", m_Path));
 
     m_Width  = width;
     m_Height = height;
@@ -42,7 +42,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
         format         = GL_RGB;
     }
     else {
-        ENGINE_ASSERT(false, "Unknown image format: {0}", m_Path);
+        Logger::EngineError(std::format("Unknown image format: {0}", m_Path));
     }
 
     glGenTextures(1, &m_RendererID);
@@ -66,7 +66,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
 
     GLenum err = glGetError();
     if (err != GL_NO_ERROR) {
-        EDITOR_ERROR("OpenGL error after texture creation: 0x{0:x}", err);
+        Logger::EngineError(std::format("OpenGL error after texture creation: 0x{0:x}", err));
     }
 }
 
@@ -88,5 +88,5 @@ void Engine::OpenGLTexture2D::Unbind() const
 
 void Engine::OpenGLTexture2D::SetData(void* data, uint32_t size)
 {
-    ENGINE_ASSERT(false, "Not implemented");
+    glTexImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, GL_RGBA, GL_UNSIGNED_BYTE, data);
 }

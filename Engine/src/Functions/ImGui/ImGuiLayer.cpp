@@ -37,7 +37,7 @@ Engine::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
     ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(native_window), true);
     ImGui_ImplOpenGL3_Init("#version 450");
 
-    ENGINE_INFO("ImGui layer is initialized");
+    Logger::EngineInfo("ImGui layer is initialized");
 }
 
 Engine::ImGuiLayer::~ImGuiLayer()
@@ -46,7 +46,7 @@ Engine::ImGuiLayer::~ImGuiLayer()
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
-    ENGINE_INFO("ImGui layer is destroyed");
+    Logger::EngineInfo("ImGui layer is destroyed");
 }
 
 void Engine::ImGuiLayer::OnImGuiRender()

@@ -11,7 +11,7 @@
 
 static void GLFWErrorCallback(int error, const char* description)
 {
-    ENGINE_ERROR("GLFW Error ({0}): {1}", error, description);
+    Engine::Logger::EngineAssert(false, std::format("GLFW Error ({0}): {1}", error, description));
 }
 
 Engine::GLFWWindow::GLFWWindow(const WindowProps& props)
@@ -19,10 +19,10 @@ Engine::GLFWWindow::GLFWWindow(const WindowProps& props)
     m_Data.Title  = props.Title;
     m_Data.Width  = props.Width;
     m_Data.Height = props.Height;
-    ENGINE_INFO("GLFW window {0} ({1}, {2})", props.Title, props.Width, props.Height);
+    Logger::EngineInfo(std::format("GLFW window {0} ({1}, {2})", props.Title, props.Width, props.Height));
 
     if (!glfwInit()) {
-        ENGINE_ERROR("Could not initialize GLFW");
+        Logger::EngineAssert(false, "Could not initialize GLFW");
         return;
     }
     glfwSetErrorCallback(GLFWErrorCallback);
@@ -38,7 +38,7 @@ Engine::GLFWWindow::GLFWWindow(const WindowProps& props)
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     m_Window = glfwCreateWindow(props.Width, props.Height, props.Title.c_str(), nullptr, nullptr);
     if (!m_Window) {
-        ENGINE_ERROR("Could not create window");
+        Logger::EngineAssert(false, "Could not create window");
         return;
     }
 
@@ -149,7 +149,7 @@ Engine::GLFWWindow::GLFWWindow(const WindowProps& props)
         data.EventCallback(event);
     });
 
-    ENGINE_INFO("GLFW window is initialized");
+    Logger::EngineInfo("GLFW window is initialized");
 }
 
 Engine::GLFWWindow::~GLFWWindow()
@@ -157,7 +157,7 @@ Engine::GLFWWindow::~GLFWWindow()
     glfwDestroyWindow(m_Window);
     glfwTerminate();
 
-    ENGINE_INFO("GLFW window is destroyed");
+    Logger::EngineInfo("GLFW window is destroyed");
 }
 
 void Engine::GLFWWindow::OnUpdate()

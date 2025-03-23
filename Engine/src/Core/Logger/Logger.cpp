@@ -1,6 +1,5 @@
 #include "Logger.hpp"
 
-// Core
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 std::shared_ptr<spdlog::logger> Engine::Logger::s_EngineLogger;
@@ -16,5 +15,105 @@ void Engine::Logger::Init()
     s_EditorLogger = spdlog::stdout_color_mt("EDITOR");
     s_EditorLogger->set_level(spdlog::level::trace);
 
-    ENGINE_INFO("Logger is initialized");
+    s_EngineLogger->info("Logger is initialized");
 }
+
+#ifdef DEBUG
+void Engine::Logger::EngineTrace(const std::string& message)
+{
+    s_EngineLogger->trace(message);
+}
+
+void Engine::Logger::EngineInfo(const std::string& message)
+{
+    s_EngineLogger->info(message);
+}
+
+void Engine::Logger::EngineWarn(const std::string& message)
+{
+    s_EngineLogger->warn(message);
+}
+
+void Engine::Logger::EngineError(const std::string& message)
+{
+    s_EngineLogger->error(message);
+}
+
+void Engine::Logger::EngineAssert(bool condition, const std::string& message)
+{
+    if (!condition) {
+        s_EngineLogger->error(message);
+
+#ifdef _WIN32
+        __debugbreak();
+#else
+        __builtin_trap();
+#endif
+    }
+}
+
+void Engine::Logger::EditorTrace(const std::string& message)
+{
+    s_EditorLogger->trace(message);
+}
+
+void Engine::Logger::EditorInfo(const std::string& message)
+{
+    s_EditorLogger->info(message);
+}
+
+void Engine::Logger::EditorWarn(const std::string& message)
+{
+    s_EditorLogger->warn(message);
+}
+
+void Engine::Logger::EditorError(const std::string& message)
+{
+    s_EditorLogger->error(message);
+}
+
+void Engine::Logger::EditorAssert(bool condition, const std::string& message)
+{
+    if (!condition) {
+        s_EditorLogger->error(message);
+
+#ifdef _WIN32
+        __debugbreak();
+#else
+        __builtin_trap();
+#endif
+    }
+}
+#elif RELEASE
+void Engine::Logger::EngineTrace(const std::string& message)
+{
+}
+
+void Engine::Logger::EngineInfo(const std::string& message)
+{
+}
+
+void Engine::Logger::EngineWarn(const std::string& message)
+{
+}
+
+void Engine::Logger::EngineAssert(bool condition, const std::string& message)
+{
+}
+
+void Engine::Logger::EditorTrace(const std::string& message)
+{
+}
+
+void Engine::Logger::EditorInfo(const std::string& message)
+{
+}
+
+void Engine::Logger::EditorWarn(const std::string& message)
+{
+}
+
+void Engine::Logger::EditorAssert(bool condition, const std::string& message)
+{
+}
+#endif

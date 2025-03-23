@@ -9,7 +9,7 @@ std::unique_ptr<Engine::VertexBuffer> Engine::VertexBuffer::Create(float* vertic
     case RendererAPI::API::OpenGL:
         return std::make_unique<OpenGLVertexBuffer>(vertices, size);
     default:
-        ENGINE_ASSERT(false, "Unknown RendererAPI!");
+        Logger::EngineAssert(false, "Unknown RendererAPI!");
         return nullptr;
     }
 }

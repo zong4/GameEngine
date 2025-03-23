@@ -19,14 +19,12 @@ class Application
     virtual void Shutdown();
     void         OnEvent(Event& e);
 
-    template <typename T, typename... Args> void PushLayer(Args&&... args) { m_LayerStack.PushLayer<T>(std::forward<Args>(args)...); }
-    template <typename T, typename... Args> void PushOverlay(Args&&... args) { m_LayerStack.PushOverlay<T>(std::forward<Args>(args)...); }
-
     static std::unique_ptr<Application>& Create();
 
   public:
     static std::unique_ptr<Application>& Get() { return s_Instance; }
     std::unique_ptr<Window>&             GetWindow() { return m_Window; }
+    LayerStack&                          GetLayerStack() { return m_LayerStack; }
 
   private:
     bool OnWindowClose(WindowCloseEvent& e);

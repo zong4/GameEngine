@@ -8,12 +8,12 @@
 
 Engine::GLFWInput::GLFWInput()
 {
-    ENGINE_INFO("GLFW input system is initialized");
+    Logger::EngineInfo("GLFW input system is initialized");
 }
 
 Engine::GLFWInput::~GLFWInput()
 {
-    ENGINE_INFO("GLFW input system is destroyed");
+    Logger::EngineInfo("GLFW input system is destroyed");
 }
 
 bool Engine::GLFWInput::IsKeyPressedImpl(int keycode)

@@ -43,14 +43,14 @@ class Event
     Event()          = default;
     virtual ~Event() = default;
 
-    virtual std::string_view ToString() const { return GetName(); }
+    virtual std::string ToString() const { return GetName(); }
 
   public:
-    virtual EventType        GetEventType() const     = 0;
-    virtual EventCategory    GetCategoryFlags() const = 0;
-    virtual std::string_view GetName() const          = 0;
-    bool                     IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
-    bool                     IsHandled() const { return m_Handled; }
+    bool                  IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
+    bool                  IsHandled() const { return m_Handled; }
+    virtual EventType     GetEventType() const     = 0;
+    virtual EventCategory GetCategoryFlags() const = 0;
+    virtual std::string   GetName() const          = 0;
 
   protected:
     bool m_Handled = false;
@@ -62,7 +62,7 @@ template <EventType Type, EventCategory... Categories> class EventBase : public 
     static constexpr EventType GetStaticEventType() { return Type; }
     EventType                  GetEventType() const final { return Type; }
     EventCategory              GetCategoryFlags() const final { return (Categories | ...); }
-    std::string_view           GetName() const final { return m_Name; }
+    std::string                GetName() const final { return std::string(m_Name); }
 
   private:
     static constexpr std::string_view m_Name = []() constexpr {
@@ -84,6 +84,8 @@ class EventDispatcher
         if (m_Event.GetEventType() == T::GetStaticEventType()) {
             if constexpr (std::is_invocable_r_v<bool, F, T&>) {
                 m_Event.m_Handled = handler(static_cast<T&>(m_Event));
+
+                Logger::EngineInfo(std::format("Event dispatched {0} handled: {1}", m_Event.GetName(), m_Event.IsHandled()));
                 return true;
             }
         }
