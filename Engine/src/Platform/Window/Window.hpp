@@ -6,11 +6,11 @@ namespace Engine
 {
 struct WindowProps {
     std::string Title;
-    std::size_t Width;
-    std::size_t Height;
+   int Width;
+    int Height;
     bool        VSync;
 
-    WindowProps(const std::string& title, std::size_t width, std::size_t height, bool vsync = true) : Title(title), Width(width), Height(height), VSync(vsync)
+    WindowProps(const std::string& title, int width,int height, bool vsync = true) : Title(title), Width(width), Height(height), VSync(vsync)
     {
     }
 };
@@ -40,7 +40,7 @@ class Window
   protected:
     struct WindowData {
         std::string Title;
-        std::size_t Width = 0, Height = 0;
+       int Width = 0, Height = 0;
         bool        VSync = false;
 
         std::function<void(Event&)> EventCallback;

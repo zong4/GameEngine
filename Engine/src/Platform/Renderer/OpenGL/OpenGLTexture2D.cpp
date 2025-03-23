@@ -27,7 +27,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height) : Text
 Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(path)
 {
     std::ifstream file(m_Path);
-    Logger::EngineError(std::format("Texture file not found: {0}", m_Path));
+    Logger::EngineAssert(file.is_open(), std::format("Failed to open image: {0}", m_Path));
 
     int width, height, channels;
     stbi_set_flip_vertically_on_load(1);

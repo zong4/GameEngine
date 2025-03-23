@@ -31,7 +31,7 @@ Engine::GLFWWindow::GLFWWindow(const WindowProps& props) : Window(props)
 
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    m_Window = glfwCreateWindow(static_cast<int>(m_Data.Width), m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
+    m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
     if (!m_Window) {
         Logger::EngineAssert(false, "Could not create glfw window");
         return;

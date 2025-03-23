@@ -23,6 +23,47 @@ enum class EventType {
     MouseScrolled
 };
 
+static std::string EventTypeToString(EventType type)
+{
+    switch (type) {
+    case EventType::None:
+        return "None";
+    case EventType::AppTick:
+        return "AppTick";
+    case EventType::AppUpdate:
+        return "AppUpdate";
+    case EventType::AppRender:
+        return "AppRender";
+    case EventType::WindowClose:
+        return "WindowClose";
+    case EventType::WindowResize:
+        return "WindowResize";
+    case EventType::WindowFocus:
+        return "WindowFocus";
+    case EventType::WindowLostFocus:
+        return "WindowLostFocus";
+    case EventType::WindowMoved:
+        return "WindowMoved";
+    case EventType::KeyPressed:
+        return "KeyPressed";
+    case EventType::KeyReleased:
+        return "KeyReleased";
+    case EventType::KeyTyped:
+        return "KeyTyped";
+    case EventType::MouseButtonPressed:
+        return "MouseButtonPressed";
+    case EventType::MouseButtonReleased:
+        return "MouseButtonReleased";
+    case EventType::MouseMoved:
+        return "MouseMoved";
+    case EventType::MouseScrolled:
+        return "MouseScrolled";
+    default:
+        Logger::EngineAssert(false, "Unknown event type!");
+        return "";
+    }
+}
+
 enum class EventCategory { None = 0, Application = 1 << 0, Input = 1 << 1, Keyboard = 1 << 2, Mouse = 1 << 3, MouseButton = 1 << 4 };
 
 constexpr EventCategory operator|(EventCategory lhs, EventCategory rhs) noexcept
@@ -62,15 +103,7 @@ template <EventType Type, EventCategory... Categories> class EventBase : public 
     static constexpr EventType GetStaticEventType() { return Type; }
     EventType                  GetEventType() const final { return Type; }
     EventCategory              GetCategoryFlags() const final { return (Categories | ...); }
-    std::string                GetName() const final { return std::string(m_Name); }
-
-  private:
-    static constexpr std::string_view m_Name = []() constexpr {
-        if constexpr (std::is_same_v<decltype(Type), EventType>) {
-            return "EventName";
-        }
-        return "UnknownEvent";
-    }();
+    std::string                GetName() const final { return EventTypeToString(Type); }
 };
 
 class EventDispatcher
@@ -85,7 +118,7 @@ class EventDispatcher
             if constexpr (std::is_invocable_r_v<bool, F, T&>) {
                 m_Event.m_Handled = handler(static_cast<T&>(m_Event));
 
-                Logger::EngineInfo(std::format("Event dispatched {0} handled: {1}", m_Event.GetName(), m_Event.IsHandled()));
+                Logger::EngineTrace(std::format("Event dispatched {0} handled: {1}", m_Event.GetName(), m_Event.IsHandled()));
                 return true;
             }
         }

@@ -24,7 +24,7 @@ Engine::OpenGLShader::~OpenGLShader()
 {
     glDeleteProgram(m_RendererID);
 
-    Logger::EngineInfo(std::format("OpenGL shader is deleted with ID: {0}", m_RendererID));
+    Logger::EngineTrace(std::format("OpenGL shader is deleted with ID: {0}", m_RendererID));
 }
 
 void Engine::OpenGLShader::Bind() const
@@ -75,7 +75,7 @@ void Engine::OpenGLShader::SetUniform4f(const std::string& name, float v0, float
 std::string Engine::OpenGLShader::ReadFile(const std::string& filepath)
 {
     std::ifstream file(filepath, std::ios::in | std::ios::binary);
-    Logger::EngineError(std::format("Failed to open file: {0}", filepath));
+    Logger::EngineAssert(file.is_open(), std::format("Failed to open file: {0}", filepath));
 
     std::string fileContent;
     file.seekg(0, std::ios::end);

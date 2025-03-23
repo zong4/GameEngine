@@ -21,7 +21,7 @@ void Editor::Shutdown()
 {
     Engine::Logger::EditorInfo("Editor is shutdown");
 
-    for (int i = GetLayerStack().size() - 1; i >= 0; i--) {
+    for (int i = static_cast<int>(GetLayerStack().size()) - 1; i >= 0; i--) {
         GetLayerStack().PopLayer(i);
     }
 
