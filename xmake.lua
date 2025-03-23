@@ -17,6 +17,7 @@ if is_mode("debug") then
 elseif is_mode("release") then
     set_warnings("all")
     add_defines("RELEASE")
+    set_optimize("fastest")
 end
 
 -- add platform informations
@@ -25,10 +26,11 @@ if is_plat("windows") then
 
     set_arch("x64")
 elseif is_plat("linux") then
+    set_arch("x86_64")
+elseif is_plat("macosx") then
     set_arch("arm64")
-    add_defines("PLATFORM_LINUX")
-elseif is_plat("macosx") or is_plat("iphoneos") then
-    set_arch("arm64")
+else
+    raise("Unsupported platform! Only windows/linux/macosx are supported.")
 end
 
 -- includes sub-projects

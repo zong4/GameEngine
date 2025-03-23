@@ -7,7 +7,6 @@ namespace Engine
 class Shader
 {
   public:
-    Shader(const std::string& filepath) : m_Name(std::string(PROJECT_DIR) + "/" + filepath) {}
     virtual ~Shader() = default;
 
     virtual void Bind() const   = 0;
@@ -30,6 +29,9 @@ class Shader
 
   public:
     virtual const std::string& GetName() const { return m_Name; }
+
+  protected:
+    Shader(const std::string& filepath) : m_Name(std::string(PROJECT_DIR) + "/" + filepath) {}
 
   protected:
     std::string m_Name;

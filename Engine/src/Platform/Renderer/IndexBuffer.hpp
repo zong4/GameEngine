@@ -7,7 +7,6 @@ namespace Engine
 class IndexBuffer
 {
   public:
-    IndexBuffer()          = default;
     virtual ~IndexBuffer() = default;
 
     virtual void Bind() const   = 0;
@@ -18,6 +17,9 @@ class IndexBuffer
   public:
     uint32_t GetCount() const { return m_Count; }
     void     SetCount(uint32_t count) { m_Count = count; }
+
+  protected:
+    IndexBuffer() = default;
 
   protected:
     uint32_t m_RendererID = 0;

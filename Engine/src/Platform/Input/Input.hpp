@@ -15,7 +15,7 @@ class Input
     static void Shutdown();
 
   protected:
-    Input() = default;
+    Input(void* window) : m_Window(window) {}
 
   public:
     static bool                      IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
@@ -30,6 +30,9 @@ class Input
     virtual std::pair<double, double> GetMousePositionImpl()               = 0;
     double                            GetMouseXImpl() { return GetMousePositionImpl().first; }
     double                            GetMouseYImpl() { return GetMousePositionImpl().second; }
+
+  protected:
+    void* m_Window = nullptr;
 
   private:
     static std::unique_ptr<Input> s_Instance;

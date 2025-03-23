@@ -6,33 +6,21 @@
 
 namespace Engine
 {
-class GLFWWindow : public Window
+class GLFWWindow final : public Window
 {
   public:
-    GLFWWindow(const WindowProps& props);
+    explicit GLFWWindow(const WindowProps& props);
     virtual ~GLFWWindow() override;
 
     void OnUpdate() override;
-    void SetEventCallback(const std::function<void(Event&)>& callback) override { m_Data.EventCallback = callback; }
+    void SetEventCallback(const std::function<void(Event&)>& callback) override;
 
   public:
-    std::size_t GetWidth() const override { return m_Data.Width; }
-    std::size_t GetHeight() const override { return m_Data.Height; }
-    void*       GetNativeWindow() const override { return m_Window; }
-    bool        GetVSync() const override { return m_Data.VSync; }
-    void        SetVSync(bool enabled) override;
+    virtual void* GetNativeWindow() const override { return m_Window; }
+    virtual void  SetVSync(bool enabled) override;
 
   private:
-    GLFWwindow*                      m_Window = nullptr;
+    GLFWwindow*                      m_Window;
     std::unique_ptr<RendererContext> m_Context;
-
-    struct WindowData {
-        std::string Title;
-        std::size_t Width = 0, Height = 0;
-        bool        VSync = false;
-
-        std::function<void(Event&)> EventCallback;
-    };
-    WindowData m_Data;
 };
 } // namespace Engine

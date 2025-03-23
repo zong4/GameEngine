@@ -7,7 +7,6 @@ namespace Engine
 class VertexBuffer
 {
   public:
-    VertexBuffer()          = default;
     virtual ~VertexBuffer() = default;
 
     virtual void Bind() const   = 0;
@@ -18,6 +17,9 @@ class VertexBuffer
   public:
     const BufferLayout& GetLayout() const { return m_Layout; }
     void                SetLayout(const BufferLayout& layout) { m_Layout = layout; }
+
+  protected:
+    VertexBuffer() = default;
 
   protected:
     uint32_t     m_RendererID = 0;

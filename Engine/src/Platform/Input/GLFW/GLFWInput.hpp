@@ -8,8 +8,7 @@ namespace Engine
 class GLFWInput final : public Input
 {
   public:
-    GLFWInput() = delete;
-    GLFWInput(void* window);
+    explicit GLFWInput(void* window);
     virtual ~GLFWInput() override;
 
   protected:
@@ -19,8 +18,5 @@ class GLFWInput final : public Input
 
   private:
     GLFWwindow* GetGLFWWindow() const;
-
-  private:
-    GLFWwindow* m_Window = nullptr;
 };
 } // namespace Engine

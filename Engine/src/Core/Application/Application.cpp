@@ -10,7 +10,7 @@ void Engine::Application::Init()
 {
     Engine::Logger::Init();
 
-    m_Window = Window::Create();
+    m_Window = Window::Create({"Game Engine", 1280, 720});
     m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));
 
     Engine::Input::Init(m_Window->GetNativeWindow());

@@ -2,9 +2,9 @@
 
 #include "Core/Application/Application.hpp"
 
-Engine::GLFWInput::GLFWInput(void* window) : m_Window(static_cast<GLFWwindow*>(window))
+Engine::GLFWInput::GLFWInput(void* window) : Input(window)
 {
-    Logger::EngineInfo(std::format("GLFWInput initialized (Window: {})", reinterpret_cast<void*>(m_Window)));
+    Logger::EngineInfo(std::format("GLFWInput initialized (Window: {})", m_Window));
 }
 
 Engine::GLFWInput::~GLFWInput()
@@ -14,7 +14,7 @@ Engine::GLFWInput::~GLFWInput()
 
 GLFWwindow* Engine::GLFWInput::GetGLFWWindow() const
 {
-    return m_Window;
+    return static_cast<GLFWwindow*>(m_Window);
 }
 
 bool Engine::GLFWInput::IsKeyPressedImpl(int keycode)
