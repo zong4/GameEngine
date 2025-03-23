@@ -17,6 +17,11 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height) : Text
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     glBindTexture(GL_TEXTURE_2D, 0);
+    
+    GLenum err = glGetError();
+    if (err != GL_NO_ERROR) {
+        Logger::EngineAssert(false, std::format("OpenGL error after texture creation: 0x{0:x}", err));
+    }
 }
 
 Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(path)
@@ -27,7 +32,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
     int width, height, channels;
     stbi_set_flip_vertically_on_load(1);
     stbi_uc* data = stbi_load(m_Path.c_str(), &width, &height, &channels, 0);
-    Logger::EngineError(std::format("Failed to load image: {0}", m_Path));
+    Logger::EngineAssert(data, std::format("Failed to load image: {0}", m_Path));
 
     m_Width  = width;
     m_Height = height;
@@ -42,7 +47,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
         format         = GL_RGB;
     }
     else {
-        Logger::EngineError(std::format("Unknown image format: {0}", m_Path));
+        Logger::EngineAssert(false,std::format("Unknown image format: {0}", m_Path));
     }
 
     glGenTextures(1, &m_RendererID);
@@ -58,7 +63,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
+    
     glBindTexture(GL_TEXTURE_2D, 0);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
@@ -66,7 +71,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
 
     GLenum err = glGetError();
     if (err != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error after texture creation: 0x{0:x}", err));
+        Logger::EngineAssert(false,std::format("OpenGL error after texture creation: 0x{0:x}", err));
     }
 }
 
@@ -88,5 +93,7 @@ void Engine::OpenGLTexture2D::Unbind() const
 
 void Engine::OpenGLTexture2D::SetData(void* data, uint32_t size)
 {
-    glTexImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glBindTexture(GL_TEXTURE_2D, m_RendererID);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }

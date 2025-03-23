@@ -11,10 +11,11 @@ add_defines("PROJECT_DIR=\"" .. os.projectdir():gsub("\\", "/") .. "\"")
 -- add mode informations
 add_rules("mode.debug", "mode.release")
 if is_mode("debug") then
-    set_warnings("all", "error")
+    -- set_warnings("all", "error")
+    set_warnings("all")
     add_defines("DEBUG")
 elseif is_mode("release") then
-        set_warnings("all")
+    set_warnings("all")
     add_defines("RELEASE")
 end
 

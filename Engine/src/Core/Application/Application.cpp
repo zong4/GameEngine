@@ -82,7 +82,7 @@ bool Engine::Application::OnWindowResize(WindowResizeEvent& e)
     m_Minimized = e.GetWidth() < 1 || e.GetHeight() < 1;
 
     if (!m_Minimized) {
-        Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+        Renderer::OnWindowResize(static_cast<uint32_t>(e.GetWidth()), static_cast<uint32_t>(e.GetHeight()));
     }
 
     Logger::EngineTrace("Window resize event is handled in Application");

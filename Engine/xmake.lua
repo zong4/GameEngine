@@ -28,6 +28,7 @@ target("Engine")
     add_files("src/**.cpp")
     add_includedirs("src", {public=true})
     add_includedirs("include", {public=true})
+    add_includedirs("assets")
 
     -- Core
     add_packages("spdlog", {public=true})
