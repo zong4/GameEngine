@@ -1,8 +1,8 @@
 #pragma once
 
+#include "Buffers/VertexArray.hpp"
 #include "Functions/Camera/OrthographicCamera.hpp"
 #include "Platform/Renderer/Shader.hpp"
-#include "Platform/Renderer/VertexArray.hpp"
 
 namespace Engine
 {

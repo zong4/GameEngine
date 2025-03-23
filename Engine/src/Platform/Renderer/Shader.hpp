@@ -31,10 +31,11 @@ class Shader
     virtual const std::string& GetName() const { return m_Name; }
 
   protected:
-    Shader(const std::string& filepath) : m_Name(std::string(PROJECT_DIR) + "/" + filepath) {}
+    Shader(const std::string& filepath) : m_Path(std::string(PROJECT_DIR) + "/" + filepath) {}
 
   protected:
     std::string m_Name;
+    std::string m_Path;
     uint32_t    m_RendererID = 0;
 };
 } // namespace Engine

@@ -48,7 +48,12 @@ target("Engine")
     -- Core
     add_packages("spdlog", {public=true})
     add_packages("glm", {public=true})
-    add_packages("tracy", {public=true})
+
+    add_packages("tracy", { public = true })
+    add_defines("TRACY_ENABLE")
+    if is_plat("windows") then
+        add_links("ws2_32")
+    end
 
     -- Functions
     add_packages("stb", {private=true})

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Platform/Renderer/VertexArray.hpp"
+#include "../VertexArray.hpp"
 
 namespace Engine
 {

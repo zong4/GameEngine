@@ -1,5 +1,10 @@
 #include "BufferLayout.hpp"
 
+Engine::BufferElement::BufferElement(ShaderDataType type, const std::string& name, bool normalized)
+    : m_Name(name), m_Type(type), m_Offset(0), m_Normalized(normalized)
+{
+}
+
 uint32_t Engine::BufferElement::GetComponentCount() const
 {
     switch (m_Type) {
@@ -28,5 +33,14 @@ uint32_t Engine::BufferElement::GetComponentCount() const
     default:
         Logger::EngineAssert(false, "Unknown ShaderDataType!");
         return 0;
+    }
+}
+
+void Engine::BufferLayout::CalculateOffsetsAndStride()
+{
+    m_Stride = 0;
+    for (auto& element : m_Elements) {
+        element.SetOffset(m_Stride);
+        m_Stride += ShaderDataTypeSize(element.GetType());
     }
 }

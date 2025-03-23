@@ -1,7 +1,7 @@
 #include "Shader.hpp"
 
 #include "Platform/Renderer/OpenGL/OpenGLShader.hpp"
-#include "Platform/Renderer/RendererAPI.hpp"
+#include "RendererAPI.hpp"
 
 std::unique_ptr<Engine::Shader> Engine::Shader::Create(const std::string& filepath)
 {

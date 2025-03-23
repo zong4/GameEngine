@@ -1,7 +1,5 @@
 #include "OpenGLRendererAPI.hpp"
 
-#include <glad/glad.h>
-
 void Engine::OpenGLRendererAPI::Init()
 {
     glEnable(GL_BLEND);
@@ -24,12 +22,12 @@ void Engine::OpenGLRendererAPI::Clear()
 
 void Engine::OpenGLRendererAPI::DrawIndexed(const std::unique_ptr<VertexArray>& vertexArray)
 {
-    glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, nullptr);
 }
 
 void Engine::OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
 {
-    glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, nullptr);
 }
 
 void Engine::OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
