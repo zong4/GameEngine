@@ -6,13 +6,11 @@ namespace Engine
 {
 struct WindowProps {
     std::string Title;
-   int Width;
-    int Height;
+    int         Width;
+    int         Height;
     bool        VSync;
 
-    WindowProps(const std::string& title, int width,int height, bool vsync = true) : Title(title), Width(width), Height(height), VSync(vsync)
-    {
-    }
+    WindowProps(const std::string& title, int width, int height, bool vsync = true) : Title(title), Width(width), Height(height), VSync(vsync) {}
 };
 
 class Window
@@ -27,9 +25,6 @@ class Window
 
     static std::unique_ptr<Window> Create(const WindowProps& props);
 
-  protected:
-    Window(const WindowProps& props) : m_Data(props) {}
-
   public:
     bool          IsVSync() const { return m_Data.VSync; }
     std::size_t   GetWidth() const { return m_Data.Width; }
@@ -38,9 +33,12 @@ class Window
     virtual void  SetVSync(bool enabled)  = 0;
 
   protected:
+    Window(const WindowProps& props) : m_Data(props) {}
+
+  protected:
     struct WindowData {
         std::string Title;
-       int Width = 0, Height = 0;
+        int         Width = 0, Height = 0;
         bool        VSync = false;
 
         std::function<void(Event&)> EventCallback;
