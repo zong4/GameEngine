@@ -4,14 +4,14 @@
 
 std::unique_ptr<Engine::Input> Engine::Input::s_Instance = nullptr;
 
-void Engine::Input::Init()
+void Engine::Input::Init(void* window)
 {
 #ifdef _WIN32
     s_Instance = std::make_unique<GLFWInput>();
 #elif PLATFORM_LINUX
     s_Instance = std::make_unique<GLFWInput>();
 #elif __APPLE__
-    s_Instance = std::make_unique<GLFWInput>();
+    s_Instance = std::make_unique<GLFWInput>(window);
 #endif
     Logger::EngineInfo("Input system is initialized");
 }

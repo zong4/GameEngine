@@ -13,7 +13,7 @@ void Engine::Application::Init()
     m_Window = Window::Create();
     m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));
 
-    Engine::Input::Init();
+    Engine::Input::Init(m_Window->GetNativeWindow());
     Engine::Renderer::Init();
 
     Logger::EngineInfo("Application is initialized");

@@ -15,6 +15,7 @@ class LayerStack
         m_LayerInsertIndex++;
     }
     template <typename T, typename... Args> void PushOverlay(Args&&... args) { m_Layers.emplace_back(std::make_unique<T>(std::forward<Args>(args)...)); }
+    void                                         PopLayer(std::size_t index);
     void                                         PopLayer(const std::string& name);
 
   public:
@@ -23,7 +24,8 @@ class LayerStack
     auto begin() const { return m_Layers.cbegin(); }
     auto end() const { return m_Layers.cend(); }
 
-    void SetLayerActive(const std::string& name, bool active);
+    std::size_t GetLayerInsertIndex() const { return m_LayerInsertIndex; }
+    void        SetLayerActive(const std::string& name, bool active);
 
   private:
     std::size_t                         m_LayerInsertIndex = 0;

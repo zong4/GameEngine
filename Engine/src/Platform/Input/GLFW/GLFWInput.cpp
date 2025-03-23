@@ -1,14 +1,10 @@
 #include "GLFWInput.hpp"
 
-// Core
 #include "Core/Application/Application.hpp"
 
-// Platform
-#include <GLFW/glfw3.h>
-
-Engine::GLFWInput::GLFWInput()
+Engine::GLFWInput::GLFWInput(void* window) : m_Window(static_cast<GLFWwindow*>(window))
 {
-    Logger::EngineInfo("GLFW input system is initialized");
+    Logger::EngineInfo(std::format("GLFWInput initialized (Window: {})", reinterpret_cast<void*>(m_Window)));
 }
 
 Engine::GLFWInput::~GLFWInput()
@@ -16,24 +12,26 @@ Engine::GLFWInput::~GLFWInput()
     Logger::EngineInfo("GLFW input system is destroyed");
 }
 
+GLFWwindow* Engine::GLFWInput::GetGLFWWindow() const
+{
+    return m_Window;
+}
+
 bool Engine::GLFWInput::IsKeyPressedImpl(int keycode)
 {
-    auto window = static_cast<GLFWwindow*>(Engine::Application::Get()->GetWindow()->GetNativeWindow());
-    auto state  = glfwGetKey(window, keycode);
+    auto state = glfwGetKey(GetGLFWWindow(), keycode);
     return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
 
 bool Engine::GLFWInput::IsMouseButtonPressedImpl(int button)
 {
-    auto window = static_cast<GLFWwindow*>(Engine::Application::Get()->GetWindow()->GetNativeWindow());
-    auto state  = glfwGetMouseButton(window, button);
+    auto state = glfwGetMouseButton(GetGLFWWindow(), button);
     return state == GLFW_PRESS;
 }
 
 std::pair<double, double> Engine::GLFWInput::GetMousePositionImpl()
 {
-    auto   window = static_cast<GLFWwindow*>(Engine::Application::Get()->GetWindow()->GetNativeWindow());
     double xpos, ypos;
-    glfwGetCursorPos(window, &xpos, &ypos);
+    glfwGetCursorPos(GetGLFWWindow(), &xpos, &ypos);
     return {xpos, ypos};
 }

@@ -11,7 +11,7 @@ class Input
     Input(const Input&)            = delete;
     Input& operator=(const Input&) = delete;
 
-    static void Init();
+    static void Init(void* window);
     static void Shutdown();
 
   protected:

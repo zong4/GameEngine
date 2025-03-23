@@ -1,5 +1,13 @@
 #include "LayerStack.hpp"
 
+void Engine::LayerStack::PopLayer(std::size_t index)
+{
+    if (index < m_Layers.size()) {
+        m_Layers.erase(m_Layers.begin() + index);
+        m_LayerInsertIndex--;
+    }
+}
+
 void Engine::LayerStack::PopLayer(const std::string& name)
 {
     auto it = std::find_if(m_Layers.begin(), m_Layers.end(), [&name](const std::unique_ptr<Layer>& layer) { return layer->GetName() == name; });
