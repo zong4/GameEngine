@@ -23,6 +23,7 @@ class LayerStack
     auto end() { return m_Layers.end(); }
     auto begin() const { return m_Layers.cbegin(); }
     auto end() const { return m_Layers.cend(); }
+    std::size_t size() const { return m_Layers.size(); }
 
     std::size_t GetLayerInsertIndex() const { return m_LayerInsertIndex; }
     void        SetLayerActive(const std::string& name, bool active);

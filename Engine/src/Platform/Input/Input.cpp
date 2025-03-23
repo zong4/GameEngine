@@ -7,9 +7,9 @@ std::unique_ptr<Engine::Input> Engine::Input::s_Instance = nullptr;
 void Engine::Input::Init(void* window)
 {
 #ifdef _WIN32
-    s_Instance = std::make_unique<GLFWInput>();
+    s_Instance = std::make_unique<GLFWInput>(window);
 #elif PLATFORM_LINUX
-    s_Instance = std::make_unique<GLFWInput>();
+    s_Instance = std::make_unique<GLFWInput>(window);
 #elif __APPLE__
     s_Instance = std::make_unique<GLFWInput>(window);
 #endif

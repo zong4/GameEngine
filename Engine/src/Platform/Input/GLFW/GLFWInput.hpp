@@ -8,6 +8,7 @@ namespace Engine
 class GLFWInput final : public Input
 {
   public:
+    GLFWInput() = delete;
     GLFWInput(void* window);
     virtual ~GLFWInput() override;
 

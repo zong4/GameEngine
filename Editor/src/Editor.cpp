@@ -21,7 +21,7 @@ void Editor::Shutdown()
 {
     Engine::Logger::EditorInfo("Editor is shutdown");
 
-    for (std::size_t i = GetLayerStack().GetLayerInsertIndex() - 1; i >= 0; i--) {
+    for (int i = GetLayerStack().size() - 1; i >= 0; i--) {
         GetLayerStack().PopLayer(i);
     }
 
