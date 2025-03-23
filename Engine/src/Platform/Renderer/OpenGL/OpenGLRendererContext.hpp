@@ -8,10 +8,9 @@ namespace Engine
 class OpenGLRendererContext : public RendererContext
 {
   public:
-    OpenGLRendererContext(GLFWwindow* windowHandle) : m_WindowHandle(windowHandle) {}
+    OpenGLRendererContext(GLFWwindow* windowHandle);
     virtual ~OpenGLRendererContext();
 
-    virtual void Init() override;
     virtual void SwapBuffers() override;
 
   private:

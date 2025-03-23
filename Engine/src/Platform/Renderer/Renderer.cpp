@@ -9,7 +9,7 @@ void Engine::Renderer::Init()
 {
     RenderCommand::Init();
     Renderer2D::Init();
-    Logger::EngineInfo("Renderer initialized");
+    Logger::EngineInfo("Renderer is initialized");
 }
 
 void Engine::Renderer::BeginScene(const OrthographicCamera& camera)
@@ -39,7 +39,9 @@ void Engine::Renderer::Clear()
 
 void Engine::Renderer::Shutdown()
 {
-    Logger::EngineInfo("Renderer shutdown");
+    Renderer2D::Shutdown();
+    RenderCommand::Shutdown();
+    Logger::EngineInfo("Renderer is shutdown");
 }
 
 void Engine::Renderer::OnWindowResize(uint32_t width, uint32_t height)

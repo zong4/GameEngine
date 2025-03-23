@@ -29,8 +29,6 @@ void Engine::Application::Run()
         Timestep timestep(now - m_LastFrameTime);
         m_LastFrameTime = now;
 
-        Logger::EngineTrace(std::format("Frame time: {0}ms ({1}fps)", timestep.Milliseconds(), 1.0f / timestep.Seconds()));
-
         if (!m_Minimized) {
             for (auto& layer : m_LayerStack) {
                 layer->OnUpdate(timestep);
@@ -52,7 +50,10 @@ void Engine::Application::Shutdown()
     Engine::Renderer::Shutdown();
     Engine::Input::Shutdown();
 
+    m_Window.reset();
+
     Logger::EngineInfo("Application is shutdown");
+    Logger::Shutdown();
 }
 
 void Engine::Application::OnEvent(Event& event)

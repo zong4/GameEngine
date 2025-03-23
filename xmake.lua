@@ -24,7 +24,6 @@ if is_plat("windows") then
     add_cxxflags("/utf-8") -- fix spdlog error
 
     set_arch("x64")
-    add_defines("PLATFORM_WINDOWS")
 elseif is_plat("linux") then
     set_arch("arm64")
     add_defines("PLATFORM_LINUX")

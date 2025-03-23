@@ -6,17 +6,18 @@ std::unique_ptr<Engine::Input> Engine::Input::s_Instance = nullptr;
 
 void Engine::Input::Init()
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef _WIN32
     s_Instance = std::make_unique<GLFWInput>();
 #elif PLATFORM_LINUX
     s_Instance = std::make_unique<GLFWInput>();
 #elif __APPLE__
     s_Instance = std::make_unique<GLFWInput>();
 #endif
-    Logger::EngineAssert(s_Instance, "Input system is not initialized");
+    Logger::EngineInfo("Input system is initialized");
 }
 
 void Engine::Input::Shutdown()
 {
-    Logger::EngineInfo("Input system is shutting down");
+    s_Instance.reset();
+    Logger::EngineInfo("Input system is shutdown");
 }

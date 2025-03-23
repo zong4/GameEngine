@@ -1,7 +1,7 @@
 #pragma once
 
 // todo: across platform
-#ifdef PLATFORM_WINDOWS
+#ifdef _WIN32
 #elif PLATFORM_LINUX
 #elif __APPLE__
 #endif

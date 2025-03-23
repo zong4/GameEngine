@@ -18,6 +18,15 @@ void Engine::Logger::Init()
     s_EngineLogger->info("Logger is initialized");
 }
 
+void Engine::Logger::Shutdown()
+{
+    s_EngineLogger->info("Engine logger is shutdown");
+    s_EngineLogger->flush();
+
+    s_EditorLogger->info("Editor logger is shutdown");
+    s_EditorLogger->flush();
+}
+
 #ifdef DEBUG
 void Engine::Logger::EngineTrace(const std::string& message)
 {

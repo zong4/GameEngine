@@ -8,6 +8,7 @@ class Logger
 {
   public:
     static void Init();
+    static void Shutdown();
 
     static void                       EngineTrace(const std::string& message);
     static void                       EngineInfo(const std::string& message);

@@ -2,7 +2,7 @@
 
 #include "Platform/Renderer/OpenGL/OpenGLRendererAPI.hpp"
 
-#ifdef PLATFORM_WINDOWS
+#ifdef _WIN32
 Engine::RendererAPI::API Engine::RendererAPI::s_API = Engine::RendererAPI::API::OpenGL;
 #elif PLATFORM_LINUX
 Engine::RendererAPI::API Engine::RendererAPI::s_API = Engine::RendererAPI::API::OpenGL;

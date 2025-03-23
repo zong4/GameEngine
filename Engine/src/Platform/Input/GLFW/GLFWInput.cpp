@@ -37,15 +37,3 @@ std::pair<double, double> Engine::GLFWInput::GetMousePositionImpl()
     glfwGetCursorPos(window, &xpos, &ypos);
     return {xpos, ypos};
 }
-
-double Engine::GLFWInput::GetMouseXImpl()
-{
-    auto [x, y] = GetMousePositionImpl();
-    return x;
-}
-
-double Engine::GLFWInput::GetMouseYImpl()
-{
-    auto [x, y] = GetMousePositionImpl();
-    return y;
-}

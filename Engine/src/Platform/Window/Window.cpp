@@ -5,7 +5,7 @@
 
 std::unique_ptr<Engine::Window> Engine::Window::Create(const WindowProps& props)
 {
-#ifdef PLATFORM_WINDOWS
+#ifdef _WIN32
     return std::make_unique<GLFWWindow>(props);
 #elif PLATFORM_LINUX
     return std::make_unique<GLFWWindow>(props);

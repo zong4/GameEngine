@@ -40,10 +40,14 @@ void Engine::Renderer2D::Init()
     s_Data->WhiteTexture      = Texture2D::Create(1, 1);
     uint32_t whiteTextureData = 0xffffffff;
     s_Data->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+
+    Logger::EngineInfo("Renderer2D is initialized");
 }
 
 void Engine::Renderer2D::Shutdown()
 {
+    s_Data.reset();
+    Logger::EngineInfo("Renderer2D is shutdown");
 }
 
 void Engine::Renderer2D::BeginScene(const OrthographicCamera& camera)

@@ -5,6 +5,7 @@
 void Editor::Init()
 {
     Application::Init();
+
     GetLayerStack().PushLayer<EditorLayer2D>();
     GetLayerStack().PushOverlay<Engine::ImGuiLayer>();
 
@@ -18,9 +19,9 @@ void Editor::Run()
 
 void Editor::Shutdown()
 {
-    Application::Shutdown();
-
     Engine::Logger::EditorInfo("Editor is shutdown");
+
+    Application::Shutdown();
 }
 
 std::unique_ptr<Engine::Application>& Engine::Application::Create()

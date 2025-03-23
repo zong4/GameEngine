@@ -12,6 +12,16 @@ void Engine::OpenGLRendererAPI::Init()
     Logger::EngineInfo("OpenGL renderer API is initialized");
 }
 
+void Engine::OpenGLRendererAPI::Shutdown()
+{
+    Logger::EngineInfo("OpenGL renderer API is shutdown");
+}
+
+void Engine::OpenGLRendererAPI::Clear()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 void Engine::OpenGLRendererAPI::DrawIndexed(const std::unique_ptr<VertexArray>& vertexArray)
 {
     glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
@@ -20,11 +30,6 @@ void Engine::OpenGLRendererAPI::DrawIndexed(const std::unique_ptr<VertexArray>& 
 void Engine::OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
 {
     glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
-}
-
-void Engine::OpenGLRendererAPI::Clear()
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 void Engine::OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
