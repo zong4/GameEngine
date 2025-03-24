@@ -1,7 +1,6 @@
 #include "GLFWWindow.hpp"
 
 #include "../../Renderer/OpenGL/OpenGLRendererContext.hpp"
-#include <core.hpp>
 #include <glad/glad.h>
 
 static void GLFWErrorCallback(int error, const char* description)

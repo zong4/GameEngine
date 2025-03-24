@@ -5,10 +5,12 @@
 
 namespace Engine
 {
-class OpenGLVertexBuffer : public VertexBuffer
+class OpenGLVertexBuffer final : public VertexBuffer
 {
   public:
-    OpenGLVertexBuffer(float* vertices, uint32_t size);
+    explicit OpenGLVertexBuffer(uint32_t size);
+    explicit OpenGLVertexBuffer(std::span<const float> vertices);
+    explicit OpenGLVertexBuffer(std::span<const double> vertices);
     ~OpenGLVertexBuffer();
 
     virtual void Bind() const override;

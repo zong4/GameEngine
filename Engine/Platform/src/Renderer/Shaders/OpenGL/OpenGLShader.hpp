@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Shader.hpp"
-#include <glad/glad.h> // todo: remove
+#include <glad/glad.h>
 
 namespace Engine
 {

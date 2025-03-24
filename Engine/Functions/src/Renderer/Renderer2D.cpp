@@ -20,7 +20,7 @@ void Engine::Renderer2D::Init()
     float vertices[4 * 5] = {
         -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.5f, 0.5f, 0.0f, 1.0f, 1.0f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
     };
-    std::shared_ptr<VertexBuffer> vertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
+    std::shared_ptr<VertexBuffer> vertexBuffer = VertexBuffer::Create(vertices);
 
     BufferLayout layout = {
         {ShaderDataType::Float3, "a_Position"},

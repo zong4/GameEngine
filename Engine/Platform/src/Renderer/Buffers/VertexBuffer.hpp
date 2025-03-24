@@ -12,7 +12,9 @@ class VertexBuffer
     virtual void Bind() const   = 0;
     virtual void Unbind() const = 0;
 
-    static std::unique_ptr<VertexBuffer> Create(float* vertices, uint32_t size);
+    static std::unique_ptr<VertexBuffer> Create(uint32_t size);
+    static std::unique_ptr<VertexBuffer> Create(std::span<const float> vertices);
+    static std::unique_ptr<VertexBuffer> Create(std::span<const double> vertices);
 
   public:
     const BufferLayout& GetLayout() const { return m_Layout; }
