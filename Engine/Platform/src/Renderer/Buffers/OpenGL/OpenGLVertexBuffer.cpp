@@ -58,3 +58,29 @@ void Engine::OpenGLVertexBuffer::Unbind() const
 {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
+
+void Engine::OpenGLVertexBuffer::SetData(std::span<const float> vertices, uint32_t offset)
+{
+    glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+    glBufferSubData(GL_ARRAY_BUFFER, offset, vertices.size_bytes(), vertices.data());
+
+    GLint error = glGetError();
+    if (error != GL_NO_ERROR) {
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
+    }
+
+    Logger::EngineTrace(std::format("OpenGL vertex buffer is setting data with ID: {0}", m_RendererID));
+}
+
+void Engine::OpenGLVertexBuffer::SetData(std::span<const double> vertices, uint32_t offset)
+{
+    glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
+    glBufferSubData(GL_ARRAY_BUFFER, offset, vertices.size_bytes(), vertices.data());
+
+    GLint error = glGetError();
+    if (error != GL_NO_ERROR) {
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
+    }
+
+    Logger::EngineTrace(std::format("OpenGL vertex buffer is setting data with ID: {0}", m_RendererID));
+}

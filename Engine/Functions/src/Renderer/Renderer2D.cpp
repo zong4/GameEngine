@@ -30,7 +30,7 @@ void Engine::Renderer2D::Init()
     s_Data->QuadVertexArray->AddVertexBuffer(std::move(vertexBuffer));
 
     uint32_t                     indices[6]  = {0, 1, 2, 2, 3, 0};
-    std::shared_ptr<IndexBuffer> indexBuffer = IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
+    std::shared_ptr<IndexBuffer> indexBuffer = IndexBuffer::Create(indices);
     s_Data->QuadVertexArray->SetIndexBuffer(std::move(indexBuffer));
 
     s_Data->TextureShader = Shader::Create("Engine/assets/shaders/Texture.glsl");

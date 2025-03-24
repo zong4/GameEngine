@@ -15,5 +15,9 @@ class OpenGLVertexBuffer final : public VertexBuffer
 
     virtual void Bind() const override;
     virtual void Unbind() const override;
+
+  public:
+    virtual void SetData(std::span<const float> vertices, uint32_t offset = 0) override;
+    virtual void SetData(std::span<const double> vertices, uint32_t offset = 0) override;
 };
 } // namespace Engine
