@@ -9,8 +9,8 @@ class OpenGLVertexBuffer final : public VertexBuffer
 {
   public:
     explicit OpenGLVertexBuffer(uint32_t size);
-    explicit OpenGLVertexBuffer(std::span<const float> vertices);
-    explicit OpenGLVertexBuffer(std::span<const double> vertices);
+    explicit OpenGLVertexBuffer(std::span<const float> vertices, BufferLayout layout);
+    explicit OpenGLVertexBuffer(std::span<const double> vertices, BufferLayout layout);
     ~OpenGLVertexBuffer();
 
     virtual void Bind() const override;

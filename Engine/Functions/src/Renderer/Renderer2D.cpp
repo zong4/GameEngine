@@ -20,24 +20,21 @@ void Engine::Renderer2D::Init()
     float vertices[4 * 5] = {
         -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.5f, 0.5f, 0.0f, 1.0f, 1.0f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
     };
-    std::shared_ptr<VertexBuffer> vertexBuffer = VertexBuffer::Create(vertices);
-
     BufferLayout layout = {
         {ShaderDataType::Float3, "a_Position"},
         {ShaderDataType::Float2, "a_TexCoord"},
     };
-    vertexBuffer->SetLayout(layout);
-    s_Data->QuadVertexArray->AddVertexBuffer(std::move(vertexBuffer));
+    s_Data->QuadVertexArray->AddVertexBuffer(VertexBuffer::Create(vertices, layout));
 
-    uint32_t                     indices[6]  = {0, 1, 2, 2, 3, 0};
-    std::shared_ptr<IndexBuffer> indexBuffer = IndexBuffer::Create(indices);
-    s_Data->QuadVertexArray->SetIndexBuffer(std::move(indexBuffer));
+    uint32_t indices[6] = {0, 1, 2, 2, 3, 0};
+    s_Data->QuadVertexArray->SetIndexBuffer(IndexBuffer::Create(indices));
 
     s_Data->TextureShader = Shader::Create(std::string(PROJECT_DIR) + "/Engine/assets/shaders/Texture.glsl");
 
-    s_Data->WhiteTexture      = Texture2D::Create(1, 1);
-    uint32_t whiteTextureData = 0xffffffff;
-    s_Data->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+    constexpr uint32_t width = 2, height = 2;
+    s_Data->WhiteTexture                           = Texture2D::Create(width, height);
+    std::uint32_t whiteTextureData[width * height] = {0xffffffff, 0x00ffffff, 0xff00ffff, 0x0000ffff};
+    s_Data->WhiteTexture->SetData(whiteTextureData);
 
     Logger::EngineInfo("Renderer2D is initialized");
 }

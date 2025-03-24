@@ -1,6 +1,5 @@
 ﻿#include "OpenGLTexture2D.hpp"
 
-#include <glad/glad.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 
@@ -22,6 +21,8 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height) : Text
     if (err != GL_NO_ERROR) {
         Logger::EngineAssert(false, std::format("OpenGL error after texture creation: 0x{0:x}", err));
     }
+
+    Logger::EngineTrace(std::format("Texture is constructed with ID: {0}, width: {1}, height: {2}", m_RendererID, m_Width, m_Height));
 }
 
 Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(path)
@@ -73,11 +74,15 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
     if (err != GL_NO_ERROR) {
         Logger::EngineAssert(false, std::format("OpenGL error after texture creation: 0x{0:x}", err));
     }
+
+    Logger::EngineTrace(std::format("Texture is constructed with ID: {0}, width: {1}, height: {2}", m_RendererID, m_Width, m_Height));
 }
 
 Engine::OpenGLTexture2D::~OpenGLTexture2D()
 {
     glDeleteTextures(1, &m_RendererID);
+
+    Logger::EngineTrace(std::format("OpenGL texture is destructed with ID: {0}", m_RendererID));
 }
 
 void Engine::OpenGLTexture2D::Bind(uint32_t slot) const
@@ -91,9 +96,16 @@ void Engine::OpenGLTexture2D::Unbind() const
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Engine::OpenGLTexture2D::SetData(void* data, uint32_t size)
+void Engine::OpenGLTexture2D::SetData(std::span<const uint32_t> data)
 {
     glBindTexture(GL_TEXTURE_2D, m_RendererID);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data.data());
     glBindTexture(GL_TEXTURE_2D, 0);
+
+    GLenum err = glGetError();
+    if (err != GL_NO_ERROR) {
+        Logger::EngineAssert(false, std::format("OpenGL error after texture data setting: 0x{0:x}", err));
+    }
+
+    Logger::EngineTrace(std::format("Texture data is set with ID: {0}, width: {1}, height: {2}", m_RendererID, m_Width, m_Height));
 }

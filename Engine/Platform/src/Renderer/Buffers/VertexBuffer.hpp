@@ -13,8 +13,8 @@ class VertexBuffer
     virtual void Unbind() const = 0;
 
     static std::shared_ptr<VertexBuffer> Create(uint32_t size);
-    static std::shared_ptr<VertexBuffer> Create(std::span<const float> vertices);
-    static std::shared_ptr<VertexBuffer> Create(std::span<const double> vertices);
+    static std::shared_ptr<VertexBuffer> Create(std::span<const float> vertices, BufferLayout layout);
+    static std::shared_ptr<VertexBuffer> Create(std::span<const double> vertices, BufferLayout layout);
 
   public:
     const BufferLayout& GetLayout() const { return m_Layout; }
@@ -24,6 +24,7 @@ class VertexBuffer
 
   protected:
     VertexBuffer() = default;
+    VertexBuffer(BufferLayout layout) : m_Layout(layout) {}
 
   protected:
     uint32_t     m_RendererID = 0;

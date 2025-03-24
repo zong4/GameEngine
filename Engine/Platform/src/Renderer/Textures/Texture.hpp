@@ -13,9 +13,9 @@ class Texture
     virtual void Unbind() const                = 0;
 
   public:
-    virtual uint32_t GetWidth() const { return m_Width; }
-    virtual uint32_t GetHeight() const { return m_Height; }
-    virtual void     SetData(void* data, uint32_t size) = 0;
+    uint32_t     GetWidth() const { return m_Width; }
+    uint32_t     GetHeight() const { return m_Height; }
+    virtual void SetData(std::span<const uint32_t> data) = 0;
 
   protected:
     Texture(uint32_t width, uint32_t height) : m_Width(width), m_Height(height) {}

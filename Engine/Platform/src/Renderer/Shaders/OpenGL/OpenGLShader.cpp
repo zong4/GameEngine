@@ -114,7 +114,7 @@ std::unordered_map<GLenum, std::string> Engine::OpenGLShader::Preprocess(const s
 
 void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 {
-    Logger::EngineAssert(shaderSources.size() <= 2, "We only support 2 shaders for now");
+    Logger::EngineAssert(shaderSources.size() <= 2, "We only support 2 shaders for now"); // todo
 
     GLuint program = glCreateProgram();
 

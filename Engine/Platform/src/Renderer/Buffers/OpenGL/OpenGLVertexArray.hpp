@@ -5,10 +5,10 @@
 
 namespace Engine
 {
-class OpenGLVertexArray : public VertexArray
+class OpenGLVertexArray final : public VertexArray
 {
   public:
-    OpenGLVertexArray();
+    explicit OpenGLVertexArray();
     virtual ~OpenGLVertexArray();
 
     virtual void Bind() const override;

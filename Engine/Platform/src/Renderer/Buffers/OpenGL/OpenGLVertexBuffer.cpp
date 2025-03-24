@@ -14,7 +14,7 @@ Engine::OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size)
     Logger::EngineTrace(std::format("OpenGL vertex buffer is constructed with ID: {0}", m_RendererID));
 }
 
-Engine::OpenGLVertexBuffer::OpenGLVertexBuffer(std::span<const float> vertices)
+Engine::OpenGLVertexBuffer::OpenGLVertexBuffer(std::span<const float> vertices, BufferLayout layout) : VertexBuffer(layout)
 {
     glCreateBuffers(1, &m_RendererID);
     glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
@@ -28,7 +28,7 @@ Engine::OpenGLVertexBuffer::OpenGLVertexBuffer(std::span<const float> vertices)
     Logger::EngineTrace(std::format("OpenGL vertex buffer is constructed with ID: {0}", m_RendererID));
 }
 
-Engine::OpenGLVertexBuffer::OpenGLVertexBuffer(std::span<const double> vertices)
+Engine::OpenGLVertexBuffer::OpenGLVertexBuffer(std::span<const double> vertices, BufferLayout layout) : VertexBuffer(layout)
 {
     glCreateBuffers(1, &m_RendererID);
     glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);

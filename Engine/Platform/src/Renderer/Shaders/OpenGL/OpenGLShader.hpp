@@ -5,10 +5,10 @@
 
 namespace Engine
 {
-class OpenGLShader : public Shader
+class OpenGLShader final : public Shader
 {
   public:
-    OpenGLShader(const std::string& filepath);
+    explicit OpenGLShader(const std::string& filepath);
     ~OpenGLShader();
 
     virtual void Bind() const override;

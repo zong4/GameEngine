@@ -27,14 +27,14 @@ Engine::OpenGLVertexArray::OpenGLVertexArray()
 {
     glCreateVertexArrays(1, &m_RendererID);
 
-    Logger::EngineTrace(std::format("OpenGL vertex array is created with ID: {0}", m_RendererID));
+    Logger::EngineTrace(std::format("OpenGL vertex array is constructed with ID: {0}", m_RendererID));
 }
 
 Engine::OpenGLVertexArray::~OpenGLVertexArray()
 {
     glDeleteVertexArrays(1, &m_RendererID);
 
-    Logger::EngineTrace(std::format("OpenGL vertex array is deleted with ID: {0}", m_RendererID));
+    Logger::EngineTrace(std::format("OpenGL vertex array is destructed with ID: {0}", m_RendererID));
 }
 
 void Engine::OpenGLVertexArray::Bind() const
