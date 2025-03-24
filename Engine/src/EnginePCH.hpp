@@ -22,6 +22,7 @@
 #include <stdexcept>
 #include <string>
 #include <thread>
+#include <tracy/Tracy.hpp>
 #include <type_traits>
 #include <unordered_map>
 #include <unordered_set>

@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Platform/Renderer/VertexArray.hpp"
+#include "../VertexArray.hpp"
+#include <glad/glad.h>
 
 namespace Engine
 {

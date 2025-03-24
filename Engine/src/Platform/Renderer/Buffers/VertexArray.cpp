@@ -1,6 +1,6 @@
 #include "VertexArray.hpp"
 
-#include "Platform/Renderer/OpenGL/OpenGLVertexArray.hpp"
+#include "OpenGL/OpenGLVertexArray.hpp"
 #include "Platform/Renderer/RendererAPI.hpp"
 
 std::unique_ptr<Engine::VertexArray> Engine::VertexArray::Create()

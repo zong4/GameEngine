@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Platform/Renderer/BufferLayout.hpp"
+#include "BufferLayout.hpp"
 
 namespace Engine
 {

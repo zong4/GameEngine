@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Platform/Renderer/VertexBuffer.hpp"
+#include "../VertexBuffer.hpp"
+#include <glad/glad.h>
 
 namespace Engine
 {

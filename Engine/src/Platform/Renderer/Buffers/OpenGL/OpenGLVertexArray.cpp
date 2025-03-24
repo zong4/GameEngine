@@ -1,7 +1,5 @@
 #include "OpenGLVertexArray.hpp"
 
-#include <glad/glad.h>
-
 static GLint ShaderDataTypeToOpenGLBaseType(Engine::ShaderDataType type)
 {
     switch (type) {

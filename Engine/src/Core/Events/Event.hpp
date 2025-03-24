@@ -23,7 +23,7 @@ enum class EventType {
     MouseScrolled
 };
 
-static std::string EventTypeToString(EventType type)
+constexpr std::string EventTypeToString(EventType type)
 {
     switch (type) {
     case EventType::None:

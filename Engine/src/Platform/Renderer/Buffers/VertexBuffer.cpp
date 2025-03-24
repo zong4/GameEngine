@@ -1,6 +1,6 @@
 #include "VertexBuffer.hpp"
 
-#include "Platform/Renderer/OpenGL/OpenGLVertexBuffer.hpp"
+#include "OpenGL/OpenGLVertexBuffer.hpp"
 #include "Platform/Renderer/RendererAPI.hpp"
 
 std::unique_ptr<Engine::VertexBuffer> Engine::VertexBuffer::Create(float* vertices, uint32_t size)

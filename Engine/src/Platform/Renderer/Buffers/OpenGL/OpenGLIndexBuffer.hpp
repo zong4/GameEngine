@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Platform/Renderer/IndexBuffer.hpp"
+#include "../IndexBuffer.hpp"
+#include <glad/glad.h>
 
 namespace Engine
 {

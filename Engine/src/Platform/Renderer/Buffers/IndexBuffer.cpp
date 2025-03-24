@@ -1,6 +1,6 @@
 #include "IndexBuffer.hpp"
 
-#include "Platform/Renderer/OpenGL/OpenGLIndexBuffer.hpp"
+#include "OpenGL/OpenGLIndexBuffer.hpp"
 #include "Platform/Renderer/RendererAPI.hpp"
 
 std::unique_ptr<Engine::IndexBuffer> Engine::IndexBuffer::Create(uint32_t* indices, uint32_t count)
