@@ -4,7 +4,7 @@
 
 #ifdef _WIN32
 Engine::RendererAPI::API Engine::RendererAPI::s_API = Engine::RendererAPI::API::OpenGL;
-#elif PLATFORM_LINUX
+#elif __linux__
 Engine::RendererAPI::API Engine::RendererAPI::s_API = Engine::RendererAPI::API::OpenGL;
 #elif __APPLE__
 Engine::RendererAPI::API Engine::RendererAPI::s_API = Engine::RendererAPI::API::OpenGL;

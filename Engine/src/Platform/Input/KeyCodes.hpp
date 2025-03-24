@@ -2,7 +2,7 @@
 
 // todo: across platform
 #ifdef _WIN32
-#elif PLATFORM_LINUX
+#elif __linux__
 #elif __APPLE__
 #endif
 
