@@ -1,7 +1,6 @@
 #include "OrthographicCameraController.hpp"
 
-#include "Platform/Input/Input.hpp"
-#include "Platform/Input/KeyCodes.hpp"
+#include <platform.hpp>
 
 Engine::OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
     : m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), m_Rotation(rotation)

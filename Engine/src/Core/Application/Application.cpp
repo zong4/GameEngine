@@ -1,8 +1,6 @@
 #include "Application.hpp"
 
-#include "Functions/ImGui/ImGuiLayer.hpp"
-#include "Platform/Input/Input.hpp"
-#include "Platform/Renderer/Renderer.hpp"
+#include "Functions/Renderer/Renderer.hpp"
 
 std::unique_ptr<Engine::Application> Engine::Application::s_Instance = nullptr;
 
@@ -15,6 +13,8 @@ void Engine::Application::Init()
 
     Engine::Input::Init(m_Window->GetNativeWindow());
     Engine::Renderer::Init();
+
+    GetLayerStack().PushOverlay<Engine::ImGuiLayer>(m_Window->GetNativeWindow());
 
     Logger::EngineInfo("Application is initialized");
 }
@@ -38,7 +38,7 @@ void Engine::Application::Run()
             for (auto& layer : m_LayerStack) {
                 layer->OnImGuiRender();
             }
-            ImGuiLayer::EndRender();
+            ImGuiLayer::EndRender(m_Window->GetWidth(), m_Window->GetHeight());
         }
 
         m_Window->OnUpdate();

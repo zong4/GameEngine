@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Core/Layer/LayerStack.hpp"
-#include "Platform/Window/Window.hpp"
-#include <basic.hpp>
+#include <platform.hpp>
 
 namespace Engine
 {

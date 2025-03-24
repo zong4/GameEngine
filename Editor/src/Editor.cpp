@@ -7,7 +7,6 @@ void Editor::Init()
     Application::Init();
 
     GetLayerStack().PushLayer<EditorLayer2D>();
-    GetLayerStack().PushOverlay<Engine::ImGuiLayer>();
 
     Engine::Logger::EditorInfo("Editor is initialized");
 }
