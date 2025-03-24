@@ -14,7 +14,7 @@ Engine::OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t size) : IndexBuffer(size)
     Logger::EngineTrace(std::format("OpenGL index buffer is constructed with ID: {0}", m_RendererID));
 }
 
-Engine::OpenGLIndexBuffer::OpenGLIndexBuffer(std::span<uint32_t> indices) : IndexBuffer(indices.size())
+Engine::OpenGLIndexBuffer::OpenGLIndexBuffer(std::span<uint32_t> indices) : IndexBuffer(static_cast<uint32_t>(indices.size()))
 {
     glCreateBuffers(1, &m_RendererID);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
