@@ -4,7 +4,7 @@ class EditorLayer2D : public Engine::Layer
 {
 public:
     EditorLayer2D();
-    virtual ~EditorLayer2D() noexcept override;
+    virtual ~EditorLayer2D() override;
 
     virtual void OnUpdate(const Engine::Timestep& timestep) override;
     virtual void OnImGuiRender() override;

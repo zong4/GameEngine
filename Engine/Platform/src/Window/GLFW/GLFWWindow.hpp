@@ -4,8 +4,7 @@
 #include "../Window.hpp"
 #include <GLFW/glfw3.h>
 
-namespace Engine
-{
+namespace Engine {
 class GLFWWindow final : public Window
 {
 public:

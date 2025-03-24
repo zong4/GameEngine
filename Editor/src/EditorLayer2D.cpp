@@ -2,19 +2,16 @@
 
 EditorLayer2D::EditorLayer2D() : Layer("EditorLayer2D")
 {
-    m_ShaderLibrary.Add("Texture", Engine::Shader::Create(
-                                        std::string(PROJECT_DIR) +
-                                        "/Editor/assets/shaders/Texture.glsl"));
+    m_ShaderLibrary.Add("Texture",
+                        Engine::Shader::Create(std::string(PROJECT_DIR) + "/Editor/assets/shaders/Texture.glsl"));
 
-    m_Texture = Engine::Texture2D::Create(std::string(PROJECT_DIR) +
-                                          "/Editor/assets/textures/head.png");
-    m_TextureBG = Engine::Texture2D::Create(std::string(PROJECT_DIR) +
-                                            "/Editor/assets/textures/02.jpg");
+    m_Texture = Engine::Texture2D::Create(std::string(PROJECT_DIR) + "/Editor/assets/textures/head.png");
+    m_TextureBG = Engine::Texture2D::Create(std::string(PROJECT_DIR) + "/Editor/assets/textures/02.jpg");
 
     Engine::Logger::EditorInfo("EditorLayer2D is constructed");
 }
 
-EditorLayer2D::~EditorLayer2D() noexcept
+EditorLayer2D::~EditorLayer2D()
 {
     Engine::Logger::EditorInfo("EditorLayer2D is destructed");
 }
@@ -44,16 +41,15 @@ void EditorLayer2D::OnUpdate(const Engine::Timestep& timestep)
             m_ObjectRotation -= m_ObjectRotationSpeed * timestep;
     }
 
-    Engine::RenderCommand::SetClearColor(m_ColorBG);
-    Engine::RenderCommand::Clear();
-
+    Engine::Renderer2D::Clear(m_ColorBG);
     Engine::Renderer2D::BeginScene(m_CameraController.GetCamera());
     {
-        Engine::Renderer2D::DrawQuad(
-            {m_ObjectPosition.x, m_ObjectPosition.y, 0.1f},
-            glm::radians(m_ObjectRotation), {1.0f, 1.0f}, m_Color, m_Texture);
-        Engine::Renderer2D::DrawQuad({0.0f, 0.0f, 0.0f}, 0.0f, {1.0f, 1.0f},
-                                     m_Color, m_TextureBG, {2.0f, 1.0f});
+        Engine::Renderer2D::DrawQuad({m_ObjectPosition.x, m_ObjectPosition.y, 0.1f},
+                                     glm::radians(m_ObjectRotation),
+                                     {1.0f, 1.0f},
+                                     m_Color,
+                                     m_Texture);
+        Engine::Renderer2D::DrawQuad({0.0f, 0.0f, 0.0f}, 0.0f, {1.0f, 1.0f}, m_Color, m_TextureBG, {2.0f, 1.0f});
     }
     Engine::Renderer2D::EndScene();
 }

@@ -4,13 +4,11 @@
 #include <glad/glad.h>
 
 namespace Engine {
-class OpenGLRendererAPI final : public RendererAPI
+class VulkanRendererAPI final : public RendererAPI
 {
 public:
-    explicit OpenGLRendererAPI();
-    virtual ~OpenGLRendererAPI();
-    OpenGLRendererAPI(const OpenGLRendererAPI&) = delete;
-    OpenGLRendererAPI& operator=(const OpenGLRendererAPI&) = delete;
+    explicit VulkanRendererAPI();
+    virtual ~VulkanRendererAPI();
 
     virtual void Clear() override;
     virtual void DrawIndexed(const VertexArray& vertexArray) override;

@@ -2,14 +2,16 @@
 
 #include "../RendererContext.hpp"
 #include <GLFW/glfw3.h>
+#include <glad/glad.h>
 
-namespace Engine
-{
-class OpenGLRendererContext : public RendererContext
+namespace Engine {
+class OpenGLRendererContext final : public RendererContext
 {
 public:
-    OpenGLRendererContext(GLFWwindow* windowHandle);
+    explicit OpenGLRendererContext(GLFWwindow* windowHandle);
     virtual ~OpenGLRendererContext();
+    OpenGLRendererContext(const OpenGLRendererContext&) = delete;
+    OpenGLRendererContext& operator=(const OpenGLRendererContext&) = delete;
 
     virtual void SwapBuffers() override;
 

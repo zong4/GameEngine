@@ -10,10 +10,9 @@ void Engine::Application::Init()
     m_Window->SetEventCallback(ENGINE_BIND_EVENT_FN(Application::OnEvent));
 
     Engine::Input::Init(m_Window->GetNativeWindow());
-    Engine::Renderer::Init();
+    Engine::Renderer2D::Init();
 
-    GetLayerStack().PushOverlay<Engine::ImGuiLayer>(
-        m_Window->GetNativeWindow());
+    GetLayerStack().PushOverlay<Engine::ImGuiLayer>(m_Window->GetNativeWindow());
 
     Logger::EngineInfo("Application is initialized");
 }
@@ -23,26 +22,21 @@ void Engine::Application::Run()
     Logger::EngineInfo("Application is running");
 
     m_LastFrameTime = std::chrono::high_resolution_clock::now();
-    while (m_Running)
-    {
+    while (m_Running) {
         auto now = std::chrono::high_resolution_clock::now();
         Timestep timestep(now - m_LastFrameTime);
         m_LastFrameTime = now;
 
-        if (!m_Minimized)
-        {
-            for (auto& layer : m_LayerStack)
-            {
+        if (!m_Minimized) {
+            for (auto& layer : m_LayerStack) {
                 layer->OnUpdate(timestep);
             }
 
             ImGuiLayer::BeginRender();
-            for (auto& layer : m_LayerStack)
-            {
+            for (auto& layer : m_LayerStack) {
                 layer->OnImGuiRender();
             }
-            ImGuiLayer::EndRender(static_cast<float>(m_Window->GetWidth()),
-                                  static_cast<float>(m_Window->GetHeight()));
+            ImGuiLayer::EndRender(static_cast<float>(m_Window->GetWidth()), static_cast<float>(m_Window->GetHeight()));
         }
 
         m_Window->OnUpdate();
@@ -51,7 +45,7 @@ void Engine::Application::Run()
 
 void Engine::Application::Shutdown()
 {
-    Engine::Renderer::Shutdown();
+    Engine::Renderer2D::Shutdown();
     Engine::Input::Shutdown();
 
     m_Window.reset();
@@ -63,16 +57,12 @@ void Engine::Application::Shutdown()
 void Engine::Application::OnEvent(Event& event)
 {
     EventDispatcher dispatcher(event);
-    dispatcher.Dispatch<WindowCloseEvent>(
-        ENGINE_BIND_EVENT_FN(Application::OnWindowClose));
-    dispatcher.Dispatch<WindowResizeEvent>(
-        ENGINE_BIND_EVENT_FN(Application::OnWindowResize));
+    dispatcher.Dispatch<WindowCloseEvent>(ENGINE_BIND_EVENT_FN(Application::OnWindowClose));
+    dispatcher.Dispatch<WindowResizeEvent>(ENGINE_BIND_EVENT_FN(Application::OnWindowResize));
 
-    for (auto& layer : std::ranges::reverse_view(m_LayerStack))
-    {
+    for (auto& layer : std::ranges::reverse_view(m_LayerStack)) {
         layer->OnEvent(event);
-        if (event.IsHandled())
-        {
+        if (event.IsHandled()) {
             break;
         }
     }
@@ -90,10 +80,8 @@ bool Engine::Application::OnWindowResize(WindowResizeEvent& e)
 {
     m_Minimized = e.GetWidth() < 1 || e.GetHeight() < 1;
 
-    if (!m_Minimized)
-    {
-        Renderer::OnWindowResize(static_cast<uint32_t>(e.GetWidth()),
-                                 static_cast<uint32_t>(e.GetHeight()));
+    if (!m_Minimized) {
+        Renderer2D::OnWindowResize(static_cast<uint32_t>(e.GetWidth()), static_cast<uint32_t>(e.GetHeight()));
     }
 
     Logger::EngineTrace("Window resize event is handled in Application");
