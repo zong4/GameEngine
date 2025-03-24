@@ -2,8 +2,7 @@
 
 #include <core.hpp>
 
-namespace Engine
-{
+namespace Engine {
 class Texture
 {
 public:
@@ -18,9 +17,7 @@ public:
     virtual void SetData(std::span<const uint32_t> data) = 0;
 
 protected:
-    Texture(uint32_t width, uint32_t height) : m_Width(width), m_Height(height)
-    {
-    }
+    Texture(uint32_t width, uint32_t height) : m_Width(width), m_Height(height) {}
     Texture(const std::string& path) : m_Path(path) {}
 
 protected:

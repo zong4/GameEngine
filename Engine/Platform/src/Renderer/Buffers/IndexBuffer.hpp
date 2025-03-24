@@ -2,8 +2,7 @@
 
 #include <core.hpp>
 
-namespace Engine
-{
+namespace Engine {
 class IndexBuffer
 {
 public:

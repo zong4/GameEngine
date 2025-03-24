@@ -2,8 +2,7 @@
 
 #include <functions.hpp>
 
-namespace Engine
-{
+namespace Engine {
 class Application
 {
 public:

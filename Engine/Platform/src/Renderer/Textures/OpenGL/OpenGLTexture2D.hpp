@@ -3,8 +3,7 @@
 #include "../Texture2D.hpp"
 #include <glad/glad.h>
 
-namespace Engine
-{
+namespace Engine {
 class OpenGLTexture2D final : public Texture2D
 {
 public:

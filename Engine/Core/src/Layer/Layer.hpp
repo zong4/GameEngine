@@ -3,8 +3,7 @@
 #include "../Events/Event.hpp"
 #include "../Time/Timestep.hpp"
 
-namespace Engine
-{
+namespace Engine {
 class Layer
 {
 public:

@@ -2,8 +2,7 @@
 
 static GLint ShaderDataTypeToOpenGLBaseType(Engine::ShaderDataType type)
 {
-    switch (type)
-    {
+    switch (type) {
         case Engine::ShaderDataType::Float:
         case Engine::ShaderDataType::Float2:
         case Engine::ShaderDataType::Float3:
@@ -28,61 +27,62 @@ Engine::OpenGLVertexArray::OpenGLVertexArray()
 {
     glCreateVertexArrays(1, &m_RendererID);
 
-    Logger::EngineTrace(std::format(
-        "OpenGL vertex array is constructed with ID: {0}", m_RendererID));
+    Logger::EngineTrace(std::format("OpenGL vertex array is constructed with ID: {0}", m_RendererID));
 }
 
 Engine::OpenGLVertexArray::~OpenGLVertexArray()
 {
     glDeleteVertexArrays(1, &m_RendererID);
 
-    Logger::EngineTrace(std::format(
-        "OpenGL vertex array is destructed with ID: {0}", m_RendererID));
+    Logger::EngineTrace(std::format("OpenGL vertex array is destructed with ID: {0}", m_RendererID));
 }
 
 void Engine::OpenGLVertexArray::Bind() const
 {
     glBindVertexArray(m_RendererID);
+
+    GLint error = glGetError();
+    if (error != GL_NO_ERROR) {
+        Logger::EngineError(std::format("OpenGL error: {0}", error));
+    }
 }
 
-void Engine::OpenGLVertexArray::Unbind() const { glBindVertexArray(0); }
+void Engine::OpenGLVertexArray::Unbind() const
+{
+    glBindVertexArray(0);
+}
 
-std::vector<std::shared_ptr<Engine::VertexBuffer>> const&
-Engine::OpenGLVertexArray::GetVertexBuffers() const
+std::vector<std::shared_ptr<Engine::VertexBuffer>> const& Engine::OpenGLVertexArray::GetVertexBuffers() const
 {
     return m_VertexBuffers;
 }
 
-std::shared_ptr<Engine::IndexBuffer> const&
-Engine::OpenGLVertexArray::GetIndexBuffer() const
+std::shared_ptr<Engine::IndexBuffer> const& Engine::OpenGLVertexArray::GetIndexBuffer() const
 {
     return m_IndexBuffer;
 }
 
-void Engine::OpenGLVertexArray::AddVertexBuffer(
-    const std::shared_ptr<Engine::VertexBuffer>& vertexBuffer)
+void Engine::OpenGLVertexArray::AddVertexBuffer(const std::shared_ptr<Engine::VertexBuffer>& vertexBuffer)
 {
     glBindVertexArray(m_RendererID);
     vertexBuffer->Bind();
 
     const auto& layout = vertexBuffer->GetLayout();
-    for (const auto& element : layout)
-    {
+    for (const auto& element : layout) {
         glEnableVertexAttribArray(m_VertexBufferIndex);
-        glVertexAttribPointer(m_VertexBufferIndex, element.GetComponentCount(),
+        glVertexAttribPointer(m_VertexBufferIndex,
+                              element.GetComponentCount(),
                               ShaderDataTypeToOpenGLBaseType(element.GetType()),
                               element.GetNormalized() ? GL_TRUE : GL_FALSE,
                               layout.GetStride(),
-                              reinterpret_cast<const void*>(
-                                  static_cast<uintptr_t>(element.GetOffset())));
+                              reinterpret_cast<const void*>(static_cast<uintptr_t>(element.GetOffset())));
         m_VertexBufferIndex++;
     }
 
     m_VertexBuffers.push_back(vertexBuffer);
 }
 
-void Engine::OpenGLVertexArray::SetIndexBuffer(
-    const std::shared_ptr<Engine::IndexBuffer>& indexBuffer)
+void Engine::OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<Engine::IndexBuffer>& indexBuffer)
 {
     glBindVertexArray(m_RendererID);
     indexBuffer->Bind();

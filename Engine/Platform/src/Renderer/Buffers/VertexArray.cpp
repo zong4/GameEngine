@@ -5,8 +5,7 @@
 
 std::shared_ptr<Engine::VertexArray> Engine::VertexArray::Create()
 {
-    switch (RendererAPI::GetAPI())
-    {
+    switch (RendererAPI::GetAPI()) {
         case RendererAPI::API::OpenGL:
             return std::make_shared<OpenGLVertexArray>();
         default:

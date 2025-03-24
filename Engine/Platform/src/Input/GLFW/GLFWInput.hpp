@@ -3,8 +3,7 @@
 #include "../Input.hpp"
 #include <GLFW/glfw3.h>
 
-namespace Engine
-{
+namespace Engine {
 class GLFWInput final : public Input
 {
 public:

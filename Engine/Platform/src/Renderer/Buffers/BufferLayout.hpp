@@ -2,27 +2,12 @@
 
 #include <core.hpp>
 
-namespace Engine
-{
-enum class ShaderDataType
-{
-    Float,
-    Float2,
-    Float3,
-    Float4,
-    Mat3,
-    Mat4,
-    Int,
-    Int2,
-    Int3,
-    Int4,
-    Bool
-};
+namespace Engine {
+enum class ShaderDataType { Float, Float2, Float3, Float4, Mat3, Mat4, Int, Int2, Int3, Int4, Bool };
 
 static uint32_t ShaderDataTypeSize(ShaderDataType type)
 {
-    switch (type)
-    {
+    switch (type) {
         case ShaderDataType::Float:
             return 4;
         case ShaderDataType::Float2:
@@ -54,12 +39,9 @@ static uint32_t ShaderDataTypeSize(ShaderDataType type)
 class BufferElement
 {
 public:
-    BufferElement(ShaderDataType type, const std::string& name,
-                  bool normalized = false)
-        : m_Name(name), m_Type(type), m_Size(0), m_Offset(0),
-          m_Normalized(normalized)
-    {
-    }
+    BufferElement(ShaderDataType type, const std::string& name, bool normalized = false)
+        : m_Name(name), m_Type(type), m_Size(0), m_Offset(0), m_Normalized(normalized)
+    {}
 
 public:
     std::string GetName() const { return m_Name; }
@@ -82,8 +64,7 @@ class BufferLayout
 {
 public:
     BufferLayout() = default;
-    BufferLayout(const std::initializer_list<BufferElement>& elements)
-        : m_Elements(elements)
+    BufferLayout(const std::initializer_list<BufferElement>& elements) : m_Elements(elements)
     {
         CalculateOffsetsAndStride();
     }
@@ -93,21 +74,14 @@ public:
     uint32_t GetStride() const { return m_Stride; }
     std::vector<BufferElement>::iterator begin() { return m_Elements.begin(); }
     std::vector<BufferElement>::iterator end() { return m_Elements.end(); }
-    std::vector<BufferElement>::const_iterator begin() const
-    {
-        return m_Elements.begin();
-    }
-    std::vector<BufferElement>::const_iterator end() const
-    {
-        return m_Elements.end();
-    }
+    std::vector<BufferElement>::const_iterator begin() const { return m_Elements.begin(); }
+    std::vector<BufferElement>::const_iterator end() const { return m_Elements.end(); }
 
 private:
     void CalculateOffsetsAndStride()
     {
         m_Stride = 0;
-        for (auto& element : m_Elements)
-        {
+        for (auto& element : m_Elements) {
             element.SetOffset(m_Stride);
             m_Stride += ShaderDataTypeSize(element.GetType());
         }

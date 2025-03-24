@@ -6,8 +6,7 @@
 #include <imgui_impl_opengl3.h>
 #include <imgui_internal.h>
 
-Engine::ImGuiLayer::ImGuiLayer(void* window)
-    : Layer("ImGuiLayer"), m_Window(window)
+Engine::ImGuiLayer::ImGuiLayer(void* window) : Layer("ImGuiLayer"), m_Window(window)
 {
     // Set up ImGui context
     IMGUI_CHECKVERSION();
@@ -23,8 +22,7 @@ Engine::ImGuiLayer::ImGuiLayer(void* window)
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform
     // windows can look identical to regular
     ImGuiStyle& style = ImGui::GetStyle();
-    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-    {
+    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
         style.WindowRounding = 0.0f;
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
     }
@@ -67,8 +65,7 @@ void Engine::ImGuiLayer::EndRender(float width, float height)
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
-    {
+    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
         GLFWwindow* backup_current_context = glfwGetCurrentContext();
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();

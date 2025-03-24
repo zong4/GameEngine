@@ -3,8 +3,7 @@
 #include "../IndexBuffer.hpp"
 #include <glad/glad.h>
 
-namespace Engine
-{
+namespace Engine {
 class OpenGLIndexBuffer final : public IndexBuffer
 {
 public:
@@ -16,7 +15,6 @@ public:
     virtual void Unbind() const override;
 
 public:
-    virtual void SetData(std::span<uint32_t> indices,
-                         uint32_t offset = 0) override;
+    virtual void SetData(std::span<uint32_t> indices, uint32_t offset = 0) override;
 };
 } // namespace Engine

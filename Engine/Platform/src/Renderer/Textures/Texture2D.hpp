@@ -2,8 +2,7 @@
 
 #include "Texture.hpp"
 
-namespace Engine
-{
+namespace Engine {
 class Texture2D : public Texture
 {
 public:

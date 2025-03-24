@@ -5,8 +5,7 @@
 
 std::shared_ptr<Engine::IndexBuffer> Engine::IndexBuffer::Create(uint32_t size)
 {
-    switch (RendererAPI::GetAPI())
-    {
+    switch (RendererAPI::GetAPI()) {
         case RendererAPI::API::OpenGL:
             return std::make_shared<OpenGLIndexBuffer>(size);
         default:
@@ -15,11 +14,9 @@ std::shared_ptr<Engine::IndexBuffer> Engine::IndexBuffer::Create(uint32_t size)
     }
 }
 
-std::shared_ptr<Engine::IndexBuffer>
-Engine::IndexBuffer::Create(std::span<uint32_t> indices)
+std::shared_ptr<Engine::IndexBuffer> Engine::IndexBuffer::Create(std::span<uint32_t> indices)
 {
-    switch (RendererAPI::GetAPI())
-    {
+    switch (RendererAPI::GetAPI()) {
         case RendererAPI::API::OpenGL:
             return std::make_shared<OpenGLIndexBuffer>(indices);
         default:

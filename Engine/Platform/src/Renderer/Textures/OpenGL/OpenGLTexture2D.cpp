@@ -89,6 +89,11 @@ void Engine::OpenGLTexture2D::Bind(uint32_t slot) const
 {
     glActiveTexture(GL_TEXTURE0 + slot);
     glBindTexture(GL_TEXTURE_2D, m_RendererID);
+
+    GLint error = glGetError();
+    if (error != GL_NO_ERROR) {
+        Logger::EngineError(std::format("OpenGL error: {0}", error));
+    }
 }
 
 void Engine::OpenGLTexture2D::Unbind() const

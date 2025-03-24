@@ -2,8 +2,7 @@
 
 uint32_t Engine::BufferElement::GetComponentCount() const
 {
-    switch (m_Type)
-    {
+    switch (m_Type) {
         case ShaderDataType::Float:
             return 1;
         case ShaderDataType::Float2:

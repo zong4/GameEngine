@@ -2,8 +2,7 @@
 
 #include <core.hpp>
 
-namespace Engine
-{
+namespace Engine {
 class Input
 {
 public:
@@ -15,18 +14,9 @@ public:
     static void Shutdown();
 
 public:
-    static bool IsKeyPressed(int keycode)
-    {
-        return s_Instance->IsKeyPressedImpl(keycode);
-    }
-    static bool IsMouseButtonPressed(int button)
-    {
-        return s_Instance->IsMouseButtonPressedImpl(button);
-    }
-    static std::pair<double, double> GetMousePosition()
-    {
-        return s_Instance->GetMousePositionImpl();
-    }
+    static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
+    static bool IsMouseButtonPressed(int button) { return s_Instance->IsMouseButtonPressedImpl(button); }
+    static std::pair<double, double> GetMousePosition() { return s_Instance->GetMousePositionImpl(); }
     static double GetMouseX() { return s_Instance->GetMouseXImpl(); }
     static double GetMouseY() { return s_Instance->GetMouseYImpl(); }
 

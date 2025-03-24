@@ -36,8 +36,6 @@
 #include <utility>
 #include <vector>
 
-namespace Engine
-{
-#define ENGINE_BIND_EVENT_FN(fn)                                               \
-    std::bind(&fn, this, std::placeholders::_1) // todo
+namespace Engine {
+#define ENGINE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1) // todo
 } // namespace Engine

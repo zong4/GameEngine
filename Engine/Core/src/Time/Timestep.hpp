@@ -2,8 +2,7 @@
 
 #include <chrono>
 
-namespace Engine
-{
+namespace Engine {
 class Timestep
 {
 public:

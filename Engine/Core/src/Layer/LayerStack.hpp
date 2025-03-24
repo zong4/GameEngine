@@ -2,21 +2,19 @@
 
 #include "Layer.hpp"
 
-namespace Engine
-{
+namespace Engine {
 class LayerStack
 {
 public:
     ~LayerStack() = default;
 
-    template <typename T, typename... Args>
+    template<typename T, typename... Args>
     void PushLayer(Args&&... args)
     {
-        m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex,
-                         std::make_unique<T>(std::forward<Args>(args)...));
+        m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex, std::make_unique<T>(std::forward<Args>(args)...));
         m_LayerInsertIndex++;
     }
-    template <typename T, typename... Args>
+    template<typename T, typename... Args>
     void PushOverlay(Args&&... args)
     {
         m_Layers.emplace_back(std::make_unique<T>(std::forward<Args>(args)...));
