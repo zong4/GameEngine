@@ -36,7 +36,7 @@ void Engine::Application::Run()
             for (auto& layer : m_LayerStack) {
                 layer->OnImGuiRender();
             }
-            ImGuiLayer::EndRender(m_Window->GetWidth(), m_Window->GetHeight());
+            ImGuiLayer::EndRender(static_cast<float>(m_Window->GetWidth()), static_cast<float>(m_Window->GetHeight()));
         }
 
         m_Window->OnUpdate();
