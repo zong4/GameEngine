@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Functions/Camera/OrthographicCamera.hpp"
+#include "../Camera/OrthographicCamera.hpp"
 #include <platform.hpp>
 
 namespace Engine

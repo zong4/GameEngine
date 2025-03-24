@@ -1,7 +1,5 @@
 #include "Application.hpp"
 
-#include "Functions/Renderer/Renderer.hpp"
-
 std::unique_ptr<Engine::Application> Engine::Application::s_Instance = nullptr;
 
 void Engine::Application::Init()
