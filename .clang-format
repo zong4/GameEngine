@@ -1,33 +1,111 @@
 # find . -name "*.cpp" -o -name "*.hpp" | xargs clang-format -i
 
-BasedOnStyle: LLVM  # 基于 LLVM 风格，简洁高效:cite[1]:cite[8]
+---
 Language: Cpp
-
-# 基础格式
-ColumnLimit: 160    # 放宽行宽限制，适应现代宽屏显示器:cite[8]
-IndentWidth: 4      # 4 空格缩进，提升可读性:cite[2]:cite[5]
-TabWidth: 4
-UseTab: Never       # 强制使用空格而非 Tab:cite[8]
-
-# 对齐与空格
-AlignConsecutiveAssignments: true   # 对齐连续赋值语句的等号:cite[2]:cite[4]
-AlignConsecutiveDeclarations: true  # 对齐连续变量声明:cite[2]
-AlignTrailingComments: true         # 对齐行尾注释:cite[2]:cite[5]
-PointerAlignment: Left              # 指针符号左对齐（`int* ptr`）:cite[3]:cite[5]
-SpaceBeforeParens: ControlStatements # 控制语句括号前加空格（如 `if (cond)`）:cite[8]
-SpaceAfterTemplateKeyword: true     # `template<typename T>` 后加空格:cite[5]
-
-# 函数与代码块
-AllowShortFunctionsOnASingleLine: InlineOnly  # 类内短函数保持单行:cite[5]
-AllowShortIfStatementsOnASingleLine: Never    # 禁止短 if 压缩到单行:cite[2]
-BreakBeforeBraces: Custom          # 自定义大括号换行规则:cite[2]
+# BasedOnStyle:  LLVM
+AccessModifierOffset: -4 # -2
+AlignAfterOpenBracket: Align
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: Right
+AlignOperands: true
+AlignTrailingComments: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: true # false
+BinPackArguments: true
+BinPackParameters: true
 BraceWrapping:
-  AfterClass: true                 # 类定义后换行
-  AfterFunction: true              # 函数定义后换行
-  AfterNamespace: true             # 命名空间后换行
-  BeforeElse: true                 # else 前换行:cite[8]
-
-# 其他优化
-SortIncludes: true                 # 自动排序头文件:cite[5]
-ReflowComments: true               # 重新排版注释:cite[5]
-Cpp11BracedListStyle: true         # 使用 C++11 风格的初始化列表（`{1, 2}`）:cite[2]
+  AfterClass: true # false
+  AfterControlStatement: true # false
+  AfterEnum: true # false
+  AfterFunction: true # false
+  AfterNamespace: true # false
+  AfterObjCDeclaration: true # false
+  AfterStruct: true # false
+  AfterUnion: true # false
+  AfterExternBlock: true # false
+  BeforeCatch: true # false
+  BeforeElse: true # false
+  IndentBraces: true # false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Allman # Attach
+BreakBeforeInheritanceComma: false
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializersBeforeComma: false
+BreakConstructorInitializers: BeforeColon
+BreakAfterJavaFieldAnnotations: false
+BreakStringLiterals: true
+ColumnLimit: 80
+CommentPragmas: "^ IWYU pragma:"
+CompactNamespaces: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+Cpp11BracedListStyle: true
+DerivePointerAlignment: false
+DisableFormat: false
+ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: true
+ForEachMacros:
+  - foreach
+  - Q_FOREACH
+  - BOOST_FOREACH
+IncludeBlocks: Preserve
+IncludeCategories:
+  - Regex: '^"(llvm|llvm-c|clang|clang-c)/'
+    Priority: 2
+  - Regex: '^(<|"(gtest|gmock|isl|json)/)'
+    Priority: 3
+  - Regex: ".*"
+    Priority: 1
+IncludeIsMainRegex: "(Test)?$"
+IndentCaseLabels: true # false
+IndentPPDirectives: None
+IndentWidth: 4 #2
+IndentWrappedFunctionNames: false
+JavaScriptQuotes: Leave
+JavaScriptWrapImports: true
+KeepEmptyLinesAtTheStartOfBlocks: true
+MacroBlockBegin: ""
+MacroBlockEnd: ""
+MaxEmptyLinesToKeep: 1
+NamespaceIndentation: None
+ObjCBlockIndentWidth: 2
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: true
+PenaltyBreakAssignment: 2
+PenaltyBreakBeforeFirstCallParameter: 19
+PenaltyBreakComment: 300
+PenaltyBreakFirstLessLess: 120
+PenaltyBreakString: 1000
+PenaltyExcessCharacter: 1000000
+PenaltyReturnTypeOnItsOwnLine: 60
+PointerAlignment: Left # Right
+ReflowComments: true
+SortIncludes: true
+SortUsingDeclarations: true
+SpaceAfterCStyleCast: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles: false
+SpacesInContainerLiterals: true
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+Standard: Cpp11
+TabWidth: 8
+UseTab: Never

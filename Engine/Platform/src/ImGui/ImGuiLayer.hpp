@@ -6,7 +6,7 @@ namespace Engine
 {
 class ImGuiLayer : public Layer
 {
-  public:
+public:
     ImGuiLayer(void* window);
     virtual ~ImGuiLayer();
 
@@ -17,7 +17,7 @@ class ImGuiLayer : public Layer
     static void BeginRender();
     static void EndRender(float width, float height);
 
-  private:
+private:
     void* m_Window;
 };
 }; // namespace Engine

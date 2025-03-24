@@ -4,16 +4,21 @@
 
 namespace Engine
 {
-class WindowCloseEvent : public EventBase<EventType::WindowClose, EventCategory::Application>
+class WindowCloseEvent
+    : public EventBase<EventType::WindowClose, EventCategory::Application>
 {
-  public:
+public:
     WindowCloseEvent() = default;
 };
 
-class WindowResizeEvent : public EventBase<EventType::WindowResize, EventCategory::Application>
+class WindowResizeEvent
+    : public EventBase<EventType::WindowResize, EventCategory::Application>
 {
-  public:
-    WindowResizeEvent(std::size_t width, std::size_t height) : m_Width(width), m_Height(height) {}
+public:
+    WindowResizeEvent(std::size_t width, std::size_t height)
+        : m_Width(width), m_Height(height)
+    {
+    }
 
     std::string ToString() const override
     {
@@ -22,29 +27,32 @@ class WindowResizeEvent : public EventBase<EventType::WindowResize, EventCategor
         return ss.str();
     }
 
-  public:
+public:
     std::size_t GetWidth() const { return m_Width; }
     std::size_t GetHeight() const { return m_Height; }
 
-  private:
+private:
     std::size_t m_Width, m_Height;
 };
 
-class WindowFocusEvent : public EventBase<EventType::WindowFocus, EventCategory::Application>
+class WindowFocusEvent
+    : public EventBase<EventType::WindowFocus, EventCategory::Application>
 {
-  public:
+public:
     WindowFocusEvent() = default;
 };
 
-class WindowLostFocusEvent : public EventBase<EventType::WindowLostFocus, EventCategory::Application>
+class WindowLostFocusEvent
+    : public EventBase<EventType::WindowLostFocus, EventCategory::Application>
 {
-  public:
+public:
     WindowLostFocusEvent() = default;
 };
 
-class WindowMovedEvent : public EventBase<EventType::WindowMoved, EventCategory::Application>
+class WindowMovedEvent
+    : public EventBase<EventType::WindowMoved, EventCategory::Application>
 {
-  public:
+public:
     WindowMovedEvent(int x, int y) : m_X(x), m_Y(y) {}
 
     std::string ToString() const override
@@ -54,11 +62,11 @@ class WindowMovedEvent : public EventBase<EventType::WindowMoved, EventCategory:
         return ss.str();
     }
 
-  public:
+public:
     int GetX() const { return m_X; }
     int GetY() const { return m_Y; }
 
-  private:
+private:
     int m_X, m_Y;
 };
 } // namespace Engine

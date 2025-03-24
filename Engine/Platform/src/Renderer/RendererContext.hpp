@@ -6,14 +6,14 @@ namespace Engine
 {
 class RendererContext
 {
-  public:
+public:
     virtual ~RendererContext() = default;
 
     virtual void SwapBuffers() = 0;
 
     static std::unique_ptr<RendererContext> Create(void* window);
 
-  protected:
+protected:
     RendererContext() = default;
 };
 } // namespace Engine

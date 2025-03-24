@@ -50,7 +50,8 @@ void Engine::Logger::EngineError(const std::string& message)
 
 void Engine::Logger::EngineAssert(bool condition, const std::string& message)
 {
-    if (!condition) {
+    if (!condition)
+    {
         s_EngineLogger->error(message);
 
 #ifdef _WIN32
@@ -83,7 +84,8 @@ void Engine::Logger::EditorError(const std::string& message)
 
 void Engine::Logger::EditorAssert(bool condition, const std::string& message)
 {
-    if (!condition) {
+    if (!condition)
+    {
         s_EditorLogger->error(message);
 
 #ifdef _WIN32
@@ -94,35 +96,19 @@ void Engine::Logger::EditorAssert(bool condition, const std::string& message)
     }
 }
 #elif RELEASE
-void Engine::Logger::EngineTrace(const std::string& message)
-{
-}
+void Engine::Logger::EngineTrace(const std::string& message) {}
 
-void Engine::Logger::EngineInfo(const std::string& message)
-{
-}
+void Engine::Logger::EngineInfo(const std::string& message) {}
 
-void Engine::Logger::EngineWarn(const std::string& message)
-{
-}
+void Engine::Logger::EngineWarn(const std::string& message) {}
 
-void Engine::Logger::EngineAssert(bool condition, const std::string& message)
-{
-}
+void Engine::Logger::EngineAssert(bool condition, const std::string& message) {}
 
-void Engine::Logger::EditorTrace(const std::string& message)
-{
-}
+void Engine::Logger::EditorTrace(const std::string& message) {}
 
-void Engine::Logger::EditorInfo(const std::string& message)
-{
-}
+void Engine::Logger::EditorInfo(const std::string& message) {}
 
-void Engine::Logger::EditorWarn(const std::string& message)
-{
-}
+void Engine::Logger::EditorWarn(const std::string& message) {}
 
-void Engine::Logger::EditorAssert(bool condition, const std::string& message)
-{
-}
+void Engine::Logger::EditorAssert(bool condition, const std::string& message) {}
 #endif

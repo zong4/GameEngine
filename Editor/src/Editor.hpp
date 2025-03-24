@@ -4,8 +4,8 @@
 
 class Editor : public Engine::Application
 {
-  public:
-    Editor()                            = default;
+public:
+    Editor() = default;
     virtual ~Editor() noexcept override = default;
 
     void Init() override;

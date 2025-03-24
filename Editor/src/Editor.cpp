@@ -11,16 +11,14 @@ void Editor::Init()
     Engine::Logger::EditorInfo("Editor is initialized");
 }
 
-void Editor::Run()
-{
-    Application::Run();
-}
+void Editor::Run() { Application::Run(); }
 
 void Editor::Shutdown()
 {
     Engine::Logger::EditorInfo("Editor is shutdown");
 
-    for (int i = static_cast<int>(GetLayerStack().size()) - 1; i >= 0; i--) {
+    for (int i = static_cast<int>(GetLayerStack().size()) - 1; i >= 0; i--)
+    {
         GetLayerStack().PopLayer(i);
     }
 

@@ -1,7 +1,6 @@
 #include "Renderer.hpp"
 
 #include "Renderer2D.hpp"
-#include <platform.hpp>
 
 Engine::Renderer::SceneData Engine::Renderer::m_SceneData = {};
 
@@ -17,25 +16,23 @@ void Engine::Renderer::BeginScene(const OrthographicCamera& camera)
     m_SceneData.Camera = camera;
 }
 
-void Engine::Renderer::Submit(const std::unique_ptr<Shader>& shader, const std::unique_ptr<VertexArray>& vertexArray, const glm::mat4& transform)
+void Engine::Renderer::Submit(const std::unique_ptr<Shader>& shader,
+                              const std::unique_ptr<VertexArray>& vertexArray,
+                              const glm::mat4& transform)
 {
     vertexArray->Bind();
 
     shader->Bind();
     shader->SetUniformMat4f("u_Transform", transform);
-    shader->SetUniformMat4f("u_ViewProjection", m_SceneData.Camera.GetViewProjectionMatrix());
+    shader->SetUniformMat4f("u_ViewProjection",
+                            m_SceneData.Camera.GetViewProjectionMatrix());
 
     RenderCommand::DrawIndexed(vertexArray);
 }
 
-void Engine::Renderer::EndScene()
-{
-}
+void Engine::Renderer::EndScene() {}
 
-void Engine::Renderer::Clear()
-{
-    RenderCommand::Clear();
-}
+void Engine::Renderer::Clear() { RenderCommand::Clear(); }
 
 void Engine::Renderer::Shutdown()
 {
