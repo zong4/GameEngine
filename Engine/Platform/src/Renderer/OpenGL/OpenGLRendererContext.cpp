@@ -22,11 +22,6 @@ Engine::OpenGLRendererContext::~OpenGLRendererContext()
 {
     glfwMakeContextCurrent(nullptr);
 
-    GLint error = glGetError();
-    if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
-    }
-
     Logger::EngineInfo("OpenGL renderer context is destroyed");
 }
 
