@@ -13,8 +13,8 @@ class IndexBuffer
     virtual void Bind() const   = 0;
     virtual void Unbind() const = 0;
 
-    static std::unique_ptr<IndexBuffer> Create(uint32_t size);
-    static std::unique_ptr<IndexBuffer> Create(std::span<uint32_t> indices);
+    static std::shared_ptr<IndexBuffer> Create(uint32_t size);
+    static std::shared_ptr<IndexBuffer> Create(std::span<uint32_t> indices);
 
   public:
     uint32_t     GetSize() const { return m_Size; }

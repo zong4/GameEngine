@@ -32,7 +32,7 @@ static uint32_t ShaderDataTypeSize(ShaderDataType type)
     case ShaderDataType::Bool:
         return 1;
     default:
-        Logger::EngineAssert(false, "Unknown ShaderDataType!");
+        Logger::EngineAssert(false, "Unknown ShaderDataType");
         return 0;
     }
 }

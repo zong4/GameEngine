@@ -59,7 +59,7 @@ constexpr std::string EventTypeToString(EventType type)
     case EventType::MouseScrolled:
         return "MouseScrolled";
     default:
-        Logger::EngineAssert(false, "Unknown event type!");
+        Logger::EngineAssert(false, "Unknown event type");
         return "";
     }
 }

@@ -14,6 +14,7 @@ class OpenGLTexture2D : public Texture2D
     virtual void Bind(uint32_t slot = 0) const override;
     virtual void Unbind() const override;
 
+  public:
     virtual void SetData(void* data, uint32_t size) override;
 };
 } // namespace Engine

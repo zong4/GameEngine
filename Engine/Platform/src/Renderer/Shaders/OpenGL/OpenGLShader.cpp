@@ -9,22 +9,24 @@ static GLenum ShaderTypeFromString(const std::string& type)
         return GL_FRAGMENT_SHADER;
     }
 
-    Engine::Logger::EngineAssert(false, "Unknown shader type!");
+    Engine::Logger::EngineAssert(false, "Unknown shader type");
     return 0;
 }
 
 Engine::OpenGLShader::OpenGLShader(const std::string& filepath) : Shader(filepath)
 {
-    std::string source        = ReadFile(std::string(m_Name));
+    std::string source        = ReadFile(filepath);
     auto        shaderSources = Preprocess(source);
     Compile(shaderSources);
+
+    Logger::EngineTrace(std::format("OpenGL shader is constructed with ID: {0}", m_RendererID));
 }
 
 Engine::OpenGLShader::~OpenGLShader()
 {
     glDeleteProgram(m_RendererID);
 
-    Logger::EngineTrace(std::format("OpenGL shader is deleted with ID: {0}", m_RendererID));
+    Logger::EngineTrace(std::format("OpenGL shader is destructed with ID: {0}", m_RendererID));
 }
 
 void Engine::OpenGLShader::Bind() const
@@ -94,14 +96,14 @@ std::unordered_map<GLenum, std::string> Engine::OpenGLShader::Preprocess(const s
     size_t pos = source.find(typeToken, 0);
     while (pos != std::string::npos) {
         size_t eol = source.find_first_of("\r\n", pos);
-        Logger::EngineAssert(eol != std::string::npos, "Syntax error!");
+        Logger::EngineAssert(eol != std::string::npos, "Syntax error");
 
         size_t      begin = pos + typeTokenLength + 1;
         std::string type  = source.substr(begin, eol - begin);
-        Logger::EngineAssert(ShaderTypeFromString(type), "Invalid shader type specified!");
+        Logger::EngineAssert(ShaderTypeFromString(type), "Invalid shader type specified");
 
         size_t nextLinePos = source.find_first_not_of("\r\n", eol);
-        Logger::EngineAssert(nextLinePos != std::string::npos, "Syntax error!");
+        Logger::EngineAssert(nextLinePos != std::string::npos, "Syntax error");
         pos = source.find(typeToken, nextLinePos);
 
         shaderSources[ShaderTypeFromString(type)] = source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1 : nextLinePos));
@@ -112,7 +114,7 @@ std::unordered_map<GLenum, std::string> Engine::OpenGLShader::Preprocess(const s
 
 void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 {
-    Logger::EngineAssert(shaderSources.size() <= 2, "We only support 2 shaders for now!");
+    Logger::EngineAssert(shaderSources.size() <= 2, "We only support 2 shaders for now");
 
     GLuint program = glCreateProgram();
 
@@ -172,5 +174,5 @@ void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>
     }
 
     m_RendererID = program;
-    Logger::EngineTrace(std::format("OpenGL shader is created with ID: {0}", m_RendererID));
+    Logger::EngineTrace(std::format("OpenGL shader is compiled with ID: {0}", m_RendererID));
 }

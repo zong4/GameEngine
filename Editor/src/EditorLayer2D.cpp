@@ -2,9 +2,10 @@
 
 EditorLayer2D::EditorLayer2D() : Layer("EditorLayer2D")
 {
-    m_ShaderLibrary = Engine::Shader::Create("Editor/assets/shaders/Texture.glsl");
-    m_Texture       = Engine::Texture2D::Create("Editor/assets/textures/head.png");
-    m_TextureBG     = Engine::Texture2D::Create("Editor/assets/textures/02.jpg");
+    m_ShaderLibrary->Add("Texture", Engine::Shader::Create(std::string(PROJECT_DIR) + "/Editor/assets/shaders/Texture.glsl"));
+
+    m_Texture   = Engine::Texture2D::Create(std::string(PROJECT_DIR) + "Editor/assets/textures/head.png");
+    m_TextureBG = Engine::Texture2D::Create(std::string(PROJECT_DIR) + "Editor/assets/textures/02.jpg");
 
     Engine::Logger::EditorInfo("EditorLayer2D is constructed");
 }

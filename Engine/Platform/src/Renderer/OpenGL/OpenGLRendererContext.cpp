@@ -6,7 +6,7 @@ Engine::OpenGLRendererContext::OpenGLRendererContext(GLFWwindow* windowHandle) :
 {
     glfwMakeContextCurrent(m_WindowHandle);
     int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-    Logger::EngineAssert(status, "Failed to initialize Glad!");
+    Logger::EngineAssert(status, "Failed to initialize Glad");
 
     Logger::EngineInfo("OpenGL Info:");
     Logger::EngineInfo(std::format("  Vendor: {0}", reinterpret_cast<const char*>(glGetString(GL_VENDOR))));

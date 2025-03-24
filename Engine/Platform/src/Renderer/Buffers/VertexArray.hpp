@@ -13,7 +13,7 @@ class VertexArray
     virtual void Bind() const   = 0;
     virtual void Unbind() const = 0;
 
-    static std::unique_ptr<VertexArray> Create();
+    static std::shared_ptr<VertexArray> Create();
 
   public:
     virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffers() const                                           = 0;

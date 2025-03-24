@@ -33,7 +33,7 @@ void Engine::Renderer2D::Init()
     std::shared_ptr<IndexBuffer> indexBuffer = IndexBuffer::Create(indices);
     s_Data->QuadVertexArray->SetIndexBuffer(std::move(indexBuffer));
 
-    s_Data->TextureShader = Shader::Create("Engine/assets/shaders/Texture.glsl");
+    s_Data->TextureShader = Shader::Create(std::string(PROJECT_DIR) + "/Engine/assets/shaders/Texture.glsl");
 
     s_Data->WhiteTexture      = Texture2D::Create(1, 1);
     uint32_t whiteTextureData = 0xffffffff;

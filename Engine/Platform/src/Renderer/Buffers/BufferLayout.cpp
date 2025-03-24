@@ -26,7 +26,7 @@ uint32_t Engine::BufferElement::GetComponentCount() const
     case ShaderDataType::Bool:
         return 1;
     default:
-        Logger::EngineAssert(false, "Unknown ShaderDataType!");
+        Logger::EngineAssert(false, "Unknown ShaderDataType");
         return 0;
     }
 }

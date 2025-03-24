@@ -18,7 +18,7 @@ static GLint ShaderDataTypeToOpenGLBaseType(Engine::ShaderDataType type)
     case Engine::ShaderDataType::Bool:
         return GL_BOOL;
     default:
-        Engine::Logger::EngineAssert(false, "Unknown ShaderDataType!");
+        Engine::Logger::EngineAssert(false, "Unknown ShaderDataType");
         return 0;
     }
 }
