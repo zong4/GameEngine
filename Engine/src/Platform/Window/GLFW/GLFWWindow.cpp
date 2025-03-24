@@ -1,9 +1,7 @@
 #include "GLFWWindow.hpp"
 
-#include "Core/Events/ApplicationEvent.hpp"
-#include "Core/Events/KeyEvent.hpp"
-#include "Core/Events/MouseEvent.hpp"
 #include "Platform/Renderer/OpenGL/OpenGLRendererContext.hpp"
+#include <basic.hpp>
 #include <glad/glad.h>
 
 static void GLFWErrorCallback(int error, const char* description)

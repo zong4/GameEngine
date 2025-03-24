@@ -1,7 +1,5 @@
 #include "GLFWInput.hpp"
 
-#include "Core/Application/Application.hpp"
-
 Engine::GLFWInput::GLFWInput(void* window) : Input(window)
 {
     Logger::EngineInfo(std::format("GLFWInput initialized (Window: {})", m_Window));

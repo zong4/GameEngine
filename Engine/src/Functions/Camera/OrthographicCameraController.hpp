@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Core/Events/ApplicationEvent.hpp"
-#include "Core/Events/MouseEvent.hpp"
 #include "Core/Timestep.hpp"
 #include "Functions/Camera/OrthographicCamera.hpp"
+#include <basic.hpp>
 
 namespace Engine
 {

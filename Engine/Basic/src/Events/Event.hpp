@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EnginePCH.hpp"
+#include "../Logger/Logger.hpp"
 
 namespace Engine
 {

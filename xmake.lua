@@ -3,6 +3,19 @@ set_project("GameEngine")
 set_xmakever("2.9.8")
 set_version("1.0.0", {build = "%Y%m%d%H%M"})
 
+-- add platform informations
+if is_plat("windows") then
+    add_cxxflags("/utf-8") -- fix spdlog error
+
+    set_arch("x64")
+elseif is_plat("linux") then
+    set_arch("x86_64")
+elseif is_plat("macosx") then
+    set_arch("arm64")
+else
+    -- raise("Unsupported platform! Only windows/linux/macosx are supported.") -- todo
+end
+
 -- add global informations
 set_languages("cxx20")
 add_rules("plugin.compile_commands.autoupdate", {outputdir = ".vscode"})
@@ -17,19 +30,6 @@ elseif is_mode("release") then
     set_warnings("all")
     add_defines("RELEASE")
     set_optimize("fastest")
-end
-
--- add platform informations
-if is_plat("windows") then
-    add_cxxflags("/utf-8") -- fix spdlog error
-
-    set_arch("x64")
-elseif is_plat("linux") then
-    set_arch("x86_64")
-elseif is_plat("macosx") then
-    set_arch("arm64")
-else
-    -- raise("Unsupported platform! Only windows/linux/macosx are supported.") -- todo
 end
 
 -- includes sub-projects

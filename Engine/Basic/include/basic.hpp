@@ -1,5 +1,10 @@
 #pragma once
 
+#include "../src/Events/ApplicationEvent.hpp"
+#include "../src/Events/KeyEvent.hpp"
+#include "../src/Events/MouseEvent.hpp"
+#include "../src/Events/WindowEvent.hpp"
+#include "../src/Logger/Logger.hpp"
 #include <algorithm>
 #include <array>
 #include <condition_variable>
@@ -29,8 +34,7 @@
 #include <utility>
 #include <vector>
 
-// Core
-#include "Core/Logger/Logger.hpp"
-#include "Core/Timestep.hpp"
-
-#define ENGINE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+namespace Engine
+{
+#define ENGINE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1) // todo
+} // namespace Engine

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Events/Event.hpp"
+#include "Event.hpp"
 
 namespace Engine
 {
@@ -60,23 +60,5 @@ class WindowMovedEvent : public EventBase<EventType::WindowMoved, EventCategory:
 
   private:
     int m_X, m_Y;
-};
-
-class AppTickEvent : public EventBase<EventType::AppTick, EventCategory::Application>
-{
-  public:
-    AppTickEvent() = default;
-};
-
-class AppUpdateEvent : public EventBase<EventType::AppUpdate, EventCategory::Application>
-{
-  public:
-    AppUpdateEvent() = default;
-};
-
-class AppRenderEvent : public EventBase<EventType::AppRender, EventCategory::Application>
-{
-  public:
-    AppRenderEvent() = default;
 };
 } // namespace Engine

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Events/Event.hpp"
+#include "Event.hpp"
 
 namespace Engine
 {

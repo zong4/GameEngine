@@ -10,7 +10,6 @@
 
 // Core
 #include "Core/Application/Application.hpp"
-#include "Core/Logger/Logger.hpp"
 
 // Functions
 #include "Functions/Camera/OrthographicCameraController.hpp"
