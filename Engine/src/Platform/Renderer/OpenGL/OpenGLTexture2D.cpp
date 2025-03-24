@@ -17,7 +17,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height) : Text
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     glBindTexture(GL_TEXTURE_2D, 0);
-    
+
     GLenum err = glGetError();
     if (err != GL_NO_ERROR) {
         Logger::EngineAssert(false, std::format("OpenGL error after texture creation: 0x{0:x}", err));
@@ -47,7 +47,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
         format         = GL_RGB;
     }
     else {
-        Logger::EngineAssert(false,std::format("Unknown image format: {0}", m_Path));
+        Logger::EngineAssert(false, std::format("Unknown image format: {0}", m_Path));
     }
 
     glGenTextures(1, &m_RendererID);
@@ -63,7 +63,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    
+
     glBindTexture(GL_TEXTURE_2D, 0);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
@@ -71,7 +71,7 @@ Engine::OpenGLTexture2D::OpenGLTexture2D(const std::string& path) : Texture2D(pa
 
     GLenum err = glGetError();
     if (err != GL_NO_ERROR) {
-        Logger::EngineAssert(false,std::format("OpenGL error after texture creation: 0x{0:x}", err));
+        Logger::EngineAssert(false, std::format("OpenGL error after texture creation: 0x{0:x}", err));
     }
 }
 

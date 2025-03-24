@@ -53,7 +53,7 @@ void Engine::Renderer2D::Shutdown()
 void Engine::Renderer2D::BeginScene(const OrthographicCamera& camera)
 {
     s_Data->TextureShader->Bind();
-    s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+    s_Data->TextureShader->SetUniformMat4f("u_ViewProjection", camera.GetViewProjectionMatrix());
 }
 
 void Engine::Renderer2D::EndScene()
@@ -66,34 +66,35 @@ void Engine::Renderer2D::Flush()
 
 void Engine::Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
 {
-    DrawQuad({position.x, position.y, 0.0f}, size, color);
 }
 
 void Engine::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 {
-    s_Data->TextureShader->Bind();
-    s_Data->TextureShader->SetMat4("u_Transform", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f}));
-
-    s_Data->TextureShader->SetUniform4f("u_Color", color);
-
-    s_Data->WhiteTexture->Bind();
-
-    s_Data->QuadVertexArray->Bind();
-    RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
-}
-
-void Engine::Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const std::shared_ptr<Texture2D>& texture)
-{
-}
-
-void Engine::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const std::shared_ptr<Texture2D>& texture)
-{
+    DrawQuad(position, size, color, s_Data->WhiteTexture, 1.0f);
 }
 
 void Engine::Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const std::shared_ptr<Texture2D>& texture, float tilingFactor)
 {
+    DrawQuad({position.x, position.y, 0.0f}, size, texture, tilingFactor);
 }
 
 void Engine::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const std::shared_ptr<Texture2D>& texture, float tilingFactor)
 {
+    DrawQuad(position, size, glm::vec4(1.0f), texture, tilingFactor);
+}
+
+void Engine::Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color, const std::shared_ptr<Texture2D>& texture,
+                                  float tilingFactor)
+{
+    s_Data->TextureShader->Bind();
+    s_Data->TextureShader->SetUniformMat4f("u_Transform", glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), {size.x, size.y, 1.0f}));
+
+    s_Data->TextureShader->SetUniform4f("u_Color", color);
+
+    s_Data->TextureShader->SetUniform1i("u_Texture", 0);
+    s_Data->TextureShader->SetUniform1f("u_TilingFactor", tilingFactor);
+    texture->Bind();
+
+    s_Data->QuadVertexArray->Bind();
+    RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
 }
