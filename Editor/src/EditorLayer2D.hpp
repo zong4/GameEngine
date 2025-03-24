@@ -14,7 +14,7 @@ private:
     Engine::OrthographicCameraController m_CameraController =
         Engine::OrthographicCameraController(1280.0f / 720.0f, true);
 
-    std::unique_ptr<Engine::ShaderLibrary> m_ShaderLibrary;
+    Engine::ShaderLibrary m_ShaderLibrary;
     std::shared_ptr<Engine::Texture2D> m_Texture;
     std::shared_ptr<Engine::Texture2D> m_TextureBG;
     glm::vec4 m_Color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);

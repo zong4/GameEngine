@@ -2,7 +2,7 @@
 
 EditorLayer2D::EditorLayer2D() : Layer("EditorLayer2D")
 {
-    m_ShaderLibrary->Add("Texture", Engine::Shader::Create(
+    m_ShaderLibrary.Add("Texture", Engine::Shader::Create(
                                         std::string(PROJECT_DIR) +
                                         "/Editor/assets/shaders/Texture.glsl"));
 
