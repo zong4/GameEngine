@@ -18,9 +18,7 @@ target("Core")
     
     add_packages("tracy", { public = true })
     add_defines("TRACY_ENABLE")
-
     if is_plat("windows") then
-        add_cxxflags("/utf-8") -- Fix spdlog error
-        add_links("ws2_32") -- Fix tracy error
+        add_links("ws2_32") 
     end
 

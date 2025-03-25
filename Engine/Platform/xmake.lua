@@ -33,7 +33,7 @@ target("Platform")
     end)
     
     if is_plat("windows") then
-        remove_files("**/**/Vulkan/**")
+        remove_files("**/Vulkan/**.cpp")
 
         add_packages("glfw")
         add_packages("glad")
