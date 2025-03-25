@@ -20,14 +20,9 @@ void Engine::VulkanRendererAPI::Clear()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Engine::VulkanRendererAPI::DrawIndexed(const VertexArray& vertexArray)
+void Engine::VulkanRendererAPI::SetClearColor(const glm::vec4& color)
 {
-    glDrawElements(GL_TRIANGLES, vertexArray.GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, nullptr);
-}
-
-void Engine::VulkanRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
-{
-    glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, nullptr);
+    glClearColor(color.r, color.g, color.b, color.a);
 }
 
 void Engine::VulkanRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
@@ -37,7 +32,12 @@ void Engine::VulkanRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t wid
     Logger::EngineInfo("OpenGL renderer API is setting viewport");
 }
 
-void Engine::VulkanRendererAPI::SetClearColor(const glm::vec4& color)
+void Engine::VulkanRendererAPI::DrawIndexed(const VertexArray& vertexArray)
 {
-    glClearColor(color.r, color.g, color.b, color.a);
+    glDrawElements(GL_TRIANGLES, vertexArray.GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, nullptr);
+}
+
+void Engine::VulkanRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+{
+    glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, nullptr);
 }

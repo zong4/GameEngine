@@ -92,7 +92,7 @@ void Engine::OpenGLTexture2D::Bind(uint32_t slot) const
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 

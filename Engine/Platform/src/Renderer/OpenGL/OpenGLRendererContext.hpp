@@ -8,14 +8,11 @@ namespace Engine {
 class OpenGLRendererContext final : public RendererContext
 {
 public:
-    explicit OpenGLRendererContext(GLFWwindow* windowHandle);
+    explicit OpenGLRendererContext(void* windowHandle);
     virtual ~OpenGLRendererContext();
     OpenGLRendererContext(const OpenGLRendererContext&) = delete;
     OpenGLRendererContext& operator=(const OpenGLRendererContext&) = delete;
 
     virtual void SwapBuffers() override;
-
-private:
-    GLFWwindow* m_WindowHandle;
 };
 } // namespace Engine

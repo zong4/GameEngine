@@ -57,7 +57,7 @@ void Engine::OpenGLVertexBuffer::Bind() const
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 

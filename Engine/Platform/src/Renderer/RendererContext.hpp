@@ -10,9 +10,12 @@ public:
 
     virtual void SwapBuffers() = 0;
 
-    static std::unique_ptr<RendererContext> Create(void* window);
+    static std::unique_ptr<RendererContext> Create(void* windowHandle);
 
 protected:
-    RendererContext() = default;
+    RendererContext(void* windowHandle) : m_WindowHandle(windowHandle) {}
+
+protected:
+    void* m_WindowHandle;
 };
 } // namespace Engine

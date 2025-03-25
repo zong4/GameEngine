@@ -1,15 +1,14 @@
 #pragma once
 
-#include "../../Renderer/RendererContext.hpp"
 #include "../Window.hpp"
 #include <GLFW/glfw3.h>
 
 namespace Engine {
-class GLFWWindow final : public Window
+class VulkanWindow final : public Window
 {
 public:
-    explicit GLFWWindow(const WindowProps& props);
-    virtual ~GLFWWindow() override;
+    explicit VulkanWindow(const WindowProps& props);
+    virtual ~VulkanWindow() override;
 
     void OnUpdate() override;
     void SetEventCallback(const std::function<void(Event&)>& callback) override;
@@ -20,6 +19,5 @@ public:
 
 private:
     GLFWwindow* m_Window;
-    std::unique_ptr<RendererContext> m_Context;
 };
 } // namespace Engine

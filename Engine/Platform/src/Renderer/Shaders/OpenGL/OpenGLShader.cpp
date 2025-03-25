@@ -35,7 +35,7 @@ void Engine::OpenGLShader::Bind() const
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -50,7 +50,7 @@ void Engine::OpenGLShader::SetUniformMat4f(const std::string& name, const glm::m
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -60,7 +60,7 @@ void Engine::OpenGLShader::SetUniform4f(const std::string& name, glm::vec4 vecto
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -70,7 +70,7 @@ void Engine::OpenGLShader::SetUniform4f(const std::string& name, float v0, float
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -80,7 +80,7 @@ void Engine::OpenGLShader::SetUniform3f(const std::string& name, glm::vec3 vecto
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -90,7 +90,7 @@ void Engine::OpenGLShader::SetUniform3f(const std::string& name, float v0, float
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -100,7 +100,7 @@ void Engine::OpenGLShader::SetUniform2f(const std::string& name, glm::vec2 vecto
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -110,7 +110,7 @@ void Engine::OpenGLShader::SetUniform2f(const std::string& name, float v0, float
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -120,7 +120,7 @@ void Engine::OpenGLShader::SetUniform1f(const std::string& name, float value)
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -130,7 +130,7 @@ void Engine::OpenGLShader::SetUniform1i(const std::string& name, int value)
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -181,7 +181,7 @@ std::unordered_map<GLenum, std::string> Engine::OpenGLShader::Preprocess(const s
 void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 {
     Logger::EngineAssert(shaderSources.size() <= 2,
-                         "We only support 2 shaders for now"); // todo
+                         "We only support 2 shaders for now");
 
     GLuint program = glCreateProgram();
 
@@ -207,7 +207,7 @@ void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>
 
             glDeleteShader(shader);
 
-            Logger::EngineError(std::format("{0}", infoLog.data()));
+            Logger::EngineAssert(false, std::format("{0}", infoLog.data()));
             break;
         }
 
@@ -231,7 +231,7 @@ void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>
             glDeleteShader(id);
         }
 
-        Logger::EngineError(std::format("{0}", infoLog.data()));
+        Logger::EngineAssert(false, std::format("{0}", infoLog.data()));
         return;
     }
 

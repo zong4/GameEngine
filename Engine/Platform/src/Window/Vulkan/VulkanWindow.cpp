@@ -1,13 +1,13 @@
-#include "GLFWWindow.hpp"
+#include "VulkanWindow.hpp"
 
-#include "../../Renderer/OpenGL/OpenGLRendererContext.hpp"
+#include "../../Renderer/Vulkan/VulkanRendererContext.hpp"
 
 static void GLFWErrorCallback(int error, const char* description)
 {
     Engine::Logger::EngineAssert(false, std::format("GLFW Error ({0}): {1}", error, description));
 }
 
-Engine::GLFWWindow::GLFWWindow(const WindowProps& props) : Window(props)
+Engine::VulkanWindow::VulkanWindow(const WindowProps& props) : Window(props)
 {
     if (!glfwInit()) {
         Logger::EngineAssert(false, "Could not initialize GLFW");
@@ -15,13 +15,11 @@ Engine::GLFWWindow::GLFWWindow(const WindowProps& props) : Window(props)
     }
     glfwSetErrorCallback(GLFWErrorCallback);
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
     if (!m_Window) {
-        Logger::EngineAssert(false, "Could not create glfw window");
+        Logger::EngineAssert(false, "Could not create glfw window for Vulkan");
         return;
     }
 
@@ -136,28 +134,25 @@ Engine::GLFWWindow::GLFWWindow(const WindowProps& props) : Window(props)
         std::format("GLFW window {0} ({1}, {2}) is constructed", m_Data.Title, m_Data.Width, m_Data.Height));
 }
 
-Engine::GLFWWindow::~GLFWWindow()
+Engine::VulkanWindow::~VulkanWindow()
 {
     glfwDestroyWindow(m_Window);
-    m_Context.reset();
-
     glfwTerminate();
 
     Logger::EngineInfo("GLFW window is destroyed");
 }
 
-void Engine::GLFWWindow::OnUpdate()
+void Engine::VulkanWindow::OnUpdate()
 {
     glfwPollEvents();
-    m_Context->SwapBuffers();
 }
 
-void Engine::GLFWWindow::SetEventCallback(const std::function<void(Event&)>& callback)
+void Engine::VulkanWindow::SetEventCallback(const std::function<void(Event&)>& callback)
 {
     m_Data.EventCallback = std::move(callback);
 }
 
-void Engine::GLFWWindow::SetVSync(bool enabled)
+void Engine::VulkanWindow::SetVSync(bool enabled)
 {
     glfwSwapInterval(enabled ? 1 : 0);
     m_Data.VSync = enabled;

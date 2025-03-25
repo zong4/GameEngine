@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Renderer/RendererContext.hpp"
 #include <core.hpp>
 
 namespace Engine {
@@ -35,7 +36,6 @@ public:
     virtual void SetVSync(bool enabled) = 0;
 
 protected:
-    // Window() = delete;
     Window(const WindowProps& props) : m_Data(props) {}
 
 protected:
@@ -52,5 +52,6 @@ protected:
         {}
     };
     WindowData m_Data;
+    std::unique_ptr<RendererContext> m_Context;
 };
 } // namespace Engine

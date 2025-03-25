@@ -9,7 +9,7 @@ Engine::OpenGLRendererAPI::OpenGLRendererAPI()
 
         GLint error = glGetError();
         if (error != GL_NO_ERROR) {
-            Logger::EngineError(std::format("OpenGL error: {0}", error));
+            Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
         }
     }
 
@@ -19,7 +19,7 @@ Engine::OpenGLRendererAPI::OpenGLRendererAPI()
 
         GLint error = glGetError();
         if (error != GL_NO_ERROR) {
-            Logger::EngineError(std::format("OpenGL error: {0}", error));
+            Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
         }
     }
 
@@ -37,27 +37,17 @@ void Engine::OpenGLRendererAPI::Clear()
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
-void Engine::OpenGLRendererAPI::DrawIndexed(const VertexArray& vertexArray)
+void Engine::OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
 {
-    glDrawElements(GL_TRIANGLES, vertexArray.GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, nullptr);
+    glClearColor(color.r, color.g, color.b, color.a);
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
-    }
-}
-
-void Engine::OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
-{
-    glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, nullptr);
-
-    GLint error = glGetError();
-    if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }
 
@@ -67,18 +57,28 @@ void Engine::OpenGLRendererAPI::SetViewport(uint32_t x, uint32_t y, uint32_t wid
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 
     Logger::EngineInfo("OpenGL renderer API is setting viewport");
 }
 
-void Engine::OpenGLRendererAPI::SetClearColor(const glm::vec4& color)
+void Engine::OpenGLRendererAPI::DrawIndexed(const VertexArray& vertexArray)
 {
-    glClearColor(color.r, color.g, color.b, color.a);
+    glDrawElements(GL_TRIANGLES, vertexArray.GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, nullptr);
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
-        Logger::EngineError(std::format("OpenGL error: {0}", error));
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
+    }
+}
+
+void Engine::OpenGLRendererAPI::DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+{
+    glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetSize(), GL_UNSIGNED_INT, nullptr);
+
+    GLint error = glGetError();
+    if (error != GL_NO_ERROR) {
+        Logger::EngineAssert(false, std::format("OpenGL error: {0}", error));
     }
 }

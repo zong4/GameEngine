@@ -1,4 +1,3 @@
-#type vertex
 #version 450
 
 layout(location = 0) in vec3 in_Position;
@@ -16,21 +15,4 @@ void main()
     v_TexCoord = in_TexCoord;
     
     gl_Position = u_ViewProjection * u_Transform * vec4(in_Position, 1.0);
-}
-
-#type fragment
-#version 450
-
-uniform vec4 u_Color;
-uniform sampler2D u_Texture;
-uniform vec2 u_TilingFactor;
-
-in vec3 v_Position;
-in vec2 v_TexCoord;
-
-layout(location = 0) out vec4 out_color;
-
-void main()
-{
-    out_color = texture(u_Texture, v_TexCoord * u_TilingFactor) * u_Color;
 }

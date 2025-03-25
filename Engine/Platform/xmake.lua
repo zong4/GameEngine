@@ -4,12 +4,13 @@
 if is_plat("windows") then -- todo: DirectX12
     add_requires("glfw")
     add_requires("glad")
-elseif is_plat("linux") then -- OpenGL
+elseif is_plat("linux") then
     add_requires("glfw")
     add_requires("glad")
-elseif is_plat("macosx") then -- todo: Vulkan
+elseif is_plat("macosx") then
     add_requires("glfw")
     add_requires("glad")
+    add_requires("vulkansdk")
 end
 
 add_requires("stb")
@@ -25,8 +26,15 @@ target("Platform")
     add_includedirs("include", {public=true})
 
     add_deps("Core")
+
+    before_build("macosx", function (target)
+        print("Running setup_vulkan.sh before build Platform on macOS")
+        os.runv("zsh", {"./scripts/setup_vulkan.sh"})
+    end)
     
     if is_plat("windows") then
+        remove_files("**/**/Vulkan/**")
+
         add_packages("glfw")
         add_packages("glad")
     elseif is_plat("linux") then
@@ -37,6 +45,7 @@ target("Platform")
 
         add_packages("glfw")
         add_packages("glad")
+        add_packages("vulkansdk")
     end
 
     add_packages("stb")
