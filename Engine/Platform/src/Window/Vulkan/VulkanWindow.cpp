@@ -16,7 +16,6 @@ Engine::VulkanWindow::VulkanWindow(const WindowProps& props) : Window(props)
     glfwSetErrorCallback(GLFWErrorCallback);
 
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
     if (!m_Window) {
         Logger::EngineAssert(false, "Could not create glfw window for Vulkan");

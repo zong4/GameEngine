@@ -1,5 +1,7 @@
 #include "VulkanRendererContext.hpp"
 
+std::unique_ptr<Engine::VulkanRendererContext> s_Instance = nullptr;
+
 Engine::VulkanRendererContext::VulkanRendererContext(void* windowHandle) : RendererContext(windowHandle)
 {
     if (m_EnableValidationLayers && !CheckValidationLayerSupport()) {

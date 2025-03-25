@@ -4,15 +4,19 @@
 #include "RendererAPI.hpp"
 #include "Vulkan/VulkanRendererContext.hpp"
 
-std::unique_ptr<Engine::RendererContext> Engine::RendererContext::Create(void* windowHandle)
+std::weak_ptr<Engine::RendererContext> Engine::RendererContext::s_Instance;
+
+std::shared_ptr<Engine::RendererContext> Engine::RendererContext::Create(void* windowHandle)
 {
     switch (RendererAPI::GetAPI()) {
         case RendererAPI::API::OpenGL:
-            return std::make_unique<OpenGLRendererContext>(windowHandle);
+            s_Instance = std::make_shared<OpenGLRendererContext>(windowHandle);
+            return Get();
         case RendererAPI::API::Vulkan:
-            return std::make_unique<VulkanRendererContext>(windowHandle);
+            s_Instance = std::make_shared<VulkanRendererContext>(windowHandle);
+            return Get();
         default:
             Logger::EngineAssert(false, "Unknown RendererAPI");
-            return nullptr;
+            return Get();
     }
 }
