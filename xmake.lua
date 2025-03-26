@@ -7,11 +7,10 @@ set_version("1.0.0", {build = "%Y%m%d%H%M"})
 if is_plat("windows") then
 	add_cxxflags("/utf-8") -- Fix spdlog error
 
-    set_arch("x64")
 elseif is_plat("linux") then
-    set_arch("x86_64")
+
 elseif is_plat("macosx") then
-    set_arch("arm64")
+
 end
 
 -- Add global informations

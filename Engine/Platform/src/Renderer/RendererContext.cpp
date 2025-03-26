@@ -1,29 +1,23 @@
 #include "RendererContext.hpp"
 
-#include "RendererAPI.hpp"
 #ifdef _WIN32
 #include "OpenGL/OpenGLRendererContext.hpp"
 #elif __linux__
-#include "OpenGL/OpenGLWindow.hpp"
+#include "OpenGL/OpenGLRendererContext.hpp"
 #elif __APPLE__
-#include "OpenGL/OpenGLWindow.hpp"
-#include "Vulkan/VulkanRendererContext.hpp"
+#include "BGFX/BGFXRendererContext.hpp"
 #endif
 
-std::weak_ptr<Engine::RendererContext> Engine::RendererContext::s_Instance;
-
-std::shared_ptr<Engine::RendererContext> Engine::RendererContext::Create(void* windowHandle)
+std::unique_ptr<Engine::RendererContext> Engine::RendererContext::Create(void* nativeWindow, bool vsync)
 {
 #ifdef _WIN32
-    return std::make_shared<OpenGLRendererContext>(windowHandle);
+    return std::make_unique<OpenGLRendererContext>(nativeWindow, vsync);
 #elif __linux__
-#include "OpenGL/OpenGLWindow.hpp"
+    return std::make_unique<OpenGLRendererContext>(nativeWindow, vsync);
 #elif __APPLE__
-    s_Instance = std::make_shared<VulkanRendererContext>(windowHandle);
-    return Get();
+    return std::make_unique<BGFXRendererContext>(nativeWindow, vsync);
 #endif
 
-            Logger::EngineAssert(false, "Unknown RendererAPI");
-            return Get();
-    
+    Logger::EngineAssert(false, "Unknown Platform");
+    return nullptr;
 }

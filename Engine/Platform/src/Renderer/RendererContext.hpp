@@ -10,14 +10,12 @@ public:
 
     virtual void SwapBuffers() = 0;
 
-    static std::shared_ptr<Engine::RendererContext> Create(void* windowHandle);
-    static std::shared_ptr<RendererContext> Get() { return s_Instance.lock(); }
+    static std::unique_ptr<Engine::RendererContext> Create(void* nativeWindow, bool vsync);
 
 protected:
-    RendererContext(void* windowHandle) : m_WindowHandle(windowHandle) {}
+    RendererContext(void* nativeWindow) : m_NativeWindow(nativeWindow) {}
 
 protected:
-    static std::weak_ptr<RendererContext> s_Instance;
-    void* m_WindowHandle;
+    void* m_NativeWindow;
 };
 } // namespace Engine

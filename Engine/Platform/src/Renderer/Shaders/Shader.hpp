@@ -29,14 +29,10 @@ public:
 protected:
     Shader(const std::string& filepath) : m_Path(filepath) {}
 
+    std::string ReadFile(const std::string& filepath);
+
 protected:
     std::string m_Path;
     uint32_t m_RendererID = 0;
 };
 } // namespace Engine
-
-template<>
-struct std::hash<Engine::Shader>
-{
-    std::size_t operator()(const Engine::Shader& shader) const { return std::hash<std::string> {}(shader.GetPath()); }
-};

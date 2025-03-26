@@ -22,7 +22,7 @@ Engine::VulkanWindow::VulkanWindow(const WindowProps& props) : Window(props)
         return;
     }
 
-    m_Context = RendererContext::Create(m_Window);
+    m_Context = RendererContext::Create(m_Window, m_Data.VSync);
 
     glfwSetWindowUserPointer(m_Window, &m_Data);
     SetVSync(true);
@@ -138,7 +138,7 @@ Engine::VulkanWindow::~VulkanWindow()
     glfwDestroyWindow(m_Window);
     glfwTerminate();
 
-    Logger::EngineInfo("GLFW window is destroyed");
+    Logger::EngineInfo("GLFW window is destructed");
 }
 
 void Engine::VulkanWindow::OnUpdate()

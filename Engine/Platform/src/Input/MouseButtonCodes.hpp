@@ -1,11 +1,5 @@
 #pragma once
 
-// todo: across platform
-#ifdef _WIN32
-#elif __linux__
-#elif __APPLE__
-#endif
-
 // from glfw3.h
 #define ENGINE_MOUSE_BUTTON_1      0
 #define ENGINE_MOUSE_BUTTON_2      1

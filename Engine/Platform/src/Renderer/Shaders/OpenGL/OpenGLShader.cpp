@@ -134,23 +134,6 @@ void Engine::OpenGLShader::SetUniform1i(const std::string& name, int value)
     }
 }
 
-std::string Engine::OpenGLShader::ReadFile(const std::string& filepath)
-{
-    std::ifstream file(filepath, std::ios::in | std::ios::binary);
-    Logger::EngineAssert(file.is_open(), std::format("Failed to open file: {0}", filepath));
-
-    std::string fileContent;
-    file.seekg(0, std::ios::end);
-    fileContent.resize(file.tellg());
-
-    file.seekg(0, std::ios::beg);
-    file.read(&fileContent[0], fileContent.size());
-    file.close();
-
-    Logger::EngineInfo(std::format("File is read: {0}", filepath));
-    return fileContent;
-}
-
 std::unordered_map<GLenum, std::string> Engine::OpenGLShader::Preprocess(const std::string& source)
 {
     std::unordered_map<GLenum, std::string> shaderSources;
@@ -180,8 +163,7 @@ std::unordered_map<GLenum, std::string> Engine::OpenGLShader::Preprocess(const s
 
 void Engine::OpenGLShader::Compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 {
-    Logger::EngineAssert(shaderSources.size() <= 2,
-                         "We only support 2 shaders for now");
+    Logger::EngineAssert(shaderSources.size() <= 2, "We only support 2 shaders for now");
 
     GLuint program = glCreateProgram();
 

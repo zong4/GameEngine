@@ -25,7 +25,6 @@ public:
     virtual void SetUniform1i(const std::string& name, int value) override;
 
 private:
-    std::string ReadFile(const std::string& filepath);
     std::unordered_map<GLenum, std::string> Preprocess(const std::string& source);
     void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 };

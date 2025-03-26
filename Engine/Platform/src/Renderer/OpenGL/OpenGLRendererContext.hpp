@@ -8,7 +8,7 @@ namespace Engine {
 class OpenGLRendererContext final : public RendererContext
 {
 public:
-    explicit OpenGLRendererContext(void* windowHandle);
+    explicit OpenGLRendererContext(void* windowHandle, bool vsync);
     virtual ~OpenGLRendererContext();
     OpenGLRendererContext(const OpenGLRendererContext&) = delete;
     OpenGLRendererContext& operator=(const OpenGLRendererContext&) = delete;

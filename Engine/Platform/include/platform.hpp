@@ -8,4 +8,3 @@
 #include "../src/Renderer/Shaders/ShaderLibrary.hpp"
 #include "../src/Renderer/Textures/Texture2D.hpp"
 #include "../src/Window/Window.hpp"
-#include <imgui.h>

@@ -1,14 +1,16 @@
 #pragma once
 
 #include "../RendererAPI.hpp"
-#include <glad/glad.h>
+#include <bgfx/bgfx.h>
 
 namespace Engine {
-class VulkanRendererAPI final : public RendererAPI
+class BGFXRendererAPI final : public RendererAPI
 {
 public:
-    explicit VulkanRendererAPI();
-    virtual ~VulkanRendererAPI();
+    explicit BGFXRendererAPI();
+    virtual ~BGFXRendererAPI();
+    BGFXRendererAPI(const BGFXRendererAPI&) = delete;
+    BGFXRendererAPI& operator=(const BGFXRendererAPI&) = delete;
 
     virtual void Clear() override;
     virtual void SetClearColor(const glm::vec4& color) override;

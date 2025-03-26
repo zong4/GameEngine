@@ -52,6 +52,6 @@ protected:
         {}
     };
     WindowData m_Data;
-    std::shared_ptr<RendererContext> m_Context;
+    std::unique_ptr<RendererContext> m_Context;
 };
 } // namespace Engine

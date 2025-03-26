@@ -1,13 +1,11 @@
-#include "OpenGLWindow.hpp"
-
-#include "../../Renderer/OpenGL/OpenGLRendererContext.hpp"
+#include "BGFXWindow.hpp"
 
 static void GLFWErrorCallback(int error, const char* description)
 {
     Engine::Logger::EngineAssert(false, std::format("GLFW Error ({0}): {1}", error, description));
 }
 
-Engine::OpenGLWindow::OpenGLWindow(const WindowProps& props) : Window(props)
+Engine::BGFXWindow::BGFXWindow(const WindowProps& props) : Window(props)
 {
     if (!glfwInit()) {
         Logger::EngineAssert(false, "Could not initialize GLFW");
@@ -15,13 +13,10 @@ Engine::OpenGLWindow::OpenGLWindow(const WindowProps& props) : Window(props)
     }
     glfwSetErrorCallback(GLFWErrorCallback);
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
     if (!m_Window) {
-        Logger::EngineAssert(false, "Could not create glfw window for OpenGL");
+        Logger::EngineAssert(false, "Could not create glfw window for BGFX");
         return;
     }
 
@@ -136,7 +131,7 @@ Engine::OpenGLWindow::OpenGLWindow(const WindowProps& props) : Window(props)
         std::format("GLFW window {0} ({1}, {2}) is constructed", m_Data.Title, m_Data.Width, m_Data.Height));
 }
 
-Engine::OpenGLWindow::~OpenGLWindow()
+Engine::BGFXWindow::~BGFXWindow()
 {
     m_Context.reset();
 
@@ -146,18 +141,18 @@ Engine::OpenGLWindow::~OpenGLWindow()
     Logger::EngineInfo("GLFW window is destructed");
 }
 
-void Engine::OpenGLWindow::OnUpdate()
+void Engine::BGFXWindow::OnUpdate()
 {
     glfwPollEvents();
     m_Context->SwapBuffers();
 }
 
-void Engine::OpenGLWindow::SetEventCallback(const std::function<void(Event&)>& callback)
+void Engine::BGFXWindow::SetEventCallback(const std::function<void(Event&)>& callback)
 {
     m_Data.EventCallback = std::move(callback);
 }
 
-void Engine::OpenGLWindow::SetVSync(bool enabled)
+void Engine::BGFXWindow::SetVSync(bool enabled)
 {
     glfwSwapInterval(enabled ? 1 : 0);
     m_Data.VSync = enabled;

@@ -2,7 +2,7 @@
 
 std::unique_ptr<Engine::VulkanRendererContext> s_Instance = nullptr;
 
-Engine::VulkanRendererContext::VulkanRendererContext(void* windowHandle) : RendererContext(windowHandle)
+Engine::VulkanRendererContext::VulkanRendererContext(void* nativeWindow, bool vsync) : RendererContext(nativeWindow)
 {
     if (m_EnableValidationLayers && !CheckValidationLayerSupport()) {
         Logger::EngineAssert(false, "Validation layers requested, but not available!");
@@ -16,7 +16,7 @@ Engine::VulkanRendererContext::VulkanRendererContext(void* windowHandle) : Rende
     CreateSwapChain();
     CreateImageViews();
 
-    Logger::EngineInfo("Vulkan  renderer context is initialized");
+    Logger::EngineInfo("Vulkan  renderer context is constructed");
 }
 
 Engine::VulkanRendererContext::~VulkanRendererContext()
@@ -36,7 +36,7 @@ Engine::VulkanRendererContext::~VulkanRendererContext()
     vkDestroySurfaceKHR(m_Instance, m_Surface, nullptr);
     vkDestroyInstance(m_Instance, nullptr);
 
-    Logger::EngineInfo("Vulkan renderer context is destroyed");
+    Logger::EngineInfo("Vulkan renderer context is destructed");
 }
 
 void Engine::VulkanRendererContext::SwapBuffers() {}
@@ -214,7 +214,7 @@ Engine::VulkanRendererContext::DebugCallback(VkDebugUtilsMessageSeverityFlagBits
 
 void Engine::VulkanRendererContext::CreateSurface()
 {
-    if (glfwCreateWindowSurface(m_Instance, static_cast<GLFWwindow*>(m_WindowHandle), nullptr, &m_Surface) !=
+    if (glfwCreateWindowSurface(m_Instance, static_cast<GLFWwindow*>(m_NativeWindow), nullptr, &m_Surface) !=
         VK_SUCCESS) {
         Logger::EngineAssert(false, "Failed to create window surface");
     }
@@ -439,7 +439,7 @@ VkExtent2D Engine::VulkanRendererContext::ChooseSwapExtent(const VkSurfaceCapabi
         return capabilities.currentExtent;
     } else {
         int width, height;
-        glfwGetFramebufferSize(static_cast<GLFWwindow*>(m_WindowHandle), &width, &height);
+        glfwGetFramebufferSize(static_cast<GLFWwindow*>(m_NativeWindow), &width, &height);
 
         VkExtent2D actualExtent = {static_cast<uint32_t>(width), static_cast<uint32_t>(height)};
 

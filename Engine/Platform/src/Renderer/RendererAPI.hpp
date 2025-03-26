@@ -10,11 +10,6 @@ public:
     RendererAPI(const RendererAPI&) = delete;
     RendererAPI& operator=(const RendererAPI&) = delete;
 
-    enum class API {
-        OpenGL = 1,
-        Vulkan = 2,
-    };
-
 public:
     virtual void Clear() = 0;
     virtual void SetClearColor(const glm::vec4& color) = 0;
@@ -24,13 +19,7 @@ public:
 
     static std::unique_ptr<RendererAPI> Create();
 
-public:
-    static API GetAPI() { return s_API; }
-
 protected:
     RendererAPI() = default;
-
-private:
-    static API s_API;
 };
 } // namespace Engine

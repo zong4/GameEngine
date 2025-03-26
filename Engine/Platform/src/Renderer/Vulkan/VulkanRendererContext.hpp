@@ -9,12 +9,15 @@ namespace Engine {
 class VulkanRendererContext final : public RendererContext
 {
 public:
-    explicit VulkanRendererContext(void* windowHandle);
+    explicit VulkanRendererContext(void* windowHandle, bool vsync);
     virtual ~VulkanRendererContext();
     VulkanRendererContext(const VulkanRendererContext&) = delete;
     VulkanRendererContext& operator=(const VulkanRendererContext&) = delete;
 
     virtual void SwapBuffers() override;
+
+public:
+    VkDevice GetDevice() { return m_Device; }
 
 private:
     void CreateInstance();
@@ -71,7 +74,7 @@ private:
 
 #ifdef DEBUG
     bool m_EnableValidationLayers = true;
-#else
+#elif RELEASE
     bool m_EnableValidationLayers = false;
 #endif
     const std::vector<const char*> m_ValidationLayers = {

@@ -1,15 +1,14 @@
 #pragma once
 
 #include "../Window.hpp"
-#define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
 namespace Engine {
-class VulkanWindow final : public Window
+class BGFXWindow final : public Window
 {
 public:
-    explicit VulkanWindow(const WindowProps& props);
-    virtual ~VulkanWindow() override;
+    explicit BGFXWindow(const WindowProps& props);
+    virtual ~BGFXWindow() override;
 
     void OnUpdate() override;
     void SetEventCallback(const std::function<void(Event&)>& callback) override;

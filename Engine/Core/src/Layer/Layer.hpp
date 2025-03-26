@@ -7,7 +7,7 @@ namespace Engine {
 class Layer
 {
 public:
-    Layer(const std::string& name = "Layer") : m_Name(name) {}
+    Layer(const std::string& name) : m_Name(name) {}
     virtual ~Layer() = default;
     Layer(const Layer&) = delete;
     Layer& operator=(const Layer&) = delete;

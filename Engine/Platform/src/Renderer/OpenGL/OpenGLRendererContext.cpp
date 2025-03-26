@@ -1,9 +1,9 @@
 #include "OpenGLRendererContext.hpp"
 
-Engine::OpenGLRendererContext::OpenGLRendererContext(void* windowHandle) : RendererContext(windowHandle)
+Engine::OpenGLRendererContext::OpenGLRendererContext(void* nativeWindow, bool vsync) : RendererContext(nativeWindow)
 {
-    glfwMakeContextCurrent(static_cast<GLFWwindow*>(windowHandle));
-    if (glfwGetCurrentContext() != m_WindowHandle) {
+    glfwMakeContextCurrent(static_cast<GLFWwindow*>(m_NativeWindow));
+    if (glfwGetCurrentContext() != m_NativeWindow) {
         Logger::EngineAssert(false, "Failed to make OpenGL context current");
     }
 
@@ -15,19 +15,19 @@ Engine::OpenGLRendererContext::OpenGLRendererContext(void* windowHandle) : Rende
     Logger::EngineInfo(std::format("  Renderer: {0}", reinterpret_cast<const char*>(glGetString(GL_RENDERER))));
     Logger::EngineInfo(std::format("  Version: {0}", reinterpret_cast<const char*>(glGetString(GL_VERSION))));
 
-    Logger::EngineInfo("OpenGL renderer context is initialized");
+    Logger::EngineInfo("OpenGL renderer context is constructed");
 }
 
 Engine::OpenGLRendererContext::~OpenGLRendererContext()
 {
     glfwMakeContextCurrent(nullptr);
 
-    Logger::EngineInfo("OpenGL renderer context is destroyed");
+    Logger::EngineInfo("OpenGL renderer context is destructed");
 }
 
 void Engine::OpenGLRendererContext::SwapBuffers()
 {
-    glfwSwapBuffers(static_cast<GLFWwindow*>(m_WindowHandle));
+    glfwSwapBuffers(static_cast<GLFWwindow*>(m_NativeWindow));
 
     GLint error = glGetError();
     if (error != GL_NO_ERROR) {
